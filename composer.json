@@ -1,0 +1,31 @@
+{
+    "name": "abrouter/php-client",
+    "type": "library",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Abrouter\\Client\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alex Yatsenko",
+            "email": "alex@proxiedmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.5 || ^7.0",
+        "guzzlehttp/guzzle": "^7.3",
+        "ext-json": "*",
+        "art4/json-api-client": "^1.0",
+        "php-di/php-di": "^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Abrouter\\Client\\Tests\\": "tests/"
+        }
+    }
+}

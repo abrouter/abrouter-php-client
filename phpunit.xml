@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false" backupStaticAttributes="false" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" stopOnError="false" stopOnIncomplete="false" stopOnSkipped="false" bootstrap="vendor/autoload.php">
+  <coverage>
+    <include>
+      <directory suffix=".php">src/</directory>
+    </include>
+  </coverage>
+  <testsuites>
+    <testsuite name="all">
+      <directory suffix="Test.php">tests/Unit/</directory>
+    </testsuite>
+    <testsuite name="unit">
+      <directory suffix="Test.php">tests/Unit/</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

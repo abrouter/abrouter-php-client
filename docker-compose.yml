@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: abr-php-client
+    image: abr-app-client:abr-app-client
+    container_name: abr-php-client
+    hostname: docker-dev-local-om
+    ports:
+      - "1021:80"
+    volumes:
+      - .:/app
