@@ -1,6 +1,7 @@
 {
-    "name": "abrouter/php-client",
+    "name": "abrouter/abrouter-php-client",
     "type": "library",
+    "description": "AbrPHPClient :construction_worker_woman: is a PHP library to run ab-tests via ABRouter.",
     "license": "GPL",
     "autoload": {
         "psr-4": {
@@ -10,7 +11,7 @@
     "authors": [
         {
             "name": "Alex Yatsenko",
-            "email": "alex@proxiedmail.com"
+            "email": "abrouter@proxiedmail.com"
         }
     ],
     "require": {
