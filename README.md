@@ -40,7 +40,7 @@ $di->set(Config::class, new Config($token, 'https://abrouter.com'));
 /**
 * @var Client $client
 */
-$client = $di->make(Abrouter\Client\Client::class);
+$client = $di->make(Client::class);
 $userSignature = uniqid();
 $experimentId = 'B2345000-0000-0000-10006020';
 
