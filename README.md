@@ -2,6 +2,11 @@
 
 AbrPHPClient :construction_worker_woman: is a PHP library to run ab-tests via ABRouter.
 
+# What is the ABRouter service ? 
+
+ABRouter is the service to manage experiments(ab-tests). The service provides easy to manage dashboard to get experiments under control.
+There you can create experiments, branches and set a percentage for every branch. Then, when you're running an ab-test on PHP you will receive a perfect branch-wise response that following the rules, that you set up. 
+
 ## :package: Install
 Via composer
 
@@ -33,13 +38,16 @@ $token = 'Bearer Your Token';
 
 $di->set(Config::class, new Config($token, 'https://abrouter.com'));
 /**
- * @var Client $client
- */
+* @var Client $client
+*/
 $client = $di->make(Abrouter\Client\Client::class);
 $userSignature = uniqid();
-$experimentId = 'E2511000-0000-0000-04202090';
+$experimentId = 'B2345000-0000-0000-10006020';
 
-die(var_dump($client->experiments()->run($userSignature, $experimentId)));
+
+$runExperimentResult = $client->experiments()->run($userSignature, $experimentId);
+echo $runExperimentResult->getExperimentId(); //form-filler
+echo $runExperimentResult->getBranchId(); //new-form
 ```
 
 You can create an experiment and get your token and id of experiment on [ABRouter](https://abrouter.com) or just read the [docs](https://abrouter.com/en/docs). 
