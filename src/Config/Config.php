@@ -30,10 +30,11 @@ class Config
     }
     
     /**
+     * some for test
      * @return string
      */
     public function getToken(): string
     {
-        return '';
+        return $this->token;
     }
 }
