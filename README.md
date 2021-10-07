@@ -41,16 +41,17 @@ $token = 'Bearer Your Token';
 
 $di->set(Config::class, new Config($token, 'https://abrouter.com'));
 /**
-* @var Client $client
-*/
-$client = $di->make(Client::class);
+ * @var Client $client
+ */
+$client = $di->make(Abrouter\Client\Client::class);
 $userSignature = uniqid();
-$experimentId = 'B2345000-0000-0000-10006020';
+$experimentId = 'B2341200-0000-0000-00342340';
 
 
 $runExperimentResult = $client->experiments()->run($userSignature, $experimentId);
-echo $runExperimentResult->getExperimentId(); //form-filler
-echo $runExperimentResult->getBranchId(); //new-form
+$experimentId = $runExperimentResult->getExperimentId(); //form-color
+$branchId = $runExperimentResult->getBranchId(); //red
+echo '<button style="color: '. $branchId .'"></button>';
 ```
 
 You can create an experiment and get your token and id of experiment on [ABRouter](https://abrouter.com) or just read the [docs](https://abrouter.com/en/docs). 
