@@ -37,7 +37,7 @@ require '/app/vendor/autoload.php';
 $containerBuilder = new ContainerBuilder();
 $di = $containerBuilder->build();
 
-$token = 'Bearer Your Token';
+$token = '04890788ba2c89c4ff21668c60838a00a87b1cf42c9c6b45d6aa8e11174f0d5762b16b6c09b6b822'; //you can find your token in ABRouter dashboard
 
 $di->set(Config::class, new Config($token, 'https://abrouter.com'));
 /**
@@ -45,13 +45,13 @@ $di->set(Config::class, new Config($token, 'https://abrouter.com'));
  */
 $client = $di->make(Abrouter\Client\Client::class);
 $userSignature = uniqid();
-$experimentId = 'B2341200-0000-0000-00342340';
+$experimentId = 'B95AC000-0000-0000-00005030';//experiment id is also there
 
 
 $runExperimentResult = $client->experiments()->run($userSignature, $experimentId);
 $experimentId = $runExperimentResult->getExperimentId(); //form-color
 $branchId = $runExperimentResult->getBranchId(); //red
-echo '<button style="color: '. $branchId .'"></button>';
+echo '<button style="color: '. $branchId .'">Hello</button>';
 ```
 
 You can create an experiment and get your token and id of experiment on [ABRouter](https://abrouter.com) or just read the [docs](https://abrouter.com/en/docs). 
