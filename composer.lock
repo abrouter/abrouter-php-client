@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8272e81b48694336f7d17d88f6364286",
+    "content-hash": "3d922501d02e765b1240781d5d9bb1a4",
     "packages": [
         {
             "name": "art4/json-api-client",
