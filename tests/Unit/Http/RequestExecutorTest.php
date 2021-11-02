@@ -78,7 +78,7 @@ class RequestExecutorTest extends TestCase
                 $this->returnData = $returnData;
             }
     
-            public function request(string $method, $uri = '', array $options = []): ResponseInterface
+            public function request($method, $uri = '', array $options = []): ResponseInterface
             {
                 $this->method = $method;
                 $this->url = $uri;
