@@ -4,62 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d922501d02e765b1240781d5d9bb1a4",
+    "content-hash": "91c88fdf8f77df5fc497736945575b12",
     "packages": [
-        {
-            "name": "art4/json-api-client",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Art4/json-api-client.git",
-                "reference": "3e9aeec84793b402c3f9f4a6418b09b07469e8b0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Art4/json-api-client/zipball/3e9aeec84793b402c3f9f4a6418b09b07469e8b0",
-                "reference": "3e9aeec84793b402c3f9f4a6418b09b07469e8b0",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Art4\\JsonApiClient\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Artur Weigandt",
-                    "email": "art4@wlabs.de",
-                    "homepage": "https://wlabs.de"
-                }
-            ],
-            "description": "JSON API client",
-            "homepage": "https://github.com/Art4/json-api-client",
-            "keywords": [
-                "JSON-API",
-                "api",
-                "client",
-                "json",
-                "parser",
-                "reader",
-                "validator"
-            ],
-            "support": {
-                "issues": "https://github.com/Art4/json-api-client/issues",
-                "source": "https://github.com/Art4/json-api-client/tree/1.0.0"
-            },
-            "time": "2021-03-05T08:30:35+00:00"
-        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "6.5.5",
