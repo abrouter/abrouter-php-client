@@ -12,12 +12,12 @@ class ConfigBuilder
     /**
      * @var string $host
      */
-    private string $host;
+    private $host;
     
     /**
      * @var string $token
      */
-    private string $token;
+    private $token;
     
     /**
      * @param string $host

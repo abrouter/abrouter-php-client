@@ -8,12 +8,12 @@ class JsonApiEntity implements JsonApiEntityInterface
     /**
      * @var array
      */
-    private array $attributes;
+    private $attributes;
     
     /**
      * @var array
      */
-    private ?array $relationships;
+    private $relationships;
     
     /**
      * @var array

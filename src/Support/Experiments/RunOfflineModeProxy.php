@@ -13,7 +13,7 @@ class RunOfflineModeProxy
     /**
      * @var ExperimentManager
      */
-    private ExperimentManager $experimentManager;
+    private $experimentManager;
     
     /**
      * OfflineModeProxy constructor.

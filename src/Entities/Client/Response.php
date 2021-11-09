@@ -8,7 +8,7 @@ class Response implements ResponseInterface
     /**
      * @var array
      */
-    private array $responseJson;
+    private $responseJson;
     
     public function __construct(array $responseJson)
     {

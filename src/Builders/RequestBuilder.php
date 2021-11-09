@@ -9,13 +9,25 @@ class RequestBuilder
 {
     public const METHOD_POST = 'post';
     
-    private string $method;
+    /**
+     * @var string $method
+     */
+    private $method;
     
-    private string $url;
+    /**
+     * @var string $url
+     */
+    private $url;
     
-    private array $jsonPayload;
-
-    private array $headers;
+    /**
+     * @var array
+     */
+    private $jsonPayload;
+    
+    /**
+     * @var array
+     */
+    private  $headers;
     
     public function post(): self
     {

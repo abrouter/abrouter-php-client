@@ -14,7 +14,7 @@ class RunExperimentTransformerTest extends TestCase
     /**
      * @var RunExperimentRequestTransformer $runExperimentRequestTransformer
      */
-    private RunExperimentRequestTransformer $runExperimentRequestTransformer;
+    private $runExperimentRequestTransformer;
     
     public function setUp(): void
     {

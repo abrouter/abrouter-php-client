@@ -10,7 +10,7 @@ class HostConfigAccessor
     /**
      * @var Config
      */
-    private Config $config;
+    private $config;
     
     public function __construct(Config $config)
     {

@@ -15,7 +15,7 @@ class RequestExecutor
     /**
      * @var Client
      */
-    private Client $client;
+    private $client;
     
     public function __construct(Client $client)
     {

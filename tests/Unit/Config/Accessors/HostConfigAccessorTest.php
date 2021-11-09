@@ -11,7 +11,7 @@ class HostConfigAccessorTest extends TestCase
     /**
      * @var HostConfigAccessor $HostConfigAccessor
      */
-    private HostConfigAccessor $hostConfigAccessor;
+    private $hostConfigAccessor;
     
     public function setUp(): void
     {

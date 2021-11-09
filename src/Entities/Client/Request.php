@@ -8,22 +8,22 @@ class Request implements RequestInterface
     /**
      * @var string
      */
-    private string $method;
+    private $method;
     
     /**
      * @var array
      */
-    private array $payload;
+    private $payload;
     
     /**
      * @var array
      */
-    private array $headers;
+    private $headers;
     
     /**
      * @var string
      */
-    private string $url;
+    private $url;
     
     public function __construct(
         string $method,

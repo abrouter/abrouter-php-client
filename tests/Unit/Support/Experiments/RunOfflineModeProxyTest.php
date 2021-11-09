@@ -18,12 +18,12 @@ class RunOfflineModeProxyTest extends TestCase
     /**
      * @var ExperimentManager
      */
-    private ExperimentManager $experimentManager;
+    private $experimentManager;
     
     /**
      * @var RunOfflineModeProxy
      */
-    private RunOfflineModeProxy $runOfflineModeProxy;
+    private $runOfflineModeProxy;
     
     public function setUp(): void
     {

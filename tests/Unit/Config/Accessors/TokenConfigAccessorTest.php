@@ -11,7 +11,7 @@ class TokenConfigAccessorTest extends TestCase
     /**
      * @var TokenConfigAccessor $tokenConfigAccessor
      */
-    private TokenConfigAccessor $tokenConfigAccessor;
+    private $tokenConfigAccessor;
     
     public function setUp(): void
     {

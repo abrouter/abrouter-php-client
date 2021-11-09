@@ -21,22 +21,22 @@ class RequestExecutorTest extends TestCase
             /**
              * @var string
              */
-            private string $method;
+            private $method;
     
             /**
              * @var string
              */
-            private string $url;
+            private $url;
     
             /**
              * @var array
              */
-            private array $options;
+            private $options;
     
             /**
              * @var array
              */
-            private array $returnData;
+            private $returnData;
             
             /**
              * @return string
