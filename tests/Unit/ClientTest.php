@@ -10,7 +10,7 @@ class ClientTest extends TestCase
     /**
      * @var Client $client
      */
-    private Client $client;
+    private $client;
     
     public function setUp(): void
     {
