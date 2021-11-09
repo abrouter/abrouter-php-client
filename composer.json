@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^5.5 || ^7.0 || ^8.0",
+        "php": "^7.4 || ^8.0",
         "guzzlehttp/guzzle": "^6.5",
         "ext-json": "*",
         "art4/json-api-client": "^1.0"
