@@ -13,10 +13,10 @@ interface JsonApiEntityInterface
     /**
      * @return array
      */
-    public function getRelationships(): array;
+    public function getRelationships(): ?array;
     
     /**
      * @return array
      */
-    public function getMeta(): array;
+    public function getMeta(): ?array;
 }
