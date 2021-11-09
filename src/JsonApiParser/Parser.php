@@ -23,8 +23,8 @@ class Parser
         
         return new JsonApiEntity(
             $data['data']['attributes'],
-            $data['data']['relationships'],
-            $data['data']['meta']
+            $data['data']['relationships'] ?? null,
+            $data['data']['meta'] ?? null
         );
     }
 }
