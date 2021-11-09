@@ -18,7 +18,7 @@ class JsonApiEntity implements JsonApiEntityInterface
     /**
      * @var array
      */
-    private ?array $meta;
+    private array $meta;
     
     public function __construct(array $attributes, array $relationships, array $meta)
     {
@@ -38,7 +38,7 @@ class JsonApiEntity implements JsonApiEntityInterface
     /**
      * @return array
      */
-    public function getRelationships(): ?array
+    public function getRelationships(): array
     {
         return $this->relationships;
     }
@@ -46,7 +46,7 @@ class JsonApiEntity implements JsonApiEntityInterface
     /**
      * @return array
      */
-    public function getMeta(): ?array
+    public function getMeta(): array
     {
         return $this->meta;
     }
