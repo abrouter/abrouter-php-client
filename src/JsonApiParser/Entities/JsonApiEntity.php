@@ -20,7 +20,7 @@ class JsonApiEntity implements JsonApiEntityInterface
      */
     private ?array $meta;
     
-    public function __construct(array $attributes, ?array $relationships, ?array $meta)
+    public function __construct(array $attributes, array $relationships, array $meta)
     {
         $this->attributes = $attributes;
         $this->relationships = $relationships;
