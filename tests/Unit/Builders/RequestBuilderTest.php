@@ -12,7 +12,7 @@ class RequestBuilderTest extends TestCase
     /**
      * @var RequestBuilder $requestBuilder
      */
-    private RequestBuilder $requestBuilder;
+    private $requestBuilder;
     
     public function setUp(): void
     {

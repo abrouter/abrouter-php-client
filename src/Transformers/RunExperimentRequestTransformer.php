@@ -6,9 +6,8 @@ namespace Abrouter\Client\Transformers;
 use Abrouter\Client\Entities\Client\Response;
 use Abrouter\Client\Entities\RunExperiment;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
-use Art4\JsonApiClient\Exception\Exception;
-use Art4\JsonApiClient\Helper\Parser;
-use Art4\JsonApiClient\V1\Attributes;
+use Abrouter\Client\JsonApiParser\Parser;
+use \Exception;
 
 class RunExperimentRequestTransformer
 {
@@ -21,13 +20,10 @@ class RunExperimentRequestTransformer
     public function transform(Response $response): RunExperiment
     {
         try {
-            $jsonApi = Parser::parseResponseString(json_encode($response->getResponseJson()));
-            /**
-             * @var Attributes $attributes
-             */
-            $attributes = $jsonApi->get('data.attributes');
-            $branchUid = $attributes->get('branch-uid');
-            $experimentUid = $attributes->get('experiment-uid');
+            $json = Parser::parse($response->getResponseJson());
+            
+            $branchUid = $json->getAttributes()['branch-uid'];
+            $experimentUid = $json->getAttributes()['experiment-uid'];
             
             return new RunExperiment($branchUid, $experimentUid);
         } catch (Exception $e) {

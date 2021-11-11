@@ -15,17 +15,17 @@ class TestCase extends BaseTestCase
     /**
      * @var Container $container
      */
-    private Container $container;
+    private $container;
     
     /**
      * @var string $token
      */
-    private string $token;
+    private $token;
     
     /**
      * @var string $host
      */
-    private string $host;
+    private $host;
     
     public function getContainer()
     {

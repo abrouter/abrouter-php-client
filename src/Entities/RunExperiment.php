@@ -8,12 +8,12 @@ class RunExperiment
     /**
      * @var string
      */
-    private string $branchId;
+    private $branchId;
     
     /**
      * @var string
      */
-    private string $experimentId;
+    private $experimentId;
     
     public function __construct(string $branchId, string $experimentId)
     {

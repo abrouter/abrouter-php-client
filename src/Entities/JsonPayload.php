@@ -8,7 +8,7 @@ class JsonPayload
     /**
      * @var array
      */
-    private array $payload;
+    private $payload;
     
     public function __construct(array $payload)
     {

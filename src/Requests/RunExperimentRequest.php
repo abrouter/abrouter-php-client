@@ -17,22 +17,22 @@ class RunExperimentRequest
     /**
      * @var RequestBuilder
      */
-    private RequestBuilder $requestBuilder;
+    private $requestBuilder;
     
     /**
      * @var TokenConfigAccessor
      */
-    private TokenConfigAccessor $tokenConfigAccessor;
+    private $tokenConfigAccessor;
     
     /**
      * @var UrlBuilder
      */
-    private UrlBuilder $urlBuilder;
+    private $urlBuilder;
     
     /**
      * @var RequestExecutor
      */
-    private RequestExecutor $requestExecutor;
+    private $requestExecutor;
     
     public function __construct(
         TokenConfigAccessor $tokenConfigAccessor,

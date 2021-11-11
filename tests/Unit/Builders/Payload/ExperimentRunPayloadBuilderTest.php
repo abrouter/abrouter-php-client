@@ -12,7 +12,7 @@ class ExperimentRunPayloadBuilderTest extends TestCase
     /**
      * @var ExperimentRunPayloadBuilder $experimentRunPayloadBuilder
      */
-    private ExperimentRunPayloadBuilder $experimentRunPayloadBuilder;
+    private $experimentRunPayloadBuilder;
     
     public function setUp(): void
     {

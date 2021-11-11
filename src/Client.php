@@ -10,7 +10,7 @@ class Client
     /**
      * @var ExperimentManager
      */
-    private ExperimentManager $experimentManager;
+    private $experimentManager;
     
     public function __construct(ExperimentManager $experimentManager)
     {

@@ -42,7 +42,7 @@ class ExperimentManagerTest extends TestCase
         $experimentManager = new ExperimentManager(
             $runExperimentRequest,
             $this->getContainer()->make(ExperimentRunPayloadBuilder::class),
-            $this->getContainer()->make(RunExperimentRequestTransformer::class),
+            $this->getContainer()->make(RunExperimentRequestTransformer::class)
         );
         $userSignature = uniqid();
         $abrExperimentId = uniqid();

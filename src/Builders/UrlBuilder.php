@@ -12,11 +12,17 @@ class UrlBuilder
     /**
      * @var HostConfigAccessor
      */
-    private HostConfigAccessor $hostConfigAccessor;
+    private $hostConfigAccessor;
     
-    private string $host;
+    /**
+     * @var string
+     */
+    private $host;
     
-    private string $url;
+    /**
+     * @var string
+     */
+    private $url;
     
     public function __construct(HostConfigAccessor $hostConfigAccessor)
     {

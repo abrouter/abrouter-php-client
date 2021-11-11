@@ -11,7 +11,7 @@ class UrlBuilderTest extends TestCase
     /**
      * @var UrlBuilder $urlBuilder
      */
-    private UrlBuilder $urlBuilder;
+    private $urlBuilder;
     
     public function setUp(): void
     {

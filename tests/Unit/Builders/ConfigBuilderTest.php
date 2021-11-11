@@ -12,7 +12,7 @@ class ConfigBuilderTest extends TestCase
     /**
      * @var ConfigBuilder $configBuilder
      */
-    private ConfigBuilder $configBuilder;
+    private $configBuilder;
     
     public function setUp(): void
     {

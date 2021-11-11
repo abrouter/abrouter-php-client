@@ -15,17 +15,17 @@ class ExperimentManager
     /**
      * @var RunExperimentRequest
      */
-    private RunExperimentRequest $runExperimentRequest;
+    private $runExperimentRequest;
     
     /**
      * @var ExperimentRunPayloadBuilder
      */
-    private ExperimentRunPayloadBuilder $experimentRunPayloadBuilder;
+    private $experimentRunPayloadBuilder;
     
     /**
      * @var RunExperimentRequestTransformer
      */
-    private RunExperimentRequestTransformer $experimentRequestTransformer;
+    private $experimentRequestTransformer;
     
     public function __construct(
         RunExperimentRequest $runExperimentRequest,
