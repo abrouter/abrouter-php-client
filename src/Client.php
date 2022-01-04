@@ -12,13 +12,21 @@ class Client
      */
     private ExperimentManager $experimentManager;
     
-    public function __construct(ExperimentManager $experimentManager)
-    {
+    public function __construct(
+        ExperimentManager $experimentManager,
+        StatisticsManager $statisticsManager
+    ) {
         $this->experimentManager = $experimentManager;
+        $this->statisticsManager = $statisticsManager;
     }
     
     public function experiments(): ExperimentManager
     {
         return $this->experimentManager;
+    }
+
+    public function statistics(): StatisticsManager
+    {
+        return $this->statisticsManager;
     }
 }
