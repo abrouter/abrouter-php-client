@@ -5,6 +5,6 @@ namespace Abrouter\Client\Exceptions;
 
 use Exception;
 
-class StatisticsRequestException extends Exception
+class SendEventRequestException extends Exception
 {
 }

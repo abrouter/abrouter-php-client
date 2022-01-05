@@ -1,20 +1,10 @@
 <?php
-declare(strict_types =1);
+declare(strict_types = 1);
 
-namespace Abrouter\Client\DTO;
+namespace Abrouter\Client\Entities;
 
-class EventDTO
+class SendEvent
 {
-    /**
-     * @var string
-     */
-    private $ownerId;
-
-    /**
-     * @var string|null
-     */
-    private $temporaryUserId;
-    
     /**
      * @var string|null
      */
@@ -46,10 +36,6 @@ class EventDTO
     private $ip;
     
     /**
-     * EventDTO constructor.
-     *
-     * @param string    $ownerId
-     * @param string|null $temporaryUserId
      * @param string|null $userId
      * @param string $event
      * @param string|null $tag
@@ -58,8 +44,6 @@ class EventDTO
      * @param string|null $ip
      */
     public function __construct(
-        string $ownerId,
-        ?string $temporaryUserId,
         ?string $userId,
         string $event,
         ?string $tag,
@@ -67,30 +51,12 @@ class EventDTO
         ?array $meta,
         ?string $ip
     ) {
-        $this->ownerId = $ownerId;
-        $this->temporaryUserId = $temporaryUserId;
         $this->userId = $userId;
         $this->event = $event;
         $this->tag = $tag;
         $this->referrer = $referrer;
         $this->meta = $meta;
         $this->ip = $ip;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getOwnerId(): string
-    {
-        return $this->ownerId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTemporaryUserId(): ?string
-    {
-        return $this->temporaryUserId;
     }
     
     /**

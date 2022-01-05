@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Abrouter\Client;
 
 use Abrouter\Client\Manager\ExperimentManager;
+use Abrouter\Client\Manager\StatisticsManager;
 
 class Client
 {

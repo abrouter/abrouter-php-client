@@ -10,9 +10,9 @@ use Abrouter\Client\Entities\Client\Response;
 use Abrouter\Client\Entities\Client\ResponseInterface;
 use Abrouter\Client\Entities\JsonPayload;
 use Abrouter\Client\Http\RequestExecutor;
-use Abrouter\Client\Exceptions\StatisticsRequestException;
+use Abrouter\Client\Exceptions\SendEventRequestException;
 
-class StatisticsRequest
+class SendEventRequest
 {
     /**
      * @var RequestBuilder
@@ -50,11 +50,11 @@ class StatisticsRequest
      * @param JsonPayload $jsonPayload
      *
      * @return Response
-     * @throws RunExperimentRequestException
+     * @throws SendEventRequestException
      */
     public function sendEvent(JsonPayload $jsonPayload): ResponseInterface
     {
-        $url = $this->urlBuilder->statisticsUri()->build();
+        $url = $this->urlBuilder->sendEventUri()->build();
         $request = $this
             ->requestBuilder
             ->post()
@@ -68,7 +68,7 @@ class StatisticsRequest
         try {
             return $this->requestExecutor->execute($request);
         } catch (\Throwable $exception) {
-            throw new StatisticsRequestException($exception->getMessage());
+            throw new SendEventRequestException($exception->getMessage());
         }
     }
 }

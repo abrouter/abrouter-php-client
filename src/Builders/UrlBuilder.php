@@ -8,7 +8,7 @@ use Abrouter\Client\Config\Accessors\HostConfigAccessor;
 class UrlBuilder
 {
     public const RUN_EXPERIMENT_API_URL = 'api/v1/experiment/run';
-    public const STATISTICS_API_URL = 'api/v1/event';
+    public const SEND_EVENT_API_URL = 'api/v1/event';
     
     /**
      * @var HostConfigAccessor
@@ -30,9 +30,9 @@ class UrlBuilder
         return $this->setUrl(self::RUN_EXPERIMENT_API_URL);
     }
 
-    public function statisticsUri()
+    public function sendEventUri()
     {
-        return $this->setUrl(self::STATISTICS_API_URL);
+        return $this->setUrl(self::SEND_EVENT_API_URL);
     }
     
     public function build(): string

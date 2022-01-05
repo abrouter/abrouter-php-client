@@ -24,4 +24,10 @@ class UrlBuilderTest extends TestCase
         $url = $this->urlBuilder->runExperimentUri()->build();
         $this->assertEquals($url, $this->getConfig()->getHost() . '/' . UrlBuilder::RUN_EXPERIMENT_API_URL);
     }
+
+    public function testUrlBuilderSendEventUri()
+    {
+        $url = $this->urlBuilder->sendEventUri()->build();
+        $this->assertEquals($url, $this->getConfig()->getHost() . '/' . UrlBuilder::SEND_EVENT_API_URL);
+    }
 }
