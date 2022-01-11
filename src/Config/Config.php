@@ -9,7 +9,7 @@ class Config
      * @var string $token
      */
     private string $token;
-    
+
     /**
      * @var string $host
      */
