@@ -1,5 +1,5 @@
 name: Tests
-on: [push, pull_request]
+on: [push]
 jobs:
   abrouter-tests-php-74:
     runs-on: ubuntu-latest
