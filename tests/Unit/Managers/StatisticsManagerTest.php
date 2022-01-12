@@ -11,7 +11,6 @@ use \Abrouter\Client\Requests\SendEventRequest;
 use Abrouter\Client\Transformers\SendEventRequestTransformer;
 use Abrouter\Client\DTO\EventDTO;
 
-
 class StatisticsManagerTest extends TestCase
 {
     public function testSendEvent()

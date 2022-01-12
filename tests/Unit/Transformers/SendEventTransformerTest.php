@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Abrouter\Client\Tests\Unit\Transformers;
 
 use Abrouter\Client\Entities\Client\Response;
-use Abrouter\Client\Entities\SendEvent;
+use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\Tests\Unit\TestCase;
 use Abrouter\Client\Transformers\SendEventRequestTransformer;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
@@ -38,7 +38,7 @@ class SendEventTransformerTest extends TestCase
             '255.255.255.255'
         );
         
-        $sendEvent = $this->sendEventRequestTransformer->transform(new Response([
+        $sentEvent = $this->sendEventRequestTransformer->transform(new Response([
             'data' => [
                 'id' => uniqid(),
                 'type' => 'events',
@@ -53,13 +53,13 @@ class SendEventTransformerTest extends TestCase
             ]
         ]));
         
-        $this->assertInstanceOf(SendEvent::class, $sendEvent);
-        $this->assertEquals($sendEvent->getUserId(), $eventDTO->getUserId());
-        $this->assertEquals($sendEvent->getEvent(), $eventDTO->getEvent());
-        $this->assertEquals($sendEvent->getTag(), $eventDTO->getTag());
-        $this->assertEquals($sendEvent->getReferrer(), $eventDTO->getReferrer());
-        $this->assertEquals($sendEvent->getMeta(), $eventDTO->getMeta());
-        $this->assertEquals($sendEvent->getIp(), $eventDTO->getIp());
+        $this->assertInstanceOf(SentEvent::class, $sentEvent);
+        $this->assertEquals($sentEvent->getUserId(), $eventDTO->getUserId());
+        $this->assertEquals($sentEvent->getEvent(), $eventDTO->getEvent());
+        $this->assertEquals($sentEvent->getTag(), $eventDTO->getTag());
+        $this->assertEquals($sentEvent->getReferrer(), $eventDTO->getReferrer());
+        $this->assertEquals($sentEvent->getMeta(), $eventDTO->getMeta());
+        $this->assertEquals($sentEvent->getIp(), $eventDTO->getIp());
     }
     
     /**

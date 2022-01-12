@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Abrouter\Client\Entities;
 
-class SendEvent
+class SentEvent
 {
     /**
      * @var string|null

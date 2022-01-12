@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace Abrouter\Client\Transformers;
 
 use Abrouter\Client\Entities\Client\Response;
-use Abrouter\Client\Entities\SendEvent;
+use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
 use Art4\JsonApiClient\Exception\Exception;
 use Art4\JsonApiClient\Helper\Parser;
@@ -15,10 +15,10 @@ class SendEventRequestTransformer
     /**
      * @param Response $response
      *
-     * @return SendEvent
+     * @return SentEvent
      * @throws InvalidJsonApiResponseException
      */
-    public function transform(Response $response): SendEvent
+    public function transform(Response $response): SentEvent
     {
         try {
             $jsonApi = Parser::parseResponseString(json_encode($response->getResponseJson()));
@@ -33,8 +33,8 @@ class SendEventRequestTransformer
             $meta = $attributes->get('meta');
             $ip = $attributes->get('ip');
 
-            return new SendEvent(
-                $userId, 
+            return new SentEvent(
+                $userId,
                 $event,
                 $tag,
                 $referrer,

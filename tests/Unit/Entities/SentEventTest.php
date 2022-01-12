@@ -3,11 +3,11 @@ declare(strict_types = 1);
 
 namespace Abrouter\Client\Tests\Unit\Entities;
 
-use Abrouter\Client\Entities\SendEvent;
+use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\DTO\EventDTO;
 use Abrouter\Client\Tests\Unit\TestCase;
 
-class SendEventTest extends TestCase
+class SentEventTest extends TestCase
 {
     public function testStatistics()
     {
@@ -22,7 +22,7 @@ class SendEventTest extends TestCase
             '255.255.255.255'
         );
         
-        $sendEvent = new SendEvent(
+        $sentEvent = new SentEvent(
             $eventDTO->getUserId(),
             $eventDTO->getEvent(),
             $eventDTO->getTag(),
@@ -30,11 +30,11 @@ class SendEventTest extends TestCase
             $eventDTO->getMeta(),
             $eventDTO->getIp()
         );
-        $this->assertEquals($sendEvent->getUserId(), $eventDTO->getUserId());
-        $this->assertEquals($sendEvent->getEvent(), $eventDTO->getEvent());
-        $this->assertEquals($sendEvent->getTag(), $eventDTO->getTag());
-        $this->assertEquals($sendEvent->getReferrer(), $eventDTO->getReferrer());
-        $this->assertEquals($sendEvent->getMeta(), $eventDTO->getMeta());
-        $this->assertEquals($sendEvent->getIp(), $eventDTO->getIp());
+        $this->assertEquals($sentEvent->getUserId(), $eventDTO->getUserId());
+        $this->assertEquals($sentEvent->getEvent(), $eventDTO->getEvent());
+        $this->assertEquals($sentEvent->getTag(), $eventDTO->getTag());
+        $this->assertEquals($sentEvent->getReferrer(), $eventDTO->getReferrer());
+        $this->assertEquals($sentEvent->getMeta(), $eventDTO->getMeta());
+        $this->assertEquals($sentEvent->getIp(), $eventDTO->getIp());
     }
 }
