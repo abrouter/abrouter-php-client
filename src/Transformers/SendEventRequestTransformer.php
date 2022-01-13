@@ -26,20 +26,10 @@ class SendEventRequestTransformer
              * @var Attributes $attributes
              */
             $attributes = $jsonApi->get('data.attributes');
-            $userId = $attributes->get('user_id');
             $event = $attributes->get('event');
-            $tag = $attributes->get('tag');
-            $referrer = $attributes->get('referrer');
-            $meta = $attributes->get('meta');
-            $ip = $attributes->get('ip');
 
             return new SentEvent(
-                $userId,
-                $event,
-                $tag,
-                $referrer,
-                $meta,
-                $ip
+                $event
             );
         } catch (Exception $e) {
             throw new InvalidJsonApiResponseException($e->getMessage());

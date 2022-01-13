@@ -23,18 +23,8 @@ class SentEventTest extends TestCase
         );
         
         $sentEvent = new SentEvent(
-            $eventDTO->getUserId(),
-            $eventDTO->getEvent(),
-            $eventDTO->getTag(),
-            $eventDTO->getReferrer(),
-            $eventDTO->getMeta(),
-            $eventDTO->getIp()
+            $eventDTO->getEvent()
         );
-        $this->assertEquals($sentEvent->getUserId(), $eventDTO->getUserId());
-        $this->assertEquals($sentEvent->getEvent(), $eventDTO->getEvent());
-        $this->assertEquals($sentEvent->getTag(), $eventDTO->getTag());
-        $this->assertEquals($sentEvent->getReferrer(), $eventDTO->getReferrer());
-        $this->assertEquals($sentEvent->getMeta(), $eventDTO->getMeta());
-        $this->assertEquals($sentEvent->getIp(), $eventDTO->getIp());
+        $this->assertEquals($sentEvent->isSuccessful(), true);
     }
 }

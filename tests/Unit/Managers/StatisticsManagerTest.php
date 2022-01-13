@@ -59,11 +59,6 @@ class StatisticsManagerTest extends TestCase
         
         $sendEventEntity = $statisticsManager->sendEvent($eventDTO);
     
-        $this->assertEquals($sendEventEntity->getUserId(), $eventDTO->getUserId());
-        $this->assertEquals($sendEventEntity->getEvent(), $eventDTO->getEvent());
-        $this->assertEquals($sendEventEntity->getTag(), $eventDTO->getTag());
-        $this->assertEquals($sendEventEntity->getReferrer(), $eventDTO->getReferrer());
-        $this->assertEquals($sendEventEntity->getMeta(), $eventDTO->getMeta());
-        $this->assertEquals($sendEventEntity->getIp(), $eventDTO->getIp());
+        $this->assertEquals($sendEventEntity->isSuccessful(), true);
     }
 }
