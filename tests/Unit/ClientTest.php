@@ -3,6 +3,7 @@ namespace Abrouter\Client\Tests\Unit\Managers;
 
 use Abrouter\Client\Client;
 use Abrouter\Client\Manager\ExperimentManager;
+use Abrouter\Client\Manager\StatisticsManager;
 use Abrouter\Client\Tests\Unit\TestCase;
 
 class ClientTest extends TestCase
@@ -21,5 +22,10 @@ class ClientTest extends TestCase
     public function testExperiments()
     {
         $this->assertInstanceOf(ExperimentManager::class, $this->client->experiments());
+    }
+
+    public function testStatistics()
+    {
+        $this->assertInstanceOf(StatisticsManager::class, $this->client->statistics());
     }
 }
