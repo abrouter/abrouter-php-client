@@ -44,18 +44,24 @@ class EventDTO
      * @var string|null
      */
     private $ip;
-    
+
+    /**
+     * @var string|null
+     */
+    private $created_at;
+
     /**
      * EventDTO constructor.
      *
-     * @param string    $ownerId
+     * @param string $ownerId
      * @param string|null $temporaryUserId
      * @param string|null $userId
      * @param string $event
      * @param string|null $tag
      * @param string|null $referrer
-     * @param array|null  $meta
+     * @param array|null $meta
      * @param string|null $ip
+     * @param string|null $created_at
      */
     public function __construct(
         string $ownerId,
@@ -65,7 +71,8 @@ class EventDTO
         ?string $tag,
         ?string $referrer,
         ?array $meta,
-        ?string $ip
+        ?string $ip,
+        ?string $created_at
     ) {
         $this->ownerId = $ownerId;
         $this->temporaryUserId = $temporaryUserId;
@@ -75,10 +82,11 @@ class EventDTO
         $this->referrer = $referrer;
         $this->meta = $meta;
         $this->ip = $ip;
+        $this->created_at = $created_at;
     }
-    
+
     /**
-     * @return int
+     * @return string
      */
     public function getOwnerId(): string
     {
@@ -86,7 +94,7 @@ class EventDTO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getTemporaryUserId(): ?string
     {
@@ -94,7 +102,7 @@ class EventDTO
     }
     
     /**
-     * @return string
+     * @return string|null
      */
     public function getUserId(): ?string
     {
@@ -110,7 +118,7 @@ class EventDTO
     }
     
     /**
-     * @return string
+     * @return string|null
      */
     public function getReferrer(): ?string
     {
@@ -118,7 +126,7 @@ class EventDTO
     }
     
     /**
-     * @return string
+     * @return string|null
      */
     public function getTag(): ?string
     {
@@ -126,7 +134,7 @@ class EventDTO
     }
     
     /**
-     * @return array
+     * @return array|null
      */
     public function getMeta(): ?array
     {
@@ -134,10 +142,18 @@ class EventDTO
     }
     
     /**
-     * @return string
+     * @return string|null
      */
     public function getIp(): ?string
     {
         return $this->ip;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCreatedAt(): ?string
+    {
+        return $this->created_at;
     }
 }

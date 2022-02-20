@@ -52,7 +52,7 @@ class UrlBuilder
         return $this;
     }
     
-    private function injectHost(string $uri)
+    private function injectHost(string $uri): string
     {
         return join('/', [$this->hostConfigAccessor->getHost(), $uri]);
     }

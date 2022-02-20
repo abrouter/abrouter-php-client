@@ -27,6 +27,7 @@ class SendEventTransformerTest extends TestCase
      */
     public function testTransform()
     {
+        $date = (new \DateTime())->format('Y-m-d');
         $eventDTO = new EventDTO(
             'owner_12345',
             'temporary_user_12345',
@@ -35,9 +36,10 @@ class SendEventTransformerTest extends TestCase
             'new_tag',
             'abrouter',
             [],
-            '255.255.255.255'
+            '255.255.255.255',
+            $date
         );
-        
+
         $sentEvent = $this->sendEventRequestTransformer->transform(new Response([
             'data' => [
                 'id' => uniqid(),

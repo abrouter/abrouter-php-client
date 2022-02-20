@@ -9,9 +9,9 @@ class SentEvent
      * @var string
      */
     private $event;
-    
+
     /**
-     * @param string|null $ip
+     * @param string $event
      */
     public function __construct(
         string $event
