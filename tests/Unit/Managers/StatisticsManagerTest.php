@@ -14,6 +14,11 @@ use Abrouter\Client\DTO\EventDTO;
 
 class StatisticsManagerTest extends TestCase
 {
+    /**
+     * @return void
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     */
     public function testSendEvent()
     {
         $date = (new \DateTime())->format('Y-m-d');
@@ -32,8 +37,12 @@ class StatisticsManagerTest extends TestCase
         $sendEventRequest = new class () extends SendEventRequest
         {
 
+            /**
+             *
+             */
             public function __construct()
             {
+
             }
 
             /**

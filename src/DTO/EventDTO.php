@@ -36,13 +36,13 @@ class EventDTO
     /**
      * EventDTO constructor.
      *
-     * @param string $ownerId
+     * @param string      $ownerId
      * @param string|null $temporaryUserId
      * @param string|null $userId
-     * @param string $event
+     * @param string      $event
      * @param string|null $tag
      * @param string|null $referrer
-     * @param array|null $meta
+     * @param array|null  $meta
      * @param string|null $ip
      * @param string|null $created_at
      */

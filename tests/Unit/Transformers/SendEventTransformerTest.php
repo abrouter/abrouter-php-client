@@ -18,6 +18,8 @@ class SendEventTransformerTest extends TestCase
 
     /**
      * @return void
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
      */
     public function setUp(): void
     {
@@ -26,6 +28,7 @@ class SendEventTransformerTest extends TestCase
     }
     
     /**
+     * @return void
      * @throws InvalidJsonApiResponseException
      */
     public function testTransform()
@@ -66,8 +69,9 @@ class SendEventTransformerTest extends TestCase
         $this->assertInstanceOf(SentEvent::class, $sentEvent);
         $this->assertEquals($sentEvent->isSuccessful(), true);
     }
-    
+
     /**
+     * @return void
      * @throws InvalidJsonApiResponseException
      */
     public function testException()
