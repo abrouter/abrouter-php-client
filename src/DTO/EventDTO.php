@@ -32,17 +32,17 @@ class EventDTO
 
     /** @var string|null */
     private $created_at;
-    
+
     /**
      * EventDTO constructor.
      *
-     * @param string    $ownerId
+     * @param string $ownerId
      * @param string|null $temporaryUserId
      * @param string|null $userId
      * @param string $event
      * @param string|null $tag
      * @param string|null $referrer
-     * @param array|null  $meta
+     * @param array|null $meta
      * @param string|null $ip
      * @param string|null $created_at
      */
@@ -68,73 +68,55 @@ class EventDTO
         $this->created_at = $created_at;
     }
 
-    /**
-     * @return string
-     */
+    /** @return string */
     public function getOwnerId(): string
     {
         return $this->ownerId;
     }
 
-    /**
-     * @return string|null
-     */
+    /** @return string|null */
     public function getTemporaryUserId(): ?string
     {
         return $this->temporaryUserId;
     }
     
-    /**
-     * @return string|null
-     */
+    /** @return string|null */
     public function getUserId(): ?string
     {
         return $this->userId;
     }
     
-    /**
-     * @return string
-     */
+    /** @return string */
     public function getEvent(): string
     {
         return $this->event;
     }
     
-    /**
-     * @return string|null
-     */
+    /** @return string|null */
     public function getReferrer(): ?string
     {
         return $this->referrer;
     }
     
-    /**
-     * @return string|null
-     */
+    /** @return string|null */
     public function getTag(): ?string
     {
         return $this->tag;
     }
     
-    /**
-     * @return array|null
-     */
+    /** @return array|null */
     public function getMeta(): ?array
     {
         return $this->meta;
     }
     
-    /**
-     * @return string|null
-     */
+    /** @return string|null */
     public function getIp(): ?string
     {
         return $this->ip;
     }
 
-    /**
-     * @return string|null
-     */
+    /** @return string|null */
     public function getCreatedAt(): ?string
     {
         return $this->created_at;
