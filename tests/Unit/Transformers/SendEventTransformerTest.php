@@ -16,17 +16,13 @@ class SendEventTransformerTest extends TestCase
     /** @var SendEventRequestTransformer $sendEventRequestTransformer */
     private SendEventRequestTransformer $sendEventRequestTransformer;
 
-    /**
-     * @return void
-     * @throws \DI\DependencyException
-     * @throws \DI\NotFoundException
-     */
+    /** @return void */
     public function setUp(): void
     {
         $this->sendEventRequestTransformer = $this->getContainer()
                 ->make(sendEventRequestTransformer::class);
     }
-    
+
     /**
      * @return void
      * @throws InvalidJsonApiResponseException
@@ -77,8 +73,12 @@ class SendEventTransformerTest extends TestCase
     public function testException()
     {
         $this->expectException(InvalidJsonApiResponseException::class);
-        $this->sendEventRequestTransformer->transform(new Response([
-            'data' => [],
-        ]));
+        $this->sendEventRequestTransformer->transform(
+            new Response(
+                [
+                    'data' => [],
+                ]
+            )
+        );
     }
 }
