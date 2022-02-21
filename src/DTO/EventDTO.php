@@ -1,53 +1,36 @@
 <?php
+
 declare(strict_types =1);
 
 namespace Abrouter\Client\DTO;
 
 class EventDTO
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $ownerId;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $temporaryUserId;
     
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $userId;
     
-    /**
-     * @var string
-     */
+    /** @var string */
     private $event;
     
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $referrer;
     
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $tag;
     
-    /**
-     * @var array|null
-     */
+    /** @var array|null */
     private $meta;
     
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $ip;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $created_at;
     
     /**

@@ -11,6 +11,7 @@ class SentEventTest extends TestCase
 {
     public function testStatistics()
     {
+        $date = (new \DateTime())->format('Y-m-d');
         $eventDTO = new EventDTO(
             'owner_' . uniqid(),
             'temporary_user_' . uniqid(),
@@ -19,7 +20,8 @@ class SentEventTest extends TestCase
             'new_tag',
             'abrouter',
             [],
-            '255.255.255.255'
+            '255.255.255.255',
+            $date
         );
         
         $sentEvent = new SentEvent(

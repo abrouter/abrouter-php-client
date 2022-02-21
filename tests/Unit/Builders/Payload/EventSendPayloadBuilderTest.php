@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types = 1);
 
 namespace Abrouter\Client\Tests\Unit\Builders\Payload;
@@ -10,16 +11,21 @@ use Abrouter\Client\Tests\Unit\TestCase;
 
 class EventSendPayloadBuilderTest extends TestCase
 {
-    /**
-     * @var EventSendPayloadBuilder $eventSendPayloadBuilder
-     */
+    /** @var EventSendPayloadBuilder $eventSendPayloadBuilder */
     private EventSendPayloadBuilder $eventSendPayloadBuilder;
-    
+
+    /**
+     * @return void
+     */
     public function setUp(): void
     {
-        $this->eventSendPayloadBuilder = $this->getContainer()->make(EventSendPayloadBuilder::class);
+        $this->eventSendPayloadBuilder = $this->getContainer()
+                ->make(EventSendPayloadBuilder::class);
     }
-    
+
+    /**
+     * @return void
+     */
     public function testPayloadIsCorrect()
     {
         $date = (new \DateTime())->format('Y-m-d');
@@ -38,28 +44,30 @@ class EventSendPayloadBuilderTest extends TestCase
         $payload = $this->eventSendPayloadBuilder->build($eventDTO);
         
         $this->assertInstanceOf(JsonPayload::class, $payload);
-        $this->assertEquals($payload->getPayload(), [
-            'data' => [
-                'type' => 'events',
-                'attributes' => [
-                    'event' => $eventDTO->getEvent(),
-                    'user_id' => $eventDTO->getUserId(),
-                    'temporary_user_id' => $eventDTO->getTemporaryUserId(),
-                    'tag' => $eventDTO->getTag(),
-                    'referrer' => $eventDTO->getReferrer(),
-                    'meta' => $eventDTO->getMeta(),
-                    'ip' => $eventDTO->getIp(),
-                    'created_at' => $eventDTO->getCreatedAt()
-                ],
-                'relationships' => [
-                    'owner' => [
-                        'data' => [
-                            'id'   => $eventDTO->getOwnerId(),
-                            'type' => 'users',
-                        ],
+        $this->assertEquals($payload->getPayload(),
+            [
+                'data' => [
+                    'type' => 'events',
+                    'attributes' => [
+                        'event' => $eventDTO->getEvent(),
+                        'user_id' => $eventDTO->getUserId(),
+                        'temporary_user_id' => $eventDTO->getTemporaryUserId(),
+                        'tag' => $eventDTO->getTag(),
+                        'referrer' => $eventDTO->getReferrer(),
+                        'meta' => $eventDTO->getMeta(),
+                        'ip' => $eventDTO->getIp(),
+                        'created_at' => $eventDTO->getCreatedAt()
                     ],
+                    'relationships' => [
+                        'owner' => [
+                            'data' => [
+                                'id'   => $eventDTO->getOwnerId(),
+                                'type' => 'users',
+                            ],
+                        ],
+                    ]
                 ]
             ]
-        ]);
+        );
     }
 }

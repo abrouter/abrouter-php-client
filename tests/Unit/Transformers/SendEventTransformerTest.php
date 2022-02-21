@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types = 1);
 
 namespace Abrouter\Client\Tests\Unit\Transformers;
@@ -12,14 +13,16 @@ use AbRouter\Client\DTO\EventDTO;
 
 class SendEventTransformerTest extends TestCase
 {
-    /**
-     * @var SendEventRequestTransformer $sendEventRequestTransformer
-     */
+    /** @var SendEventRequestTransformer $sendEventRequestTransformer */
     private SendEventRequestTransformer $sendEventRequestTransformer;
-    
+
+    /**
+     * @return void
+     */
     public function setUp(): void
     {
-        $this->sendEventRequestTransformer = $this->getContainer()->make(sendEventRequestTransformer::class);
+        $this->sendEventRequestTransformer = $this->getContainer()
+                ->make(sendEventRequestTransformer::class);
     }
     
     /**
@@ -40,21 +43,25 @@ class SendEventTransformerTest extends TestCase
             $date
         );
         
-        $sentEvent = $this->sendEventRequestTransformer->transform(new Response([
-            'data' => [
-                'id' => uniqid(),
-                'type' => 'events',
-                'attributes' => [
-                    'user_id' => $eventDTO->getUserId(),
-                    'event' => $eventDTO->getEvent(),
-                    'tag' => $eventDTO->getTag(),
-                    'referrer' => $eventDTO->getReferrer(),
-                    'ip' => $eventDTO->getIp(),
-                    'meta' => $eventDTO->getMeta(),
-                    'created_at' => $eventDTO->getCreatedAt()
-                ],
-            ]
-        ]));
+        $sentEvent = $this->sendEventRequestTransformer->transform(
+            new Response(
+                [
+                    'data' => [
+                        'id' => uniqid(),
+                        'type' => 'events',
+                        'attributes' => [
+                            'user_id' => $eventDTO->getUserId(),
+                            'event' => $eventDTO->getEvent(),
+                            'tag' => $eventDTO->getTag(),
+                            'referrer' => $eventDTO->getReferrer(),
+                            'ip' => $eventDTO->getIp(),
+                            'meta' => $eventDTO->getMeta(),
+                            'created_at' => $eventDTO->getCreatedAt()
+                        ],
+                    ]
+                ]
+            )
+        );
         
         $this->assertInstanceOf(SentEvent::class, $sentEvent);
         $this->assertEquals($sentEvent->isSuccessful(), true);
