@@ -8,6 +8,12 @@ use Abrouter\Client\DTO\EventDTO;
 
 class EventSendPayloadBuilder
 {
+    /**
+     *
+     * @param EventDTO $eventDTO
+     * @return JsonPayload
+     *
+     */
     public function build(EventDTO $eventDTO): JsonPayload
     {
         return new JsonPayload(
