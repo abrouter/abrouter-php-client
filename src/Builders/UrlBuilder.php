@@ -30,6 +30,9 @@ class UrlBuilder
         return $this->setUrl(self::RUN_EXPERIMENT_API_URL);
     }
 
+    /**
+     * @return UrlBuilder
+     */
     public function sendEventUri()
     {
         return $this->setUrl(self::SEND_EVENT_API_URL);

@@ -6,7 +6,7 @@ namespace Abrouter\Client\DTO;
 class EventDTO
 {
     /**
-     * @var string
+     * @var string $ownerId
      */
     private $ownerId;
 
