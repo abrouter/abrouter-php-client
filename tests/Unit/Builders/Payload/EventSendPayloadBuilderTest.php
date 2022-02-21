@@ -22,6 +22,7 @@ class EventSendPayloadBuilderTest extends TestCase
     
     public function testPayloadIsCorrect()
     {
+        $date = (new \DateTime())->format('Y-m-d');
         $eventDTO = new EventDTO(
             'owner_' . uniqid(),
             'temporary_user_' . uniqid(),
@@ -30,7 +31,8 @@ class EventSendPayloadBuilderTest extends TestCase
             'new_tag',
             'abrouter',
             [],
-            '255.255.255.255'
+            '255.255.255.255',
+            $date
         );
         
         $payload = $this->eventSendPayloadBuilder->build($eventDTO);
@@ -46,7 +48,8 @@ class EventSendPayloadBuilderTest extends TestCase
                     'tag' => $eventDTO->getTag(),
                     'referrer' => $eventDTO->getReferrer(),
                     'meta' => $eventDTO->getMeta(),
-                    'ip' => $eventDTO->getIp()
+                    'ip' => $eventDTO->getIp(),
+                    'created_at' => $eventDTO->getCreatedAt()
                 ],
                 'relationships' => [
                     'owner' => [

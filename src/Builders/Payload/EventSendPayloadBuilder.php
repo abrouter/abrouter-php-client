@@ -20,7 +20,8 @@ class EventSendPayloadBuilder
                     'tag' => $eventDTO->getTag(),
                     'referrer' => $eventDTO->getReferrer(),
                     'meta' => $eventDTO->getMeta(),
-                    'ip' => $eventDTO->getIp()
+                    'ip' => $eventDTO->getIp(),
+                    'created_at' => $eventDTO->getCreatedAt()
                 ],
                 'relationships' => [
                     'owner' => [

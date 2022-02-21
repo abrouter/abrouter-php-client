@@ -15,6 +15,7 @@ class StatisticsManagerTest extends TestCase
 {
     public function testSendEvent()
     {
+        $date = (new \DateTime())->format('Y-m-d');
         $eventDTO = new EventDTO(
             'owner_12345',
             'temporary_user_12345',
@@ -23,7 +24,8 @@ class StatisticsManagerTest extends TestCase
             'new_tag',
             'abrouter',
             [],
-            '255.255.255.255'
+            '255.255.255.255',
+            $date
         );
         
         $sendEventRequest = new class () extends SendEventRequest {
@@ -33,6 +35,7 @@ class StatisticsManagerTest extends TestCase
     
             public function sendEvent(JsonPayload $jsonPayload): ResponseInterface
             {
+                $date = (new \DateTime())->format('Y-m-d');
                 return new Response([
                     'data' => [
                         'id' => uniqid(),
@@ -43,7 +46,8 @@ class StatisticsManagerTest extends TestCase
                             'tag' => 'new_tag',
                             'referrer' => 'abrouter',
                             'ip' => '255.255.255.255',
-                            'meta' => []
+                            'meta' => [],
+                            'created_at' => $date
                         ],
                     ]
                 ]);
