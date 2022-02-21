@@ -37,7 +37,6 @@ class StatisticsManagerTest extends TestCase
         {
             public function __construct()
             {
-
             }
 
             /**
@@ -66,16 +65,15 @@ class StatisticsManagerTest extends TestCase
                 );
             }
         };
-        
-        
+
         $statisticsManager = new StatisticsManager(
             $sendEventRequest,
             $this->getContainer()->make(EventSendPayloadBuilder::class),
             $this->getContainer()->make(SendEventRequestTransformer::class)
         );
-        
+
         $sendEventEntity = $statisticsManager->sendEvent($eventDTO);
-    
+
         $this->assertEquals($sendEventEntity->isSuccessful(), true);
     }
 }

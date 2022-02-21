@@ -15,31 +15,35 @@ class EventDTO
      * @var string|null
      */
     private $temporaryUserId;
-    
+
     /**
      * @var string|null
      */
     private $userId;
-    
+
     /**
      * @var string
      */
     private $event;
-    
-    /** @var string|null */
+
+    /**
+     * @var string|null
+     */
     private $referrer;
-    
+
     /**
      * @var string|null
      */
     private $tag;
-    
+
     /**
      * @var array|null
      */
     private $meta;
-    
-    /** @var string|null */
+
+    /**
+     * @var string|null
+     */
     private $ip;
 
     /**
@@ -97,7 +101,7 @@ class EventDTO
     {
         return $this->temporaryUserId;
     }
-    
+
     /**
      * @return string|null
      */
@@ -105,7 +109,7 @@ class EventDTO
     {
         return $this->userId;
     }
-    
+
     /**
      * @return string
      */
@@ -113,7 +117,7 @@ class EventDTO
     {
         return $this->event;
     }
-    
+
     /**
      * @return string|null
      */
@@ -121,7 +125,7 @@ class EventDTO
     {
         return $this->referrer;
     }
-    
+
     /**
      * @return string|null
      */
@@ -129,7 +133,7 @@ class EventDTO
     {
         return $this->tag;
     }
-    
+
     /**
      * @return array|null
      */
@@ -137,7 +141,7 @@ class EventDTO
     {
         return $this->meta;
     }
-    
+
     /**
      * @return string|null
      */

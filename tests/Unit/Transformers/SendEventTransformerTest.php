@@ -13,10 +13,11 @@ use AbRouter\Client\DTO\EventDTO;
 
 class SendEventTransformerTest extends TestCase
 {
-    /** @var SendEventRequestTransformer $sendEventRequestTransformer */
+    /**
+     * @var SendEventRequestTransformer $sendEventRequestTransformer
+     */
     private SendEventRequestTransformer $sendEventRequestTransformer;
 
-    /** @return void */
     public function setUp(): void
     {
         $this->sendEventRequestTransformer = $this->getContainer()
@@ -41,7 +42,7 @@ class SendEventTransformerTest extends TestCase
             '255.255.255.255',
             $date
         );
-        
+
         $sentEvent = $this->sendEventRequestTransformer->transform(
             new Response(
                 [
@@ -61,7 +62,7 @@ class SendEventTransformerTest extends TestCase
                 ]
             )
         );
-        
+
         $this->assertInstanceOf(SentEvent::class, $sentEvent);
         $this->assertEquals($sentEvent->isSuccessful(), true);
     }
