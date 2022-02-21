@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Entities;
 
@@ -10,7 +10,6 @@ use Abrouter\Client\Tests\Unit\TestCase;
 
 class SentEventTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -28,7 +27,6 @@ class SentEventTest extends TestCase
             '255.255.255.255',
             $date
         );
-        
         $sentEvent = new SentEvent(
             $eventDTO->getEvent()
         );

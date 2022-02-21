@@ -8,7 +8,7 @@ use Abrouter\Client\Entities\Client\ResponseInterface;
 use Abrouter\Client\Entities\JsonPayload;
 use Abrouter\Client\Manager\StatisticsManager;
 use Abrouter\Client\Tests\Unit\TestCase;
-use \Abrouter\Client\Requests\SendEventRequest;
+use Abrouter\Client\Requests\SendEventRequest;
 use Abrouter\Client\Transformers\SendEventRequestTransformer;
 use Abrouter\Client\DTO\EventDTO;
 
@@ -33,13 +33,8 @@ class StatisticsManagerTest extends TestCase
             '255.255.255.255',
             $date
         );
-        
         $sendEventRequest = new class () extends SendEventRequest
         {
-
-            /**
-             *
-             */
             public function __construct()
             {
 

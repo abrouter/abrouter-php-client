@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Builders\Payload;
 
@@ -38,9 +38,7 @@ class EventSendPayloadBuilderTest extends TestCase
             '255.255.255.255',
             $date
         );
-        
         $payload = $this->eventSendPayloadBuilder->build($eventDTO);
-        
         $this->assertInstanceOf(JsonPayload::class, $payload);
         $this->assertEquals($payload->getPayload(),
             [
