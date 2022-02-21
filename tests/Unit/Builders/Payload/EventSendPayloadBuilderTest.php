@@ -17,7 +17,8 @@ class EventSendPayloadBuilderTest extends TestCase
     
     public function setUp(): void
     {
-        $this->eventSendPayloadBuilder = $this->getContainer()->make(EventSendPayloadBuilder::class);
+        $this->eventSendPayloadBuilder = $this->getContainer()
+                ->make(EventSendPayloadBuilder::class);
     }
     
     public function testPayloadIsCorrect()

@@ -19,7 +19,8 @@ class SendEventTransformerTest extends TestCase
     
     public function setUp(): void
     {
-        $this->sendEventRequestTransformer = $this->getContainer()->make(sendEventRequestTransformer::class);
+        $this->sendEventRequestTransformer = $this->getContainer()
+                ->make(sendEventRequestTransformer::class);
     }
     
     /**
