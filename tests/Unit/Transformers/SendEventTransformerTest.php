@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Transformers;
 
@@ -16,17 +17,20 @@ class SendEventTransformerTest extends TestCase
      * @var SendEventRequestTransformer $sendEventRequestTransformer
      */
     private SendEventRequestTransformer $sendEventRequestTransformer;
-    
+
     public function setUp(): void
     {
-        $this->sendEventRequestTransformer = $this->getContainer()->make(sendEventRequestTransformer::class);
+        $this->sendEventRequestTransformer = $this->getContainer()
+                ->make(sendEventRequestTransformer::class);
     }
-    
+
     /**
+     * @return void
      * @throws InvalidJsonApiResponseException
      */
     public function testTransform()
     {
+        $date = (new \DateTime())->format('Y-m-d');
         $eventDTO = new EventDTO(
             'owner_12345',
             'temporary_user_12345',
@@ -35,36 +39,47 @@ class SendEventTransformerTest extends TestCase
             'new_tag',
             'abrouter',
             [],
-            '255.255.255.255'
+            '255.255.255.255',
+            $date
         );
-        
-        $sentEvent = $this->sendEventRequestTransformer->transform(new Response([
-            'data' => [
-                'id' => uniqid(),
-                'type' => 'events',
-                'attributes' => [
-                    'user_id' => $eventDTO->getUserId(),
-                    'event' => $eventDTO->getEvent(),
-                    'tag' => $eventDTO->getTag(),
-                    'referrer' => $eventDTO->getReferrer(),
-                    'ip' => $eventDTO->getIp(),
-                    'meta' => $eventDTO->getMeta()
-                ],
-            ]
-        ]));
-        
+
+        $sentEvent = $this->sendEventRequestTransformer->transform(
+            new Response(
+                [
+                    'data' => [
+                        'id' => uniqid(),
+                        'type' => 'events',
+                        'attributes' => [
+                            'user_id' => $eventDTO->getUserId(),
+                            'event' => $eventDTO->getEvent(),
+                            'tag' => $eventDTO->getTag(),
+                            'referrer' => $eventDTO->getReferrer(),
+                            'ip' => $eventDTO->getIp(),
+                            'meta' => $eventDTO->getMeta(),
+                            'created_at' => $eventDTO->getCreatedAt()
+                        ],
+                    ]
+                ]
+            )
+        );
+
         $this->assertInstanceOf(SentEvent::class, $sentEvent);
         $this->assertEquals($sentEvent->isSuccessful(), true);
     }
-    
+
     /**
+     * @return void
      * @throws InvalidJsonApiResponseException
      */
     public function testException()
     {
         $this->expectException(InvalidJsonApiResponseException::class);
-        $this->sendEventRequestTransformer->transform(new Response([
-            'data' => [],
-        ]));
+        $this->sendEventRequestTransformer->transform(
+            new Response(
+                [
+                    'data' => [],
+                ]
+            )
+        );
     }
 }
