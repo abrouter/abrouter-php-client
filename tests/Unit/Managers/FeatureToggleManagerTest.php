@@ -8,7 +8,7 @@ use Abrouter\Client\Entities\Client\ResponseInterface;
 use Abrouter\Client\Entities\JsonPayload;
 use Abrouter\Client\Manager\FeatureFlagManager;
 use Abrouter\Client\Tests\Unit\TestCase;
-use \Abrouter\Client\Requests\RunFeatureFlagRequest;
+use Abrouter\Client\Requests\RunFeatureFlagRequest;
 use Abrouter\Client\Transformers\RunFeatureFlagRequestTransformer;
 
 class FeatureToggleManagerTest extends TestCase
