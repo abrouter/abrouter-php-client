@@ -1,4 +1,5 @@
 <?php
+
 namespace Abrouter\Client\Tests\Unit\Managers;
 
 use Abrouter\Client\Client;
