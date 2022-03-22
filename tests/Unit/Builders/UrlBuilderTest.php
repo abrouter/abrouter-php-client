@@ -25,6 +25,12 @@ class UrlBuilderTest extends TestCase
         $this->assertEquals($url, $this->getConfig()->getHost() . '/' . UrlBuilder::RUN_EXPERIMENT_API_URL);
     }
 
+    public function testUrlBuilderRunFeatureFlagUri()
+    {
+        $url = $this->urlBuilder->runFeatureFlagUri()->build();
+        $this->assertEquals($url, $this->getConfig()->getHost() . '/' . UrlBuilder::RUN_FEATURE_FLAG_API_URL);
+    }
+
     public function testUrlBuilderSendEventUri()
     {
         $url = $this->urlBuilder->sendEventUri()->build();
