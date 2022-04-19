@@ -12,12 +12,12 @@ class FeatureFlagRunPayloadBuilder
     {
         return new JsonPayload([
             'data' => [
-                'type'          => 'feature-toggles',
+                'type'          => 'feature-toggles-run',
                 'attributes'    => [
                     'userSignature' => "",
                 ],
                 'relationships' => [
-                    'experiment' => [
+                    'feature-toggle' => [
                         'data' => [
                             'id'   => $id,
                             'type' => 'feature-toggles',
