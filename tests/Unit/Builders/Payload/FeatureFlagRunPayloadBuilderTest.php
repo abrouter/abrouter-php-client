@@ -29,12 +29,12 @@ class FeatureFlagRunPayloadBuilderTest extends TestCase
         $this->assertInstanceOf(JsonPayload::class, $payload);
         $this->assertEquals($payload->getPayload(), [
             'data' => [
-                'type'          => 'feature-toggles',
+                'type'          => 'feature-toggles-run',
                 'attributes'    => [
                     'userSignature' => "",
                 ],
                 'relationships' => [
-                    'experiment' => [
+                    'feature-toggle' => [
                         'data' => [
                             'id'   => $id,
                             'type' => 'feature-toggles',
