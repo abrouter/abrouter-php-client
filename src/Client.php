@@ -19,6 +19,11 @@ class Client
      */
     private StatisticsManager $statisticsManager;
 
+    /**
+     * @var FeatureFlagManager
+     */
+    private FeatureFlagManager $featureFlagManager;
+
     public function __construct(
         ExperimentManager $experimentManager,
         FeatureFlagManager $featureFlagManager,

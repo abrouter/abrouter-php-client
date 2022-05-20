@@ -1,6 +1,6 @@
 <?php
 
-namespace Abrouter\Client\Tests\Unit\Managers;
+namespace Abrouter\Client\Tests\Unit;
 
 use Abrouter\Client\Client;
 use Abrouter\Client\Manager\ExperimentManager;

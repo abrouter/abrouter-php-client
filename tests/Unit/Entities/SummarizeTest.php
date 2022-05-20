@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Entities;
 
-use Abrouter\Client\Entities\SentEvent;
-use Abrouter\Client\DTO\EventDTO;
+use Abrouter\Client\DTO\BaseEventDTO;
+use Abrouter\Client\Entities\Summarize;
+use Abrouter\Client\DTO\SummarizeEventDTO;
 use Abrouter\Client\Tests\Unit\TestCase;
 
-class SentEventTest extends TestCase
+class SummarizeTest extends TestCase
 {
     /**
      * @return void
@@ -16,7 +17,7 @@ class SentEventTest extends TestCase
     public function testStatistics()
     {
         $date = (new \DateTime())->format('Y-m-d');
-        $eventDTO = new EventDTO(
+        $incrementEventDTO = new SummarizeEventDTO((string)mt_rand(1,100),new BaseEventDTO(
             'owner_' . uniqid(),
             'temporary_user_' . uniqid(),
             'user_' . uniqid(),
@@ -26,10 +27,11 @@ class SentEventTest extends TestCase
             [],
             '255.255.255.255',
             $date
+        ));
+        $increment = new Summarize(
+            $incrementEventDTO->getBaseEventDTO()->getEvent(),
+            $incrementEventDTO->getValue()
         );
-        $sentEvent = new SentEvent(
-            $eventDTO->getEvent()
-        );
-        $this->assertEquals($sentEvent->isSuccessful(), true);
+        $this->assertEquals($increment->isSuccessful(), true);
     }
 }
