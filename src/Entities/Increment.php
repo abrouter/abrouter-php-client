@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Abrouter\Client\Entities;
 
-class SentEvent
+class Increment
 {
     /**
      * @var string
@@ -11,7 +11,7 @@ class SentEvent
     private $event;
     
     /**
-     * @param string|null $ip
+     * @param string $event
      */
     public function __construct(
         string $event

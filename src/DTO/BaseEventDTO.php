@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Abrouter\Client\DTO;
 
-class EventDTO
+class BaseEventDTO
 {
     /**
      * @var string
@@ -52,7 +52,7 @@ class EventDTO
     private $created_at;
 
     /**
-     * EventDTO constructor.
+     * BaseEventDTO constructor.
      *
      * @param string      $ownerId
      * @param string|null $temporaryUserId
