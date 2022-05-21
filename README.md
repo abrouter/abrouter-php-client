@@ -2,6 +2,8 @@
 
 AbrPHPClient :construction_worker_woman: is a PHP library to run ab-tests via ABRouter.
 
+You're welcome to [visit the docs](https://docs.abrouter.com).
+
 # What is the ABRouter service ? 
 
 [ABRouter](https://abrouter.com) is the service to manage experiments(ab-tests). The service provides easy to manage dashboard to get experiments under control.
