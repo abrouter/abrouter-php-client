@@ -1,9 +1,10 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Entities;
 
-use Abrouter\Client\Entities\RunExperiment;
+use Abrouter\Client\RemoteEntity\Entities\ExperimentRanResult;
 use Abrouter\Client\Tests\Unit\TestCase;
 
 class RunExperimentTest extends TestCase
@@ -12,8 +13,8 @@ class RunExperimentTest extends TestCase
     {
         $branchId = uniqid();
         $experimentId = uniqid();
-        
-        $runExperiment = new RunExperiment($branchId, $experimentId);
+
+        $runExperiment = new ExperimentRanResult($branchId, $experimentId);
         $this->assertEquals($runExperiment->getExperimentId(), $experimentId);
         $this->assertEquals($runExperiment->getBranchId(), $branchId);
     }

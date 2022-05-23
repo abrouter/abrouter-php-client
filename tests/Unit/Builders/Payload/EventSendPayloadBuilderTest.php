@@ -39,7 +39,8 @@ class EventSendPayloadBuilderTest extends TestCase
         );
         $payload = $this->eventSendPayloadBuilder->build($eventDTO);
         $this->assertInstanceOf(JsonPayload::class, $payload);
-        $this->assertEquals($payload->getPayload(),
+        $this->assertEquals(
+            $payload->getPayload(),
             [
                 'data' => [
                     'type' => 'events',

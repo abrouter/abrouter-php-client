@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Http;
 
@@ -17,27 +18,27 @@ class RequestExecutorTest extends TestCase
 {
     public function testRequestExecutor()
     {
-        $client = new class() extends Client {
+        $client = new class () extends Client {
             /**
              * @var string
              */
             private string $method;
-    
+
             /**
              * @var string
              */
             private string $url;
-    
+
             /**
              * @var array
              */
             private array $options;
-    
+
             /**
              * @var array
              */
             private array $returnData;
-            
+
             /**
              * @return string
              */
@@ -45,7 +46,7 @@ class RequestExecutorTest extends TestCase
             {
                 return $this->method;
             }
-    
+
             /**
              * @return string
              */
@@ -53,7 +54,7 @@ class RequestExecutorTest extends TestCase
             {
                 return $this->url;
             }
-            
+
             /**
              * @return array
              */
@@ -61,7 +62,7 @@ class RequestExecutorTest extends TestCase
             {
                 return $this->options;
             }
-    
+
             /**
              * @return array
              */
@@ -69,7 +70,7 @@ class RequestExecutorTest extends TestCase
             {
                 return $this->returnData;
             }
-    
+
             /**
              * @param array $returnData
              */
@@ -77,17 +78,17 @@ class RequestExecutorTest extends TestCase
             {
                 $this->returnData = $returnData;
             }
-    
+
             public function request($method, $uri = '', array $options = []): ResponseInterface
             {
                 $this->method = $method;
                 $this->url = $uri;
                 $this->options = $options;
-                
+
                 return new Response(200, [], json_encode($this->returnData));
             }
         };
-        
+
         $client->setReturnData([
             'data' => [
                 'type' => 'response-type',
@@ -97,7 +98,7 @@ class RequestExecutorTest extends TestCase
             ]
         ]);
         $requestExecutorMock = new RequestExecutor($client);
-        
+
         $request = new Request(
             RequestBuilder::METHOD_POST,
             '/',
@@ -110,10 +111,10 @@ class RequestExecutorTest extends TestCase
                 ]
             ],
             [
-                'Authorization' => 'Bearer '. uniqid(),
+                'Authorization' => 'Bearer ' . uniqid(),
             ]
         );
-        
+
         $response = $requestExecutorMock->execute($request);
         $this->assertInstanceOf(AbrResponseInterface::class, $response);
         $this->assertEquals($response->getResponseJson(), $client->getReturnData());

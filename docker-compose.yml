@@ -13,3 +13,17 @@ services:
       - "1021:80"
     volumes:
       - .:/app
+
+  redis:
+    image: redis:alpine
+    container_name: abr-php-redis
+    ports:
+      - "63846:6379"
+    volumes:
+      - redis:/data
+
+
+volumes:
+    redis:
+      driver: local
+

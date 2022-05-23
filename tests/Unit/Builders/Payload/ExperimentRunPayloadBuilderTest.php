@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Builders\Payload;
 
@@ -13,19 +14,19 @@ class ExperimentRunPayloadBuilderTest extends TestCase
      * @var ExperimentRunPayloadBuilder $experimentRunPayloadBuilder
      */
     private ExperimentRunPayloadBuilder $experimentRunPayloadBuilder;
-    
+
     public function setUp(): void
     {
         $this->experimentRunPayloadBuilder = $this->getContainer()->make(ExperimentRunPayloadBuilder::class);
     }
-    
+
     public function testPayloadIsCorrect()
     {
         $userSignature = uniqid();
         $experimentId = uniqid();
-        
+
         $payload = $this->experimentRunPayloadBuilder->build($userSignature, $experimentId);
-        
+
         $this->assertInstanceOf(JsonPayload::class, $payload);
         $this->assertEquals($payload->getPayload(), [
             'data' => [

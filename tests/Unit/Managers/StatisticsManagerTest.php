@@ -6,7 +6,9 @@ use Abrouter\Client\Builders\Payload\EventSendPayloadBuilder;
 use Abrouter\Client\Entities\Client\Response;
 use Abrouter\Client\Entities\Client\ResponseInterface;
 use Abrouter\Client\Entities\JsonPayload;
+use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\Manager\StatisticsManager;
+use Abrouter\Client\Services\Statistics\SendEventService;
 use Abrouter\Client\Tests\Unit\TestCase;
 use Abrouter\Client\Requests\SendEventRequest;
 use Abrouter\Client\Transformers\SendEventRequestTransformer;
@@ -14,6 +16,8 @@ use Abrouter\Client\DTO\EventDTO;
 
 class StatisticsManagerTest extends TestCase
 {
+    public static SentEvent $sentEvent;
+
     /**
      * @return void
      * @throws \DI\DependencyException
@@ -21,6 +25,8 @@ class StatisticsManagerTest extends TestCase
      */
     public function testSendEvent()
     {
+        $this->bindConfig();
+
         $date = (new \DateTime())->format('Y-m-d');
         $eventDTO = new EventDTO(
             'temporary_user_12345',
@@ -65,14 +71,21 @@ class StatisticsManagerTest extends TestCase
             }
         };
 
-        $statisticsManager = new StatisticsManager(
-            $sendEventRequest,
-            $this->getContainer()->make(EventSendPayloadBuilder::class),
-            $this->getContainer()->make(SendEventRequestTransformer::class)
-        );
+        $args = $this->createArgumentsFor(SendEventService::class);
+        $args[0] = $sendEventRequest;
+        $sendEventService = new class (...$args) extends SendEventService {
+            public function sendEvent(EventDTO $eventDTO): SentEvent
+            {
+                $result = parent::sendEvent($eventDTO);
+                StatisticsManagerTest::$sentEvent = $result;
+                return $result;
+            }
+        };
 
-        $sendEventEntity = $statisticsManager->sendEvent($eventDTO);
+        $this->getContainer()->set(SendEventService::class, $sendEventService);
+        $statisticsManager = $this->getContainer()->make(StatisticsManager::class);
+        $statisticsManager->sendEvent($eventDTO);
 
-        $this->assertEquals($sendEventEntity->isSuccessful(), true);
+        $this->assertTrue(self::$sentEvent->isSuccessful());
     }
 }

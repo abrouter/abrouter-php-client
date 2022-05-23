@@ -7,6 +7,7 @@ use Abrouter\Client\Entities\Client\Response;
 use Abrouter\Client\Entities\Client\ResponseInterface;
 use Abrouter\Client\Entities\JsonPayload;
 use Abrouter\Client\Manager\FeatureFlagManager;
+use Abrouter\Client\RemoteEntity\Cache\Cacher;
 use Abrouter\Client\Tests\Unit\TestCase;
 use Abrouter\Client\Requests\RunFeatureFlagRequest;
 use Abrouter\Client\Transformers\RunFeatureFlagRequestTransformer;
@@ -15,6 +16,8 @@ class FeatureToggleManagerTest extends TestCase
 {
     public function testRunFeatureFlag()
     {
+        $this->bindConfig();
+
         $runFeatureFlagRequest = new class () extends RunFeatureFlagRequest {
             public function __construct()
             {
@@ -34,12 +37,10 @@ class FeatureToggleManagerTest extends TestCase
             }
         };
 
+        $arguments = $this->createArgumentsFor(FeatureFlagManager::class);
+        $arguments[0] = $runFeatureFlagRequest;
 
-        $experimentManager = new FeatureFlagManager(
-            $runFeatureFlagRequest,
-            $this->getContainer()->make(FeatureFlagRunPayloadBuilder::class),
-            $this->getContainer()->make(RunFeatureFlagRequestTransformer::class),
-        );
+        $experimentManager = new FeatureFlagManager(...$arguments);
         $id = uniqid();
         $runFeatureFlagEntity = $experimentManager->run($id);
 
