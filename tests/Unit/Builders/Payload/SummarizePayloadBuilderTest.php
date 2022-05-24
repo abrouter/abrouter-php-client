@@ -41,30 +41,29 @@ class SummarizePayloadBuilderTest extends TestCase
         ));
         $payload = $this->summarizePayloadBuilder->build($summarizeEventDTO);
         $this->assertInstanceOf(JsonPayload::class, $payload);
-        $this->assertEquals($payload->getPayload(),[
-                'data' => [
-                    'type' => 'events',
-                    'attributes' => [
-                        'event' => $summarizeEventDTO->getBaseEventDTO()->getEvent(),
-                        'value' => $summarizeEventDTO->getValue(),
-                        'user_id' => $summarizeEventDTO->getBaseEventDTO()->getUserId(),
-                        'temporary_user_id' => $summarizeEventDTO->getBaseEventDTO()->getTemporaryUserId(),
-                        'tag' => $summarizeEventDTO->getBaseEventDTO()->getTag(),
-                        'referrer' => $summarizeEventDTO->getBaseEventDTO()->getReferrer(),
-                        'meta' => $summarizeEventDTO->getBaseEventDTO()->getMeta(),
-                        'ip' => $summarizeEventDTO->getBaseEventDTO()->getIp(),
-                        'created_at' => $summarizeEventDTO->getBaseEventDTO()->getCreatedAt()
-                    ],
-                    'relationships' => [
-                        'owner' => [
-                            'data' => [
-                                'id'   => $summarizeEventDTO->getBaseEventDTO()->getOwnerId(),
-                                'type' => 'users',
-                            ],
+        $this->assertEquals($payload->getPayload(), [
+            'data' => [
+                'type' => 'events',
+                'attributes' => [
+                    'event' => $summarizeEventDTO->getBaseEventDTO()->getEvent(),
+                    'value' => $summarizeEventDTO->getValue(),
+                    'user_id' => $summarizeEventDTO->getBaseEventDTO()->getUserId(),
+                    'temporary_user_id' => $summarizeEventDTO->getBaseEventDTO()->getTemporaryUserId(),
+                    'tag' => $summarizeEventDTO->getBaseEventDTO()->getTag(),
+                    'referrer' => $summarizeEventDTO->getBaseEventDTO()->getReferrer(),
+                    'meta' => $summarizeEventDTO->getBaseEventDTO()->getMeta(),
+                    'ip' => $summarizeEventDTO->getBaseEventDTO()->getIp(),
+                    'created_at' => $summarizeEventDTO->getBaseEventDTO()->getCreatedAt()
+                ],
+                'relationships' => [
+                    'owner' => [
+                        'data' => [
+                            'id'   => $summarizeEventDTO->getBaseEventDTO()->getOwnerId(),
+                            'type' => 'users',
                         ],
-                    ]
+                    ],
                 ]
             ]
-        );
+        ]);
     }
 }

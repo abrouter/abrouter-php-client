@@ -32,7 +32,7 @@ class SummarizeTransformerTest extends TestCase
     public function testTransform()
     {
         $date = (new \DateTime())->format('Y-m-d');
-        $summarizeEventDTO = new SummarizeEventDTO((string)mt_rand(1,100), new BaseEventDTO(
+        $summarizeEventDTO = new SummarizeEventDTO((string)mt_rand(1, 100), new BaseEventDTO(
             'owner_12345',
             'temporary_user_12345',
             'user_12345',

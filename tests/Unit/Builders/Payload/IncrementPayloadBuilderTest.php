@@ -41,30 +41,29 @@ class IncrementPayloadBuilderTest extends TestCase
         ));
         $payload = $this->incrementPayloadBuilder->build($incrementEventDTO);
         $this->assertInstanceOf(JsonPayload::class, $payload);
-        $this->assertEquals($payload->getPayload(),[
-                'data' => [
-                    'type' => 'events',
-                    'attributes' => [
-                        'event' => $incrementEventDTO->getBaseEventDTO()->getEvent(),
-                        'value' => '',
-                        'user_id' => $incrementEventDTO->getBaseEventDTO()->getUserId(),
-                        'temporary_user_id' => $incrementEventDTO->getBaseEventDTO()->getTemporaryUserId(),
-                        'tag' => $incrementEventDTO->getBaseEventDTO()->getTag(),
-                        'referrer' => $incrementEventDTO->getBaseEventDTO()->getReferrer(),
-                        'meta' => $incrementEventDTO->getBaseEventDTO()->getMeta(),
-                        'ip' => $incrementEventDTO->getBaseEventDTO()->getIp(),
-                        'created_at' => $incrementEventDTO->getBaseEventDTO()->getCreatedAt()
-                    ],
-                    'relationships' => [
-                        'owner' => [
-                            'data' => [
-                                'id'   => $incrementEventDTO->getBaseEventDTO()->getOwnerId(),
-                                'type' => 'users',
-                            ],
+        $this->assertEquals($payload->getPayload(), [
+            'data' => [
+                'type' => 'events',
+                'attributes' => [
+                    'event' => $incrementEventDTO->getBaseEventDTO()->getEvent(),
+                    'value' => '',
+                    'user_id' => $incrementEventDTO->getBaseEventDTO()->getUserId(),
+                    'temporary_user_id' => $incrementEventDTO->getBaseEventDTO()->getTemporaryUserId(),
+                    'tag' => $incrementEventDTO->getBaseEventDTO()->getTag(),
+                    'referrer' => $incrementEventDTO->getBaseEventDTO()->getReferrer(),
+                    'meta' => $incrementEventDTO->getBaseEventDTO()->getMeta(),
+                    'ip' => $incrementEventDTO->getBaseEventDTO()->getIp(),
+                    'created_at' => $incrementEventDTO->getBaseEventDTO()->getCreatedAt()
+                ],
+                'relationships' => [
+                    'owner' => [
+                        'data' => [
+                            'id'   => $incrementEventDTO->getBaseEventDTO()->getOwnerId(),
+                            'type' => 'users',
                         ],
-                    ]
+                    ],
                 ]
             ]
-        );
+        ]);
     }
 }
