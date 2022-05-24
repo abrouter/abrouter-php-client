@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Abrouter\Client\Entities;
 
@@ -25,7 +25,7 @@ class Summarize
         $this->event = $event;
         $this->value = $value;
     }
-    
+
     /**
      * @return bool
      */

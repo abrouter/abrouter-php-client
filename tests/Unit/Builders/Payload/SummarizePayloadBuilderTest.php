@@ -28,7 +28,7 @@ class SummarizePayloadBuilderTest extends TestCase
     public function testPayloadIsCorrect()
     {
         $date = (new \DateTime())->format('Y-m-d');
-        $summarizeEventDTO = new SummarizeEventDTO((string)mt_rand(1, 100),new BaseEventDTO(
+        $summarizeEventDTO = new SummarizeEventDTO((string)mt_rand(1, 100), new BaseEventDTO(
             'owner_' . uniqid(),
             'temporary_user_' . uniqid(),
             'user_' . uniqid(),
@@ -38,12 +38,10 @@ class SummarizePayloadBuilderTest extends TestCase
             [],
             '255.255.255.255',
             $date
-            )
-        );
+        ));
         $payload = $this->summarizePayloadBuilder->build($summarizeEventDTO);
         $this->assertInstanceOf(JsonPayload::class, $payload);
-        $this->assertEquals($payload->getPayload(),
-            [
+        $this->assertEquals($payload->getPayload(),[
                 'data' => [
                     'type' => 'events',
                     'attributes' => [

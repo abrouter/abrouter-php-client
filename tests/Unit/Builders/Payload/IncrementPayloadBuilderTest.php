@@ -38,12 +38,10 @@ class IncrementPayloadBuilderTest extends TestCase
             [],
             '255.255.255.255',
             $date
-            )
-        );
+        ));
         $payload = $this->incrementPayloadBuilder->build($incrementEventDTO);
         $this->assertInstanceOf(JsonPayload::class, $payload);
-        $this->assertEquals($payload->getPayload(),
-            [
+        $this->assertEquals($payload->getPayload(),[
                 'data' => [
                     'type' => 'events',
                     'attributes' => [

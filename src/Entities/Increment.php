@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Abrouter\Client\Entities;
 
@@ -9,7 +9,7 @@ class Increment
      * @var string
      */
     private $event;
-    
+
     /**
      * @param string $event
      */
@@ -18,7 +18,7 @@ class Increment
     ) {
         $this->event = $event;
     }
-    
+
     /**
      * @return bool
      */

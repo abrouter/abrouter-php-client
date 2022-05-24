@@ -17,7 +17,7 @@ class SummarizeTest extends TestCase
     public function testStatistics()
     {
         $date = (new \DateTime())->format('Y-m-d');
-        $incrementEventDTO = new SummarizeEventDTO((string)mt_rand(1,100),new BaseEventDTO(
+        $incrementEventDTO = new SummarizeEventDTO((string)mt_rand(1,100), new BaseEventDTO(
             'owner_' . uniqid(),
             'temporary_user_' . uniqid(),
             'user_' . uniqid(),
