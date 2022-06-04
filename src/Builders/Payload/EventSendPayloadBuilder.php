@@ -21,7 +21,6 @@ class EventSendPayloadBuilder
                     'type' => 'events',
                     'attributes' => [
                         'event' => $eventDTO->getEvent(),
-                        'user_id' => $eventDTO->getUserId(),
                         'temporary_user_id' => $eventDTO->getTemporaryUserId(),
                         'tag' => $eventDTO->getTag(),
                         'referrer' => $eventDTO->getReferrer(),

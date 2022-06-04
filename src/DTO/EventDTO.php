@@ -7,11 +7,6 @@ namespace Abrouter\Client\DTO;
 class EventDTO
 {
     /**
-     * @var string
-     */
-    private $ownerId;
-
-    /**
      * @var string|null
      */
     private $temporaryUserId;
@@ -54,7 +49,6 @@ class EventDTO
     /**
      * EventDTO constructor.
      *
-     * @param string      $ownerId
      * @param string|null $temporaryUserId
      * @param string|null $userId
      * @param string      $event
@@ -65,7 +59,6 @@ class EventDTO
      * @param string|null $created_at
      */
     public function __construct(
-        string $ownerId,
         ?string $temporaryUserId,
         ?string $userId,
         string $event,
@@ -75,7 +68,6 @@ class EventDTO
         ?string $ip,
         ?string $created_at
     ) {
-        $this->ownerId = $ownerId;
         $this->temporaryUserId = $temporaryUserId;
         $this->userId = $userId;
         $this->event = $event;
@@ -84,14 +76,6 @@ class EventDTO
         $this->meta = $meta;
         $this->ip = $ip;
         $this->created_at = $created_at;
-    }
-
-    /**
-     * @return string
-     */
-    public function getOwnerId(): string
-    {
-        return $this->ownerId;
     }
 
     /**

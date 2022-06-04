@@ -50,7 +50,6 @@ class SendEventTransformerTest extends TestCase
                         'id' => uniqid(),
                         'type' => 'events',
                         'attributes' => [
-                            'user_id' => $eventDTO->getUserId(),
                             'event' => $eventDTO->getEvent(),
                             'tag' => $eventDTO->getTag(),
                             'referrer' => $eventDTO->getReferrer(),
