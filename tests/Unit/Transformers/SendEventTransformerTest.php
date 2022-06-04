@@ -32,7 +32,6 @@ class SendEventTransformerTest extends TestCase
     {
         $date = (new \DateTime())->format('Y-m-d');
         $eventDTO = new EventDTO(
-            'owner_12345',
             'temporary_user_12345',
             'user_12345',
             'new_event',

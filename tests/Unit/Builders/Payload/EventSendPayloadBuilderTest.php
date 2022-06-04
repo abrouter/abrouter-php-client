@@ -28,7 +28,6 @@ class EventSendPayloadBuilderTest extends TestCase
     {
         $date = (new \DateTime())->format('Y-m-d');
         $eventDTO = new EventDTO(
-            'owner_' . uniqid(),
             'temporary_user_' . uniqid(),
             'user_' . uniqid(),
             'new_event',
