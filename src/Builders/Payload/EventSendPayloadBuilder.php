@@ -28,14 +28,6 @@ class EventSendPayloadBuilder
                         'ip' => $eventDTO->getIp(),
                         'created_at' => $eventDTO->getCreatedAt()
                     ],
-                    'relationships' => [
-                        'owner' => [
-                            'data' => [
-                                'id'   => $eventDTO->getOwnerId(),
-                                'type' => 'users',
-                            ],
-                        ],
-                    ]
                 ]
             ]
         );

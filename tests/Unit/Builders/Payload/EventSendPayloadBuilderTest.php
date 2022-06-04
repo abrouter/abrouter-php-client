@@ -52,14 +52,6 @@ class EventSendPayloadBuilderTest extends TestCase
                         'ip' => $eventDTO->getIp(),
                         'created_at' => $eventDTO->getCreatedAt()
                     ],
-                    'relationships' => [
-                        'owner' => [
-                            'data' => [
-                                'id'   => $eventDTO->getOwnerId(),
-                                'type' => 'users',
-                            ],
-                        ],
-                    ]
                 ]
             ]
         );
