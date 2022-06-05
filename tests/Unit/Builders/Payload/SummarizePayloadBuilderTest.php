@@ -29,7 +29,6 @@ class SummarizePayloadBuilderTest extends TestCase
     {
         $date = (new \DateTime())->format('Y-m-d');
         $summarizeEventDTO = new SummarizeEventDTO((string)mt_rand(1, 100), new BaseEventDTO(
-            'owner_' . uniqid(),
             'temporary_user_' . uniqid(),
             'user_' . uniqid(),
             'new_event',
@@ -54,14 +53,6 @@ class SummarizePayloadBuilderTest extends TestCase
                     'meta' => $summarizeEventDTO->getBaseEventDTO()->getMeta(),
                     'ip' => $summarizeEventDTO->getBaseEventDTO()->getIp(),
                     'created_at' => $summarizeEventDTO->getBaseEventDTO()->getCreatedAt()
-                ],
-                'relationships' => [
-                    'owner' => [
-                        'data' => [
-                            'id'   => $summarizeEventDTO->getBaseEventDTO()->getOwnerId(),
-                            'type' => 'users',
-                        ],
-                    ],
                 ]
             ]
         ]);

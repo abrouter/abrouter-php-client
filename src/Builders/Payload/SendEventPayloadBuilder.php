@@ -29,14 +29,6 @@ class SendEventPayloadBuilder
                         'meta' => $incrementEventDTO->getBaseEventDTO()->getMeta(),
                         'ip' => $incrementEventDTO->getBaseEventDTO()->getIp(),
                         'created_at' => $incrementEventDTO->getBaseEventDTO()->getCreatedAt()
-                    ],
-                    'relationships' => [
-                        'owner' => [
-                            'data' => [
-                                'id'   => $incrementEventDTO->getBaseEventDTO()->getOwnerId(),
-                                'type' => 'users',
-                            ],
-                        ],
                     ]
                 ]
             ]
@@ -59,14 +51,6 @@ class SendEventPayloadBuilder
                         'meta' => $summarizeEventDTO->getBaseEventDTO()->getMeta(),
                         'ip' => $summarizeEventDTO->getBaseEventDTO()->getIp(),
                         'created_at' => $summarizeEventDTO->getBaseEventDTO()->getCreatedAt()
-                    ],
-                    'relationships' => [
-                        'owner' => [
-                            'data' => [
-                                'id'   => $summarizeEventDTO->getBaseEventDTO()->getOwnerId(),
-                                'type' => 'users',
-                            ],
-                        ],
                     ]
                 ]
             ]

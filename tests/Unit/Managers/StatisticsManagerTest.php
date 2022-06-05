@@ -31,7 +31,6 @@ class StatisticsManagerTest extends TestCase
     {
         $date = (new \DateTime())->format('Y-m-d');
         $incrementEventDTO = new IncrementEventDTO(new BaseEventDTO(
-            'owner_12345',
             'temporary_user_12345',
             'user_12345',
             'new_event',
@@ -95,7 +94,6 @@ class StatisticsManagerTest extends TestCase
     {
         $date = (new \DateTime())->format('Y-m-d');
         $summarizeEventDTO = new SummarizeEventDTO('100',new BaseEventDTO(
-            'owner_12345',
             'temporary_user_12345',
             'user_12345',
             'new_event',

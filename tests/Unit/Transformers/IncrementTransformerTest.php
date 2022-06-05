@@ -33,7 +33,6 @@ class IncrementTransformerTest extends TestCase
     {
         $date = (new \DateTime())->format('Y-m-d');
         $incrementEventDTO = new IncrementEventDTO(new BaseEventDTO(
-            'owner_12345',
             'temporary_user_12345',
             'user_12345',
             'new_event',

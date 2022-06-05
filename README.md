@@ -1,13 +1,15 @@
-# AbrPHPClient
+# PHP A/B Tests - ABRouter-php-client
 
 AbrPHPClient :construction_worker_woman: is a PHP library to run ab-tests via ABRouter.
+
+You're welcome to [visit the docs](https://docs.abrouter.com).
 
 # What is the ABRouter service ? 
 
 [ABRouter](https://abrouter.com) is the service to manage experiments(ab-tests). The service provides easy to manage dashboard to get experiments under control.
 There you can create experiments, branches and set a percentage for every branch. Then, when you're running an ab-test on PHP you will receive a perfect branch-wise response that following the rules, that you set up.
 
-Can be also used as a feature flag or feature toggle.
+Can be also used as a feature flag or feature toggle and open-source.
 Available for free. 
 
 ## :package: Install

@@ -29,7 +29,6 @@ class IncrementPayloadBuilderTest extends TestCase
     {
         $date = (new \DateTime())->format('Y-m-d');
         $incrementEventDTO = new IncrementEventDTO(new BaseEventDTO(
-            'owner_' . uniqid(),
             'temporary_user_' . uniqid(),
             'user_' . uniqid(),
             'new_event',
@@ -53,14 +52,6 @@ class IncrementPayloadBuilderTest extends TestCase
                     'meta' => $incrementEventDTO->getBaseEventDTO()->getMeta(),
                     'ip' => $incrementEventDTO->getBaseEventDTO()->getIp(),
                     'created_at' => $incrementEventDTO->getBaseEventDTO()->getCreatedAt()
-                ],
-                'relationships' => [
-                    'owner' => [
-                        'data' => [
-                            'id'   => $incrementEventDTO->getBaseEventDTO()->getOwnerId(),
-                            'type' => 'users',
-                        ],
-                    ],
                 ]
             ]
         ]);
