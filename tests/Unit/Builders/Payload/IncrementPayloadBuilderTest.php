@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Builders\Payload;
 
-use Abrouter\Client\Builders\Payload\IncrementPayloadBuilder;
+use Abrouter\Client\Builders\Payload\SendEventPayloadBuilder;
 use Abrouter\Client\DTO\BaseEventDTO;
 use Abrouter\Client\Entities\JsonPayload;
 use Abrouter\Client\DTO\IncrementEventDTO;
@@ -12,14 +12,14 @@ use Abrouter\Client\Tests\Unit\TestCase;
 
 class IncrementPayloadBuilderTest extends TestCase
 {
-    /** @var IncrementPayloadBuilder $incrementPayloadBuilder */
-    private IncrementPayloadBuilder $incrementPayloadBuilder;
+    /** @var SendEventPayloadBuilder $sendEventPayloadBuilder */
+    private SendEventPayloadBuilder $sendEventPayloadBuilder;
 
     /** @return void */
     public function setUp(): void
     {
-        $this->incrementPayloadBuilder = $this->getContainer()
-                ->make(IncrementPayloadBuilder::class);
+        $this->sendEventPayloadBuilder = $this->getContainer()
+                ->make(SendEventPayloadBuilder::class);
     }
 
     /**
@@ -39,14 +39,13 @@ class IncrementPayloadBuilderTest extends TestCase
             '255.255.255.255',
             $date
         ));
-        $payload = $this->incrementPayloadBuilder->build($incrementEventDTO);
+        $payload = $this->sendEventPayloadBuilder->buildSendIncrementEventRequest($incrementEventDTO);
         $this->assertInstanceOf(JsonPayload::class, $payload);
         $this->assertEquals($payload->getPayload(), [
             'data' => [
                 'type' => 'events',
                 'attributes' => [
                     'event' => $incrementEventDTO->getBaseEventDTO()->getEvent(),
-                    'value' => '',
                     'user_id' => $incrementEventDTO->getBaseEventDTO()->getUserId(),
                     'temporary_user_id' => $incrementEventDTO->getBaseEventDTO()->getTemporaryUserId(),
                     'tag' => $incrementEventDTO->getBaseEventDTO()->getTag(),

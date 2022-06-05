@@ -2,8 +2,7 @@
 
 namespace Abrouter\Client\Tests\Unit\Managers;
 
-use Abrouter\Client\Builders\Payload\IncrementPayloadBuilder;
-use Abrouter\Client\Builders\Payload\SummarizePayloadBuilder;
+use Abrouter\Client\Builders\Payload\SendEventPayloadBuilder;
 use Abrouter\Client\DTO\BaseEventDTO;
 use Abrouter\Client\Entities\Client\Response;
 use Abrouter\Client\Entities\Client\ResponseInterface;
@@ -13,8 +12,7 @@ use Abrouter\Client\Exceptions\SendEventRequestException;
 use Abrouter\Client\Manager\StatisticsManager;
 use Abrouter\Client\Tests\Unit\TestCase;
 use Abrouter\Client\Requests\SendEventRequest;
-use Abrouter\Client\Transformers\IncrementRequestTransformer;
-use Abrouter\Client\Transformers\SummarizeRequestTransformer;
+use Abrouter\Client\Transformers\SendEventRequestTransformer;
 use Abrouter\Client\DTO\IncrementEventDTO;
 use Abrouter\Client\DTO\SummarizeEventDTO;
 use DI\DependencyException;
@@ -64,7 +62,6 @@ class StatisticsManagerTest extends TestCase
                             'attributes' => [
                                 'user_id' => 'user_12345',
                                 'event' => 'new_event',
-                                'value' => '',
                                 'tag' => 'new_tag',
                                 'referrer' => 'abrouter',
                                 'ip' => '255.255.255.255',
@@ -79,10 +76,8 @@ class StatisticsManagerTest extends TestCase
 
         $statisticsManager = new StatisticsManager(
             $sendEventRequest,
-            $this->getContainer()->make(IncrementPayloadBuilder::class),
-            $this->getContainer()->make(SummarizePayloadBuilder::class),
-            $this->getContainer()->make(IncrementRequestTransformer::class),
-            $this->getContainer()->make(SummarizeRequestTransformer::class)
+            $this->getContainer()->make(SendEventPayloadBuilder::class),
+            $this->getContainer()->make(SendEventRequestTransformer::class),
         );
 
         $incrementEntity = $statisticsManager->increment($incrementEventDTO);
@@ -146,10 +141,8 @@ class StatisticsManagerTest extends TestCase
 
         $statisticsManager = new StatisticsManager(
             $sendEventRequest,
-            $this->getContainer()->make(IncrementPayloadBuilder::class),
-            $this->getContainer()->make(SummarizePayloadBuilder::class),
-            $this->getContainer()->make(IncrementRequestTransformer::class),
-            $this->getContainer()->make(SummarizeRequestTransformer::class)
+            $this->getContainer()->make(SendEventPayloadBuilder::class),
+            $this->getContainer()->make(SendEventRequestTransformer::class),
         );
 
         $sendEventEntity = $statisticsManager->summarize($summarizeEventDTO);

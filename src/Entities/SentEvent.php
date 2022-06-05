@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Abrouter\Client\Entities;
 
-class Summarize
+class SentEvent
 {
     /**
      * @var string
@@ -12,19 +12,12 @@ class Summarize
     private $event;
 
     /**
-     * @var string
-     */
-    private $value;
-
-    /**
      * @param string $event
      */
     public function __construct(
-        string $event,
-        string $value
+        string $event
     ) {
         $this->event = $event;
-        $this->value = $value;
     }
 
     /**
@@ -32,10 +25,6 @@ class Summarize
      */
     public function isSuccessful(): bool
     {
-        if ($this->event !== null && $this->value !== null) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->event !== null;
     }
 }

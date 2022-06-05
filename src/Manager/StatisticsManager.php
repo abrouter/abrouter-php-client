@@ -3,15 +3,12 @@ declare(strict_types = 1);
 
 namespace Abrouter\Client\Manager;
 
-use Abrouter\Client\Builders\Payload\IncrementPayloadBuilder;
-use Abrouter\Client\Builders\Payload\SummarizePayloadBuilder;
-use Abrouter\Client\Entities\Increment;
-use Abrouter\Client\Entities\Summarize;
+use Abrouter\Client\Builders\Payload\SendEventPayloadBuilder;
+use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
 use Abrouter\Client\Exceptions\SendEventRequestException;
 use Abrouter\Client\Requests\SendEventRequest;
-use Abrouter\Client\Transformers\IncrementRequestTransformer;
-use Abrouter\Client\Transformers\SummarizeRequestTransformer;
+use Abrouter\Client\Transformers\SendEventRequestTransformer;
 use Abrouter\Client\DTO\IncrementEventDTO;
 use Abrouter\Client\DTO\SummarizeEventDTO;
 
@@ -23,65 +20,51 @@ class StatisticsManager
     private SendEventRequest $sendEventRequest;
 
     /**
-     * @var IncrementPayloadBuilder
+     * @var SendEventPayloadBuilder
      */
-    private IncrementPayloadBuilder $incrementPayloadBuilder;
+    private SendEventPayloadBuilder $sendEventPayloadBuilder;
 
     /**
-     * @var SummarizePayloadBuilder
+     * @var SendEventRequestTransformer
      */
-    private SummarizePayloadBuilder $summarizePayloadBuilder;
-
-    /**
-     * @var IncrementRequestTransformer
-     */
-    private IncrementRequestTransformer $incrementRequestTransformer;
-
-    /**
-     * @var SummarizeRequestTransformer
-     */
-    private SummarizeRequestTransformer $summarizeRequestTransformer;
+    private SendEventRequestTransformer $sendEventRequestTransformer;
 
     public function __construct(
         SendEventRequest            $sendEventRequest,
-        IncrementPayloadBuilder     $incrementPayloadBuilder,
-        SummarizePayloadBuilder     $summarizePayloadBuilder,
-        IncrementRequestTransformer $incrementRequestTransformer,
-        SummarizeRequestTransformer $summarizeRequestTransformer
+        SendEventPayloadBuilder     $sendEventPayloadBuilder,
+        SendEventRequestTransformer $sendEventRequestTransformer
     ) {
         $this->sendEventRequest = $sendEventRequest;
-        $this->incrementPayloadBuilder = $incrementPayloadBuilder;
-        $this->summarizePayloadBuilder = $summarizePayloadBuilder;
-        $this->incrementRequestTransformer = $incrementRequestTransformer;
-        $this->summarizeRequestTransformer = $summarizeRequestTransformer;
+        $this->sendEventPayloadBuilder = $sendEventPayloadBuilder;
+        $this->sendEventRequestTransformer = $sendEventRequestTransformer;
     }
 
     /**
      * @param IncrementEventDTO $incrementEventDTO
-     * @return Increment
-     * @throws SendEventRequestException
+     * @return SentEvent
      * @throws InvalidJsonApiResponseException
+     * @throws SendEventRequestException
      */
-    public function increment(IncrementEventDTO $incrementEventDTO): Increment
+    public function increment(IncrementEventDTO $incrementEventDTO): SentEvent
     {
-        $payload = $this->incrementPayloadBuilder->build($incrementEventDTO);
+        $payload = $this->sendEventPayloadBuilder->buildSendIncrementEventRequest($incrementEventDTO);
         $response = $this->sendEventRequest->sendEvent($payload);
-        $increment = $this->incrementRequestTransformer->transform($response);
+        $increment = $this->sendEventRequestTransformer->transform($response);
         
         return $increment;
     }
 
     /**
      * @param SummarizeEventDTO $summarizeEventDTO
-     * @return Summarize
+     * @return SentEvent
      * @throws InvalidJsonApiResponseException
      * @throws SendEventRequestException
      */
-    public function summarize(SummarizeEventDTO $summarizeEventDTO): Summarize
+    public function summarize(SummarizeEventDTO $summarizeEventDTO): SentEvent
     {
-        $payload = $this->summarizePayloadBuilder->build($summarizeEventDTO);
+        $payload = $this->sendEventPayloadBuilder->buildSendSummarizeEventRequest($summarizeEventDTO);
         $response = $this->sendEventRequest->sendEvent($payload);
-        $summarize = $this->summarizeRequestTransformer->transform($response);
+        $summarize = $this->sendEventRequestTransformer->transform($response);
 
         return $summarize;
     }

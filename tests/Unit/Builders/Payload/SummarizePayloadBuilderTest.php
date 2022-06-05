@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Builders\Payload;
 
-use Abrouter\Client\Builders\Payload\SummarizePayloadBuilder;
+use Abrouter\Client\Builders\Payload\SendEventPayloadBuilder;
 use Abrouter\Client\DTO\BaseEventDTO;
 use Abrouter\Client\Entities\JsonPayload;
 use Abrouter\Client\DTO\SummarizeEventDTO;
@@ -12,14 +12,14 @@ use Abrouter\Client\Tests\Unit\TestCase;
 
 class SummarizePayloadBuilderTest extends TestCase
 {
-    /** @var SummarizePayloadBuilder $summarizePayloadBuilder */
-    private SummarizePayloadBuilder $summarizePayloadBuilder;
+    /** @var SendEventPayloadBuilder $sendEventPayloadBuilder */
+    private SendEventPayloadBuilder $sendEventPayloadBuilder;
 
     /** @return void */
     public function setUp(): void
     {
-        $this->summarizePayloadBuilder = $this->getContainer()
-                ->make(SummarizePayloadBuilder::class);
+        $this->sendEventPayloadBuilder = $this->getContainer()
+                ->make(SendEventPayloadBuilder::class);
     }
 
     /**
@@ -39,7 +39,7 @@ class SummarizePayloadBuilderTest extends TestCase
             '255.255.255.255',
             $date
         ));
-        $payload = $this->summarizePayloadBuilder->build($summarizeEventDTO);
+        $payload = $this->sendEventPayloadBuilder->buildSendSummarizeEventRequest($summarizeEventDTO);
         $this->assertInstanceOf(JsonPayload::class, $payload);
         $this->assertEquals($payload->getPayload(), [
             'data' => [

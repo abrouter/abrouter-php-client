@@ -6,23 +6,23 @@ namespace Abrouter\Client\Tests\Unit\Transformers;
 
 use Abrouter\Client\DTO\BaseEventDTO;
 use Abrouter\Client\Entities\Client\Response;
-use Abrouter\Client\Entities\Increment;
+use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\Tests\Unit\TestCase;
-use Abrouter\Client\Transformers\IncrementRequestTransformer;
+use Abrouter\Client\Transformers\SendEventRequestTransformer;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
 use AbRouter\Client\DTO\IncrementEventDTO;
 
 class IncrementTransformerTest extends TestCase
 {
     /**
-     * @var IncrementRequestTransformer $incrementRequestTransformer
+     * @var SendEventRequestTransformer $sendEventRequestTransformer
      */
-    private IncrementRequestTransformer $incrementRequestTransformer;
+    private SendEventRequestTransformer $sendEventRequestTransformer;
 
     public function setUp(): void
     {
-        $this->incrementRequestTransformer = $this->getContainer()
-                ->make(IncrementRequestTransformer::class);
+        $this->sendEventRequestTransformer = $this->getContainer()
+                ->make(SendEventRequestTransformer::class);
     }
 
     /**
@@ -44,7 +44,7 @@ class IncrementTransformerTest extends TestCase
             $date
         ));
 
-        $increment = $this->incrementRequestTransformer->transform(
+        $increment = $this->sendEventRequestTransformer->transform(
             new Response(
                 [
                     'data' => [
@@ -64,7 +64,7 @@ class IncrementTransformerTest extends TestCase
             )
         );
 
-        $this->assertInstanceOf(Increment::class, $increment);
+        $this->assertInstanceOf(SentEvent::class, $increment);
         $this->assertEquals($increment->isSuccessful(), true);
     }
 
@@ -75,7 +75,7 @@ class IncrementTransformerTest extends TestCase
     public function testException()
     {
         $this->expectException(InvalidJsonApiResponseException::class);
-        $this->incrementRequestTransformer->transform(
+        $this->sendEventRequestTransformer->transform(
             new Response(
                 [
                     'data' => [],
