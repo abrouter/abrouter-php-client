@@ -49,9 +49,9 @@ class StatisticsManager
     {
         $payload = $this->sendEventPayloadBuilder->buildSendIncrementEventRequest($incrementEventDTO);
         $response = $this->sendEventRequest->sendEvent($payload);
-        $increment = $this->sendEventRequestTransformer->transform($response);
+        $sentEvent = $this->sendEventRequestTransformer->transform($response);
         
-        return $increment;
+        return $sentEvent;
     }
 
     /**
@@ -64,8 +64,8 @@ class StatisticsManager
     {
         $payload = $this->sendEventPayloadBuilder->buildSendSummarizeEventRequest($summarizeEventDTO);
         $response = $this->sendEventRequest->sendEvent($payload);
-        $summarize = $this->sendEventRequestTransformer->transform($response);
+        $sentEvent = $this->sendEventRequestTransformer->transform($response);
 
-        return $summarize;
+        return $sentEvent;
     }
 }
