@@ -1,6 +1,6 @@
 # PHP A/B Tests - ABRouter-php-client
 
-AbrPHPClient :construction_worker_woman: is a PHP library to run ab-tests via ABRouter.
+AbrPHPClient :construction_worker_woman: is a PHP library to run ab-tests via ABRouter. Please, check out ABRouter main repository: https://github.com/abrouter/abrouter
 
 You're welcome to [visit the docs](https://docs.abrouter.com).
 
