@@ -126,10 +126,6 @@ You have to put the same configuration of the client there as in your main appli
 Copy supervisor config to the specific folder which specified in etc/init.d/supervisord.conf. 
 And, please don't forget to adjust the path of worker.php aligned to your application base directory.
 
-```bash
-
-
-
 ## :white_check_mark: Testing
 Requires docker-compose and docker installed.
 
