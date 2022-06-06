@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Abrouter\Client\Entities\Client;
@@ -9,22 +10,22 @@ class Request implements RequestInterface
      * @var string
      */
     private string $method;
-    
+
     /**
      * @var array
      */
     private array $payload;
-    
+
     /**
      * @var array
      */
     private array $headers;
-    
+
     /**
      * @var string
      */
     private string $url;
-    
+
     public function __construct(
         string $method,
         string $url,
@@ -36,7 +37,7 @@ class Request implements RequestInterface
         $this->payload = $payload;
         $this->headers = $headers;
     }
-    
+
     /**
      * @return string
      */
@@ -44,7 +45,7 @@ class Request implements RequestInterface
     {
         return $this->method;
     }
-    
+
     /**
      * @return array
      */
@@ -52,12 +53,12 @@ class Request implements RequestInterface
     {
         return $this->payload;
     }
-    
+
     public function getHeaders(): array
     {
         return $this->headers;
     }
-    
+
     /**
      * @return string
      */

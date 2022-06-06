@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client;
 
@@ -19,6 +20,8 @@ class Client
      */
     private StatisticsManager $statisticsManager;
 
+    private FeatureFlagManager $featureFlagManager;
+
     public function __construct(
         ExperimentManager $experimentManager,
         FeatureFlagManager $featureFlagManager,
@@ -28,7 +31,7 @@ class Client
         $this->featureFlagManager = $featureFlagManager;
         $this->statisticsManager = $statisticsManager;
     }
-    
+
     public function experiments(): ExperimentManager
     {
         return $this->experimentManager;

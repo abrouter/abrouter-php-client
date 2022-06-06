@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Transformers;
 
@@ -12,13 +13,13 @@ class HostConfigAccessorTest extends TestCase
      * @var HostConfigAccessor $HostConfigAccessor
      */
     private HostConfigAccessor $hostConfigAccessor;
-    
+
     public function setUp(): void
     {
         $this->bindConfig();
         $this->hostConfigAccessor = $this->getContainer()->make(HostConfigAccessor::class);
     }
-    
+
     public function testHostConfigAccessor()
     {
         $this->assertEquals($this->hostConfigAccessor->getHost(), $this->getConfig()->getHost());

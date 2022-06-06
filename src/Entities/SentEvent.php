@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Entities;
 
@@ -9,7 +10,7 @@ class SentEvent
      * @var string
      */
     private $event;
-    
+
     /**
      * @param string|null $ip
      */
@@ -18,7 +19,7 @@ class SentEvent
     ) {
         $this->event = $event;
     }
-    
+
     /**
      * @return bool
      */

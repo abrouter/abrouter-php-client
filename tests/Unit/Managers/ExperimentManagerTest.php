@@ -1,4 +1,5 @@
 <?php
+
 namespace Abrouter\Client\Tests\Unit\Managers;
 
 use Abrouter\Client\Builders\Payload\ExperimentRunPayloadBuilder;
@@ -6,22 +7,26 @@ use Abrouter\Client\Entities\Client\Response;
 use Abrouter\Client\Entities\Client\ResponseInterface;
 use Abrouter\Client\Entities\JsonPayload;
 use Abrouter\Client\Manager\ExperimentManager;
+use Abrouter\Client\Services\ExperimentsParallelRun\ParallelRunner;
+use Abrouter\Client\Services\ExperimentsParallelRun\ParallelRunSwitch;
 use Abrouter\Client\Tests\Unit\TestCase;
-use \Abrouter\Client\Requests\RunExperimentRequest;
+use Abrouter\Client\Requests\RunExperimentRequest;
 use Abrouter\Client\Transformers\RunExperimentRequestTransformer;
 
 class ExperimentManagerTest extends TestCase
 {
     public function testRunExperiment()
     {
+        $this->bindConfig();
+
         $branchId = 'form';
         $experimentId = 'color-red';
-        
+
         $runExperimentRequest = new class () extends RunExperimentRequest {
             public function __construct()
             {
             }
-    
+
             public function runExperiment(JsonPayload $jsonPayload): ResponseInterface
             {
                 return new Response([
@@ -37,17 +42,19 @@ class ExperimentManagerTest extends TestCase
                 ]);
             }
         };
-        
-        
+
+
         $experimentManager = new ExperimentManager(
             $runExperimentRequest,
             $this->getContainer()->make(ExperimentRunPayloadBuilder::class),
             $this->getContainer()->make(RunExperimentRequestTransformer::class),
+            $this->getContainer()->make(ParallelRunSwitch::class),
+            $this->getContainer()->make(ParallelRunner::class),
         );
         $userSignature = uniqid();
         $abrExperimentId = uniqid();
         $runExperimentEntity = $experimentManager->run($userSignature, $abrExperimentId);
-    
+
         $this->assertEquals($runExperimentEntity->getBranchId(), $branchId);
         $this->assertEquals($runExperimentEntity->getExperimentId(), $experimentId);
     }

@@ -1,10 +1,11 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Transformers;
 
 use Abrouter\Client\Entities\Client\Response;
-use Abrouter\Client\Entities\RunExperiment;
+use Abrouter\Client\RemoteEntity\Entities\ExperimentRanResult;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
 use Art4\JsonApiClient\Exception\Exception;
 use Art4\JsonApiClient\Helper\Parser;
@@ -15,10 +16,10 @@ class RunExperimentRequestTransformer
     /**
      * @param Response $response
      *
-     * @return RunExperiment
+     * @return ExperimentRanResult
      * @throws InvalidJsonApiResponseException
      */
-    public function transform(Response $response): RunExperiment
+    public function transform(Response $response): ExperimentRanResult
     {
         try {
             $jsonApi = Parser::parseResponseString(json_encode($response->getResponseJson()));
@@ -28,8 +29,8 @@ class RunExperimentRequestTransformer
             $attributes = $jsonApi->get('data.attributes');
             $branchUid = $attributes->get('branch-uid');
             $experimentUid = $attributes->get('experiment-uid');
-            
-            return new RunExperiment($branchUid, $experimentUid);
+
+            return new ExperimentRanResult($branchUid, $experimentUid);
         } catch (Exception $e) {
             throw new InvalidJsonApiResponseException($e->getMessage());
         }

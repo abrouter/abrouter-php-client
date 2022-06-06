@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Abrouter\Client\Requests;
@@ -18,22 +19,22 @@ class RunExperimentRequest
      * @var RequestBuilder
      */
     private RequestBuilder $requestBuilder;
-    
+
     /**
      * @var TokenConfigAccessor
      */
     private TokenConfigAccessor $tokenConfigAccessor;
-    
+
     /**
      * @var UrlBuilder
      */
     private UrlBuilder $urlBuilder;
-    
+
     /**
      * @var RequestExecutor
      */
     private RequestExecutor $requestExecutor;
-    
+
     public function __construct(
         TokenConfigAccessor $tokenConfigAccessor,
         RequestBuilder $requestBuilder,
@@ -45,7 +46,7 @@ class RunExperimentRequest
         $this->urlBuilder = $urlBuilder;
         $this->requestExecutor = $requestExecutor;
     }
-    
+
     /**
      * @param JsonPayload $jsonPayload
      *
@@ -64,7 +65,7 @@ class RunExperimentRequest
             ])
             ->withJsonPayload($jsonPayload->getPayload())
             ->build();
-        
+
         try {
             return $this->requestExecutor->execute($request);
         } catch (\Throwable $exception) {

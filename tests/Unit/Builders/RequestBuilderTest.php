@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Transformers;
 
@@ -13,12 +14,12 @@ class RequestBuilderTest extends TestCase
      * @var RequestBuilder $requestBuilder
      */
     private RequestBuilder $requestBuilder;
-    
+
     public function setUp(): void
     {
         $this->requestBuilder = $this->getContainer()->make(RequestBuilder::class);
     }
-    
+
     public function testRequestBuilder()
     {
         $url = '/';
@@ -28,14 +29,14 @@ class RequestBuilderTest extends TestCase
         $headers = [
             'Authorization' => 'Bearer ' . uniqid(),
         ];
-        
+
         $request = $this->requestBuilder
             ->post()
             ->url($url)
             ->withJsonPayload($payload)
             ->withHeaders($headers)
             ->build();
-        
+
         $this->assertInstanceOf(Request::class, $request);
         $this->assertEquals($request->getPayload(), $payload);
         $this->assertEquals($request->getMethod(), RequestBuilder::METHOD_POST);

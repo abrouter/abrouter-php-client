@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Transformers;
 
@@ -12,7 +13,7 @@ class ConfigTest extends TestCase
     {
         $token = uniqid();
         $host = 'https://127.0.0.1';
-        
+
         $config = new Config($token, $host);
         $this->assertEquals($config->getToken(), $token);
         $this->assertEquals($config->getHost(), $host);
