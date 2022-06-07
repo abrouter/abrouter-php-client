@@ -39,6 +39,7 @@ class SendEventService
     public function sendEvent(EventDTO $eventDTO): SentEvent
     {
         $payload = $this->eventSendPayloadBuilder->build($eventDTO);
+
         $response = $this->sendEventRequest->sendEvent($payload);
         $sentEvent = $this->sendEventRequestTransformer->transform($response);
 

@@ -47,6 +47,7 @@ class EventSendPayloadBuilderTest extends TestCase
                     'attributes' => [
                         'event' => $eventDTO->getEvent(),
                         'temporary_user_id' => $eventDTO->getTemporaryUserId(),
+                        'user_id' => $eventDTO->getUserId(),
                         'tag' => $eventDTO->getTag(),
                         'referrer' => $eventDTO->getReferrer(),
                         'meta' => $eventDTO->getMeta(),

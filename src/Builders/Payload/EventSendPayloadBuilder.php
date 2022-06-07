@@ -22,11 +22,12 @@ class EventSendPayloadBuilder
                     'attributes' => [
                         'event' => $eventDTO->getEvent(),
                         'temporary_user_id' => $eventDTO->getTemporaryUserId(),
+                        'user_id' => $eventDTO->getUserId(),
                         'tag' => $eventDTO->getTag(),
                         'referrer' => $eventDTO->getReferrer(),
                         'meta' => $eventDTO->getMeta(),
                         'ip' => $eventDTO->getIp(),
-                        'created_at' => $eventDTO->getCreatedAt()
+                        'created_at' => $eventDTO->getCreatedAt() === '' ? null : $eventDTO->getCreatedAt(),
                     ],
                 ]
             ]

@@ -9,11 +9,14 @@ use Abrouter\Client\DTO\EventDTO;
 use Abrouter\Client\RemoteEntity\Repositories\UserEventsRepository;
 use Abrouter\Client\Worker;
 
-class StatSendParallelTest extends IntegrationTestCase
+class StatSendSyncTest extends IntegrationTestCase
 {
     public function testStatSend()
     {
-        $this->configureParallelRun('add73bda37106bbddf2e6b3f61c6ed197c2250e99df9474ad01b9afb2035af33cf66c292fdf6a6e8');
+        $this->bindConfig(
+            'https://abrouter.com',
+            'add73bda37106bbddf2e6b3f61c6ed197c2250e99df9474ad01b9afb2035af33cf66c292fdf6a6e8',
+        );
         $this->clearRedis();
 
         $client = $this->getContainer()->make(Client::class);
@@ -31,12 +34,8 @@ class StatSendParallelTest extends IntegrationTestCase
 
         $userEventsRepository = $this->getContainer()->make(UserEventsRepository::class);
         $events = $userEventsRepository->getUserEvents($userSignature);
-        $this->assertEquals(0, sizeof($events->getStatisticEvents()));
 
-        $worker = $this->getContainer()->make(Worker::class);
-        $worker->work(10);
 
-        $events = $userEventsRepository->getUserEvents($userSignature);
         $this->assertEquals(1, sizeof($events->getStatisticEvents()));
         foreach ($events->getStatisticEvents() as $event) {
             $this->assertEquals($event->getEvent(), 'event1');
