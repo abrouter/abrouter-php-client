@@ -7,10 +7,13 @@ jobs:
       matrix:
         operating-system: ['ubuntu-latest']
         php-versions: ['7.4']
+        redis-version: [ 4, 5, 6 ]
         phpunit-versions: ['latest']
         include:
           - operating-system: 'ubuntu-latest'
             php-versions: '7.4'
+    env:
+      REDIS_HOST: 127.0.0.1
     steps:
       - uses: actions/checkout@v2
       - uses: nanasess/setup-php@master
@@ -20,6 +23,11 @@ jobs:
         run: sudo composer self-update 1.10.15 --no-interaction
       - name: Run Composer Install
         run: composer install --no-interaction
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.4.0
+        with:
+          redis-version: 6
+          redis-container-name: redis
       - name: run tests
         run: vendor/bin/phpunit
   abrouter-tests-php-80:
@@ -32,6 +40,8 @@ jobs:
         include:
           - operating-system: 'ubuntu-latest'
             php-versions: '8.0'
+    env:
+      REDIS_HOST: 127.0.0.1
     steps:
       - uses: actions/checkout@v2
       - uses: nanasess/setup-php@master
@@ -41,5 +51,10 @@ jobs:
         run: sudo composer self-update 1.10.15 --no-interaction
       - name: Run Composer Install
         run: composer install --no-interaction
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.4.0
+        with:
+          redis-version: 6
+          redis-container-name: redis
       - name: run tests
         run: vendor/bin/phpunit

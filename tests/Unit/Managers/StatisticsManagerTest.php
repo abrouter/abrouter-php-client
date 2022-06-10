@@ -2,33 +2,32 @@
 
 namespace Abrouter\Client\Tests\Unit\Managers;
 
-use Abrouter\Client\Builders\Payload\SendEventPayloadBuilder;
 use Abrouter\Client\DTO\BaseEventDTO;
+use Abrouter\Client\DTO\IncrementEventDTO;
+use Abrouter\Client\DTO\SummarizeEventDTO;
 use Abrouter\Client\Entities\Client\Response;
 use Abrouter\Client\Entities\Client\ResponseInterface;
 use Abrouter\Client\Entities\JsonPayload;
-use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
-use Abrouter\Client\Exceptions\SendEventRequestException;
+use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\Manager\StatisticsManager;
+use Abrouter\Client\Services\Statistics\SendEventService;
 use Abrouter\Client\Tests\Unit\TestCase;
 use Abrouter\Client\Requests\SendEventRequest;
-use Abrouter\Client\Transformers\SendEventRequestTransformer;
-use Abrouter\Client\DTO\IncrementEventDTO;
-use Abrouter\Client\DTO\SummarizeEventDTO;
-use DI\DependencyException;
-use DI\NotFoundException;
 
 class StatisticsManagerTest extends TestCase
 {
+    public static SentEvent $sentEvent;
+
     /**
      * @return void
-     * @throws InvalidJsonApiResponseException
-     * @throws SendEventRequestException
-     * @throws DependencyException
-     * @throws NotFoundException
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     * @throws \ReflectionException
      */
-    public function testIncrementEvent()
+    public function testSendIncrementEvent()
     {
+        $this->bindConfig();
+
         $date = (new \DateTime())->format('Y-m-d');
         $incrementEventDTO = new IncrementEventDTO(new BaseEventDTO(
             'temporary_user_12345',
@@ -73,27 +72,35 @@ class StatisticsManagerTest extends TestCase
             }
         };
 
-        $statisticsManager = new StatisticsManager(
-            $sendEventRequest,
-            $this->getContainer()->make(SendEventPayloadBuilder::class),
-            $this->getContainer()->make(SendEventRequestTransformer::class),
-        );
+        $args = $this->createArgumentsFor(SendEventService::class);
+        $args[0] = $sendEventRequest;
+        $sendEventService = new class (...$args) extends SendEventService {
+            public function sendIncrementEvent(IncrementEventDTO $incrementEventDTO): SentEvent
+            {
+                $result = parent::sendIncrementEvent($incrementEventDTO);
+                StatisticsManagerTest::$sentEvent = $result;
+                return $result;
+            }
+        };
+        $this->getContainer()->set(SendEventService::class, $sendEventService);
+        $statisticsManager = $this->getContainer()->make(StatisticsManager::class);
+        $statisticsManager->sendIncrementEvent($incrementEventDTO);
 
-        $incrementEntity = $statisticsManager->increment($incrementEventDTO);
-
-        $this->assertEquals($incrementEntity->isSuccessful(), true);
+        $this->assertTrue(self::$sentEvent->isSuccessful());
     }
 
     /**
-     * @throws SendEventRequestException
-     * @throws DependencyException
-     * @throws NotFoundException
-     * @throws InvalidJsonApiResponseException
+     * @return void
+     * @throws \DI\DependencyException
+     * @throws \DI\NotFoundException
+     * @throws \ReflectionException
      */
-    public function testSummarizeEvent()
+    public function testSendSummarizalbeEvent()
     {
+        $this->bindConfig();
+
         $date = (new \DateTime())->format('Y-m-d');
-        $summarizeEventDTO = new SummarizeEventDTO('100',new BaseEventDTO(
+        $summarizeEventDTO = new SummarizeEventDTO('100', new BaseEventDTO(
             'temporary_user_12345',
             'user_12345',
             'new_event',
@@ -137,14 +144,21 @@ class StatisticsManagerTest extends TestCase
             }
         };
 
-        $statisticsManager = new StatisticsManager(
-            $sendEventRequest,
-            $this->getContainer()->make(SendEventPayloadBuilder::class),
-            $this->getContainer()->make(SendEventRequestTransformer::class),
-        );
+        $args = $this->createArgumentsFor(SendEventService::class);
+        $args[0] = $sendEventRequest;
+        $sendEventService = new class (...$args) extends SendEventService {
+            public function sendSummarizableEvent(SummarizeEventDTO $summarizeEventDTO): SentEvent
+            {
+                $result = parent::sendSummarizableEvent($summarizeEventDTO);
+                StatisticsManagerTest::$sentEvent = $result;
+                return $result;
+            }
+        };
 
-        $sendEventEntity = $statisticsManager->summarize($summarizeEventDTO);
+        $this->getContainer()->set(SendEventService::class, $sendEventService);
+        $statisticsManager = $this->getContainer()->make(StatisticsManager::class);
+        $statisticsManager->sendSummarizableEvent($summarizeEventDTO);
 
-        $this->assertEquals($sendEventEntity->isSuccessful(), true);
+        $this->assertTrue(self::$sentEvent->isSuccessful());
     }
 }

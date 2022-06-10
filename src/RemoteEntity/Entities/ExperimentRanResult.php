@@ -1,26 +1,27 @@
 <?php
-declare(strict_types = 1);
 
-namespace Abrouter\Client\Entities;
+declare(strict_types=1);
 
-class RunExperiment
+namespace Abrouter\Client\RemoteEntity\Entities;
+
+class ExperimentRanResult
 {
     /**
      * @var string
      */
     private string $branchId;
-    
+
     /**
      * @var string
      */
     private string $experimentId;
-    
+
     public function __construct(string $branchId, string $experimentId)
     {
         $this->branchId = $branchId;
         $this->experimentId = $experimentId;
     }
-    
+
     /**
      * @return string
      */
@@ -28,7 +29,7 @@ class RunExperiment
     {
         return $this->branchId;
     }
-    
+
     /**
      * @return string
      */

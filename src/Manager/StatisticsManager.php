@@ -1,71 +1,45 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Manager;
 
-use Abrouter\Client\Builders\Payload\SendEventPayloadBuilder;
-use Abrouter\Client\Entities\SentEvent;
-use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
-use Abrouter\Client\Exceptions\SendEventRequestException;
-use Abrouter\Client\Requests\SendEventRequest;
-use Abrouter\Client\Transformers\SendEventRequestTransformer;
 use Abrouter\Client\DTO\IncrementEventDTO;
 use Abrouter\Client\DTO\SummarizeEventDTO;
+use Abrouter\Client\Events\EventDispatcher;
+use Abrouter\Client\Services\ExperimentsParallelRun\ParallelRunSwitch;
+use Abrouter\Client\Services\Statistics\SendIncrementEventTask;
+use Abrouter\Client\Services\Statistics\SendSummarizableEventTask;
 
 class StatisticsManager
 {
-    /**
-     * @var SendEventRequest
-     */
-    private SendEventRequest $sendEventRequest;
+    private EventDispatcher $eventDispatcher;
+
+    private ParallelRunSwitch $parallelRunSwitch;
 
     /**
-     * @var SendEventPayloadBuilder
+     * @param EventDispatcher $eventDispatcher
+     * @param ParallelRunSwitch $parallelRunSwitch
      */
-    private SendEventPayloadBuilder $sendEventPayloadBuilder;
-
-    /**
-     * @var SendEventRequestTransformer
-     */
-    private SendEventRequestTransformer $sendEventRequestTransformer;
-
-    public function __construct(
-        SendEventRequest            $sendEventRequest,
-        SendEventPayloadBuilder     $sendEventPayloadBuilder,
-        SendEventRequestTransformer $sendEventRequestTransformer
-    ) {
-        $this->sendEventRequest = $sendEventRequest;
-        $this->sendEventPayloadBuilder = $sendEventPayloadBuilder;
-        $this->sendEventRequestTransformer = $sendEventRequestTransformer;
+    public function __construct(EventDispatcher $eventDispatcher, ParallelRunSwitch $parallelRunSwitch)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+        $this->parallelRunSwitch = $parallelRunSwitch;
     }
 
-    /**
-     * @param IncrementEventDTO $incrementEventDTO
-     * @return SentEvent
-     * @throws InvalidJsonApiResponseException
-     * @throws SendEventRequestException
-     */
-    public function increment(IncrementEventDTO $incrementEventDTO): SentEvent
+    public function sendIncrementEvent(IncrementEventDTO $eventDTO): void
     {
-        $payload = $this->sendEventPayloadBuilder->buildSendIncrementEventRequest($incrementEventDTO);
-        $response = $this->sendEventRequest->sendEvent($payload);
-        $sentEvent = $this->sendEventRequestTransformer->transform($response);
-        
-        return $sentEvent;
+        $this->eventDispatcher->dispatch(
+            new SendIncrementEventTask($eventDTO),
+            $this->parallelRunSwitch->isEnabled()
+        );
     }
 
-    /**
-     * @param SummarizeEventDTO $summarizeEventDTO
-     * @return SentEvent
-     * @throws InvalidJsonApiResponseException
-     * @throws SendEventRequestException
-     */
-    public function summarize(SummarizeEventDTO $summarizeEventDTO): SentEvent
+    public function sendSummarizableEvent(SummarizeEventDTO $eventDTO): void
     {
-        $payload = $this->sendEventPayloadBuilder->buildSendSummarizeEventRequest($summarizeEventDTO);
-        $response = $this->sendEventRequest->sendEvent($payload);
-        $sentEvent = $this->sendEventRequestTransformer->transform($response);
-
-        return $sentEvent;
+        $this->eventDispatcher->dispatch(
+            new SendSummarizableEventTask($eventDTO),
+            $this->parallelRunSwitch->isEnabled()
+        );
     }
 }

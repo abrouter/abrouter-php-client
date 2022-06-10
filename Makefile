@@ -1,4 +1,5 @@
 APP = abr-php-client
+ARGS = $(filter-out $@,$(MAKECMDGOALS))
 
 .PHONY: up
 up:
@@ -14,7 +15,7 @@ stop:
 
 .PHONY: test-run
 test-run:
-	docker exec -it $(APP) php vendor/bin/phpunit
+	docker exec -it $(APP) php vendor/bin/phpunit ${ARGS}
 
 .PHONY: bash
 bash:

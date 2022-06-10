@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Transformers;
 
@@ -12,13 +13,13 @@ class UrlBuilderTest extends TestCase
      * @var UrlBuilder $urlBuilder
      */
     private UrlBuilder $urlBuilder;
-    
+
     public function setUp(): void
     {
         $this->bindConfig();
         $this->urlBuilder = $this->getContainer()->make(UrlBuilder::class);
     }
-    
+
     public function testUrlBuilderRunExperimentUri()
     {
         $url = $this->urlBuilder->runExperimentUri()->build();

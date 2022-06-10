@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Entities\Client;
 
@@ -16,7 +17,7 @@ class RequestTest extends TestCase
         $headers = [
             'Authorization' => 'Bearer ' . uniqid(),
         ];
-        
+
         $jsonPayload = new Request($method, $url, $payload, $headers);
         $this->assertEquals($jsonPayload->getMethod(), $method);
         $this->assertEquals($jsonPayload->getUrl(), $url);

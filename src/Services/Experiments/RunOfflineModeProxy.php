@@ -1,9 +1,10 @@
 <?php
-declare(strict_types = 1);
 
-namespace Abrouter\Client\Support\Experiments;
+declare(strict_types=1);
 
-use Abrouter\Client\Entities\RunExperiment;
+namespace Abrouter\Client\Services\Experiments;
+
+use Abrouter\Client\RemoteEntity\Entities\ExperimentRanResult;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
 use Abrouter\Client\Exceptions\RunExperimentRequestException;
 use Abrouter\Client\Manager\ExperimentManager;
@@ -14,7 +15,7 @@ class RunOfflineModeProxy
      * @var ExperimentManager
      */
     private ExperimentManager $experimentManager;
-    
+
     /**
      * OfflineModeProxy constructor.
      *
@@ -24,14 +25,14 @@ class RunOfflineModeProxy
     {
         $this->experimentManager = $experimentManager;
     }
-    
+
     /**
      * @param string $userSignature
      * @param string $experimentId
      * @param string $experimentUid
      * @param string $defaultBranchId
      *
-     * @return RunExperiment
+     * @return ExperimentRanResult
      * @throws InvalidJsonApiResponseException
      */
     public function runOffline(
@@ -43,7 +44,7 @@ class RunOfflineModeProxy
         try {
             return $this->experimentManager->run($userSignature, $experimentId);
         } catch (RunExperimentRequestException $runExperimentRequestException) {
-            return new RunExperiment($defaultBranchId, $experimentUid);
+            return new ExperimentRanResult($defaultBranchId, $experimentUid);
         }
     }
 }

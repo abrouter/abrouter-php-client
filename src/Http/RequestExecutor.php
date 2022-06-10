@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Abrouter\Client\Http;
@@ -16,12 +17,12 @@ class RequestExecutor
      * @var Client
      */
     private Client $client;
-    
+
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
-    
+
     /**
      * @param RequestInterface $request
      *
@@ -34,9 +35,9 @@ class RequestExecutor
             RequestOptions::HEADERS => $request->getHeaders(),
             RequestOptions::JSON => $request->getPayload(),
         ]);
-        
+
         $jsonResponse = json_decode($request->getBody()->getContents(), true);
-        
+
         return new Response($jsonResponse);
     }
 }

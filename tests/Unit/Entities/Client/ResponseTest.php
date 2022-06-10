@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace Abrouter\Client\Tests\Unit\Entities\Client;
 
@@ -13,7 +14,7 @@ class ResponseTest extends TestCase
         $expectedResponse = [
             'test' => 1,
         ];
-        
+
         $response = new Response($expectedResponse);
         $this->assertEquals($response->getResponseJson(), $expectedResponse);
     }

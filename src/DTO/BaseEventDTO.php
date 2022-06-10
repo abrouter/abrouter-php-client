@@ -59,14 +59,14 @@ class BaseEventDTO
      * @param string|null $created_at
      */
     public function __construct(
-        ?string $temporaryUserId,
-        ?string $userId,
+        ?string $temporaryUserId = null,
+        ?string $userId = null,
         string $event,
-        ?string $tag,
-        ?string $referrer,
-        ?array $meta,
-        ?string $ip,
-        ?string $created_at
+        ?string $tag = null,
+        ?string $referrer = null,
+        ?array $meta = null,
+        ?string $ip = null,
+        ?string $created_at = null
     ) {
         $this->temporaryUserId = $temporaryUserId;
         $this->userId = $userId;
