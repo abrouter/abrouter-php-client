@@ -9,15 +9,15 @@ use Abrouter\Client\Contracts\TaskManagerContract;
 
 class Worker
 {
-    private TaskManagerContract $taskManager;
+    private ParallelRunConfigAccessor $parallelRunConfigAccessor;
 
     public function __construct(ParallelRunConfigAccessor $parallelRunConfigAccessor)
     {
-        $this->taskManager = $parallelRunConfigAccessor->getTaskManager();
+        $this->parallelRunConfigAccessor = $parallelRunConfigAccessor;
     }
 
     public function work(int $iterationsLimit = 0)
     {
-        $this->taskManager->work($iterationsLimit);
+        $this->parallelRunConfigAccessor->getTaskManager()->work($iterationsLimit);
     }
 }

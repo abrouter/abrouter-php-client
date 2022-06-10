@@ -4,25 +4,28 @@ declare(strict_types=1);
 
 namespace Abrouter\Client\Events;
 
+use Abrouter\Client\Config\Accessors\ParallelRunConfigAccessor;
 use Abrouter\Client\Contracts\TaskContract;
-use Abrouter\Client\Services\TaskManager\TaskStorage;
+use Abrouter\Client\Contracts\TaskManagerContract;
 
 class EventDispatcher
 {
     private EventHandlersMap $eventHandlersMap;
 
-    private TaskStorage $taskStorage;
+    private ParallelRunConfigAccessor $parallelRunConfigAccessor;
 
-    public function __construct(EventHandlersMap $eventHandlersMap, TaskStorage $taskStorage)
-    {
+    public function __construct(
+        EventHandlersMap $eventHandlersMap,
+        ParallelRunConfigAccessor $parallelRunConfigAccessor
+    ) {
         $this->eventHandlersMap = $eventHandlersMap;
-        $this->taskStorage = $taskStorage;
+        $this->parallelRunConfigAccessor = $parallelRunConfigAccessor;
     }
 
     public function dispatch(TaskContract $taskContract, bool $async = false): void
     {
         if ($async) {
-            $this->taskStorage->publish($taskContract);
+            $this->parallelRunConfigAccessor->getTaskManager()->queue($taskContract);
             return ;
         }
 
