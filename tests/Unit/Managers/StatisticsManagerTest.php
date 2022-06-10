@@ -29,7 +29,7 @@ class StatisticsManagerTest extends TestCase
         $this->bindConfig();
 
         $date = (new \DateTime())->format('Y-m-d');
-        $incrementEventDTO = new IncrementEventDTO(new BaseEventDTO(
+        $eventDTO = new IncrementEventDTO(new BaseEventDTO(
             'temporary_user_12345',
             'user_12345',
             'new_event',
@@ -75,16 +75,16 @@ class StatisticsManagerTest extends TestCase
         $args = $this->createArgumentsFor(SendEventService::class);
         $args[0] = $sendEventRequest;
         $sendEventService = new class (...$args) extends SendEventService {
-            public function sendIncrementEvent(IncrementEventDTO $incrementEventDTO): SentEvent
+            public function sendIncrementEvent(IncrementEventDTO $eventDTO): SentEvent
             {
-                $result = parent::sendIncrementEvent($incrementEventDTO);
+                $result = parent::sendIncrementEvent($eventDTO);
                 StatisticsManagerTest::$sentEvent = $result;
                 return $result;
             }
         };
         $this->getContainer()->set(SendEventService::class, $sendEventService);
         $statisticsManager = $this->getContainer()->make(StatisticsManager::class);
-        $statisticsManager->sendIncrementEvent($incrementEventDTO);
+        $statisticsManager->sendIncrementEvent($eventDTO);
 
         $this->assertTrue(self::$sentEvent->isSuccessful());
     }
