@@ -82,6 +82,7 @@ class StatisticsManagerTest extends TestCase
                 return $result;
             }
         };
+
         $this->getContainer()->set(SendEventService::class, $sendEventService);
         $statisticsManager = $this->getContainer()->make(StatisticsManager::class);
         $statisticsManager->sendIncrementEvent($eventDTO);
