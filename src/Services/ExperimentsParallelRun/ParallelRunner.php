@@ -23,9 +23,9 @@ class ParallelRunner
     private $experimentRunner;
 
     /**
-     * @var TaskManagerContract
+     * @var ParallelRunConfigAccessor
      */
-    private ?TaskManagerContract $taskManagerContract;
+    private ParallelRunConfigAccessor $parallelRunConfigAccessor;
 
     /**
      * @var Cacher
@@ -40,7 +40,7 @@ class ParallelRunner
     ) {
         $this->experimentBranchesCacheRepository = $experimentBranchesCacheRepository;
         $this->experimentRunner = $experimentRunner;
-        $this->taskManagerContract = $parallelRunConfig->getTaskManager();
+        $this->parallelRunConfigAccessor = $parallelRunConfig;
         $this->cacher = $cacher;
     }
 
@@ -63,7 +63,7 @@ class ParallelRunner
                 $branch,
             );
 
-            $this->taskManagerContract->queue($task);
+            $this->parallelRunConfigAccessor->getTaskManager()->queue($task);
 
             return new ExperimentRanResult(
                 $branch,

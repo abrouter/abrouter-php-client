@@ -9,34 +9,28 @@ use Abrouter\Client\Config\Accessors\KvStorageConfigAccessor;
 
 class Cacher
 {
-    /**
-     * @var KvStorageContract|null
-     */
-    private ?KvStorageContract $kvStorageContract;
-
-    private bool $isEnabled;
+    private KvStorageConfigAccessor $kvStorageConfigAccessor;
 
     public function __construct(KvStorageConfigAccessor $kvStorageConfigAccessor)
     {
-        $this->kvStorageContract = $kvStorageConfigAccessor->getKvStorage();
-        $this->isEnabled = $kvStorageConfigAccessor->hasKvStorage();
+        $this->kvStorageConfigAccessor = $kvStorageConfigAccessor;
     }
 
     public function isEnabled(): bool
     {
-        return $this->isEnabled;
+        return $this->kvStorageConfigAccessor->hasKvStorage();
     }
 
     public function fetch(string $id, string $type, int $expireIn, callable $fetchFunction): ?object
     {
         $objectId = $this->getObjectId($id, $type);
-        $object = $this->kvStorageContract->get($objectId);
+        $object = $this->kvStorageConfigAccessor->getKvStorage()->get($objectId);
         if ($object !== null) {
             return unserialize($object);
         }
 
         $object = $fetchFunction();
-        $this->kvStorageContract->put($objectId, serialize($object), $expireIn);
+        $this->kvStorageConfigAccessor->getKvStorage()->put($objectId, serialize($object), $expireIn);
         return $object;
     }
 
