@@ -36,13 +36,13 @@ class StatisticsSenderHandler implements HandlerInterface
             return false;
         }
 
-        if ($taskContract instanceof SendSummarizableEventTask) {
-            return $this->sendEventService->sendSummarizableEvent(
-                $taskContract->getSummarizableEventDTO()
-            )->isSuccessful();
-        } else {
+        if ($taskContract instanceof SendIncrementEventTask) {
             return $this->sendEventService->sendIncrementEvent(
                 $taskContract->getIncrementEventDTO()
+            )->isSuccessful();
+        } else {
+            return $this->sendEventService->sendSummarizableEvent(
+                $taskContract->getSummarizableEventDTO()
             )->isSuccessful();
         }
     }

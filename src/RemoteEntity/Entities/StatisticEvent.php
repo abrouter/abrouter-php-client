@@ -12,6 +12,8 @@ class StatisticEvent
 
     private ?string $temporaryUserId;
 
+    private ?string $value;
+
     private ?string $tag;
 
     private ?string $referrer;
@@ -24,6 +26,7 @@ class StatisticEvent
         string $event,
         ?string $userId,
         ?string $temporaryUserId,
+        ?string $value,
         ?string $tag,
         ?string $referrer,
         ?string $ip,
@@ -32,6 +35,7 @@ class StatisticEvent
         $this->event = $event;
         $this->userId = $userId;
         $this->temporaryUserId = $temporaryUserId;
+        $this->value = $value;
         $this->tag = $tag;
         $this->referrer = $referrer;
         $this->ip = $ip;
@@ -60,6 +64,14 @@ class StatisticEvent
     public function getTemporaryUserId(): ?string
     {
         return $this->temporaryUserId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getValue(): ?string
+    {
+        return $this->value;
     }
 
     /**

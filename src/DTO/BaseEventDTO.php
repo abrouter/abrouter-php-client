@@ -7,51 +7,51 @@ namespace Abrouter\Client\DTO;
 class BaseEventDTO
 {
     /**
-     * @var string|null
-     */
-    private $temporaryUserId;
-
-    /**
-     * @var string|null
-     */
-    private $userId;
-
-    /**
      * @var string
      */
-    private $event;
+    private string $event;
 
     /**
      * @var string|null
      */
-    private $referrer;
+    private ?string $temporaryUserId;
 
     /**
      * @var string|null
      */
-    private $tag;
+    private ?string $userId;
+
+    /**
+     * @var string|null
+     */
+    private ?string $referrer;
+
+    /**
+     * @var string|null
+     */
+    private ?string $tag;
 
     /**
      * @var array|null
      */
-    private $meta;
+    private ?array $meta;
 
     /**
      * @var string|null
      */
-    private $ip;
+    private ?string $ip;
 
     /**
      * @var string|null
      */
-    private $created_at;
+    private ?string $created_at;
 
     /**
      * BaseEventDTO constructor.
      *
+     * @param string      $event
      * @param string|null $temporaryUserId
      * @param string|null $userId
-     * @param string      $event
      * @param string|null $tag
      * @param string|null $referrer
      * @param array|null  $meta
@@ -59,23 +59,31 @@ class BaseEventDTO
      * @param string|null $created_at
      */
     public function __construct(
+        string $event,
         ?string $temporaryUserId = null,
         ?string $userId = null,
-        string $event,
         ?string $tag = null,
         ?string $referrer = null,
         ?array $meta = null,
         ?string $ip = null,
         ?string $created_at = null
     ) {
+        $this->event = $event;
         $this->temporaryUserId = $temporaryUserId;
         $this->userId = $userId;
-        $this->event = $event;
         $this->tag = $tag;
         $this->referrer = $referrer;
         $this->meta = $meta;
         $this->ip = $ip;
         $this->created_at = $created_at;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEvent(): string
+    {
+        return $this->event;
     }
 
     /**
@@ -92,14 +100,6 @@ class BaseEventDTO
     public function getUserId(): ?string
     {
         return $this->userId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEvent(): string
-    {
-        return $this->event;
     }
 
     /**

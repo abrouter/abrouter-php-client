@@ -9,7 +9,7 @@ class SentEvent
     /**
      * @var string
      */
-    private $event;
+    private string $event;
 
     /**
      * @param string $event
