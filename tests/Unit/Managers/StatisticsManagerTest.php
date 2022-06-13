@@ -96,7 +96,7 @@ class StatisticsManagerTest extends TestCase
      * @throws \DI\NotFoundException
      * @throws \ReflectionException
      */
-    public function testSendSummarizalbeEvent()
+    public function testSendSummarizableEvent()
     {
         $this->bindConfig();
 

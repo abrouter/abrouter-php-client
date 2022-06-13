@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Abrouter\Client\Tests\Integration;
 
 use Abrouter\Client\Client;
-use Abrouter\Client\DTO\EventDTO;
+use Abrouter\Client\DTO\BaseEventDTO;
+use Abrouter\Client\DTO\IncrementEventDTO;
 use Abrouter\Client\RemoteEntity\Repositories\UserEventsRepository;
 use Abrouter\Client\Worker;
 
@@ -18,7 +19,7 @@ class StatSendParallelTest extends IntegrationTestCase
 
         $client = $this->getContainer()->make(Client::class);
         $userSignature = 'test-run-f:' . uniqid();
-        $client->statistics()->sendEvent(new EventDTO(
+        $client->statistics()->sendIncrementEvent(new IncrementEventDTO(new BaseEventDTO(
             '',
             $userSignature,
             'event1',
@@ -27,7 +28,7 @@ class StatSendParallelTest extends IntegrationTestCase
             [],
             '',
             '',
-        ));
+        )));
 
         $userEventsRepository = $this->getContainer()->make(UserEventsRepository::class);
         $events = $userEventsRepository->getUserEvents($userSignature);
