@@ -47,7 +47,7 @@ $di->set(Config::class, new Config($token, 'https://abrouter.com'));
  */
 $client = $di->make(Abrouter\Client\Client::class);
 $userSignature = uniqid();
-$experimentId = 'B95AC000-0000-0000-00005030';//experiment id is also there
+$experimentId = 'button_color';//experiment id is also there
 
 
 $runExperimentResult = $client->experiments()->run($userSignature, $experimentId);
