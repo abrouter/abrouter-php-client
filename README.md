@@ -65,7 +65,17 @@ use Abrouter\Client\Config\Config;
 use DI\ContainerBuilder;
 use Abrouter\Client\Client;
 
+require '/app/vendor/autoload.php';
+
 $userId = uniqid();
+
+$containerBuilder = new ContainerBuilder();
+$di = $containerBuilder->build();
+
+/**
+ * @var Client $client
+ */
+$client = $di->make(Abrouter\Client\Client::class); // using PHP-DI
 $client->statistics()->sendEvent(new EventDTO(
         null, // temporary user id 
         $userId, // permanent user id 
