@@ -89,8 +89,12 @@ $client->statistics()->sendEvent(new EventDTO(
 Parallel running is a mode which allows you to run the experiments asynchronous. 
 Main things to make it works are configuring KvStorage and TaskManager. 
 KvStorage and TaskManager are using Redis to store data and tasks.
+
+
 ABRouter php client has built-in KvStorage and TaskManager, but you can make your own implementation and replace it via DI and contracts.
 We're highly recommend you to use built-in solution. The implementation is completely tested and works well. Using Parallel running gives you a great growth in speed.
+
+
 The config for parallel running is a bit different from the default config.
 
 
