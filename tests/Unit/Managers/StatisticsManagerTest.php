@@ -85,7 +85,7 @@ class StatisticsManagerTest extends TestCase
 
         $this->getContainer()->set(SendEventService::class, $sendEventService);
         $statisticsManager = $this->getContainer()->make(StatisticsManager::class);
-        $statisticsManager->sendIncrementEvent($eventDTO);
+        $statisticsManager->sendEvent($eventDTO);
 
         $this->assertTrue(self::$sentEvent->isSuccessful());
     }
@@ -158,7 +158,7 @@ class StatisticsManagerTest extends TestCase
 
         $this->getContainer()->set(SendEventService::class, $sendEventService);
         $statisticsManager = $this->getContainer()->make(StatisticsManager::class);
-        $statisticsManager->sendSummarizableEvent($summarizeEventDTO);
+        $statisticsManager->sendEvent($summarizeEventDTO);
 
         $this->assertTrue(self::$sentEvent->isSuccessful());
     }

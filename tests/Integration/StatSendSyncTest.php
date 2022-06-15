@@ -23,10 +23,10 @@ class StatSendSyncTest extends IntegrationTestCase
 
         $client = $this->getContainer()->make(Client::class);
         $userSignature = 'test-run-f:' . uniqid();
-        $client->statistics()->sendIncrementEvent(new IncrementEventDTO(new BaseEventDTO(
-            'event1',
+        $client->statistics()->sendEvent(new IncrementEventDTO(new BaseEventDTO(
             '',
             $userSignature,
+            'event1',
             '',
             '',
             [],
@@ -52,10 +52,10 @@ class StatSendSyncTest extends IntegrationTestCase
 
         $client = $this->getContainer()->make(Client::class);
         $userSignature = 'test-run-f:' . uniqid();
-        $client->statistics()->sendSummarizableEvent(new SummarizeEventDTO('10', new BaseEventDTO(
-            'event1',
+        $client->statistics()->sendEvent(new SummarizeEventDTO('10', new BaseEventDTO(
             '',
             $userSignature,
+            'event1',
             '',
             '',
             [],

@@ -9,8 +9,7 @@ use Abrouter\Client\Events\HandlerInterface;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
 use Abrouter\Client\Exceptions\SendEventRequestException;
 use Abrouter\Client\Services\Statistics\SendEventService;
-use Abrouter\Client\Services\Statistics\SendIncrementEventTask;
-use Abrouter\Client\Services\Statistics\SendSummarizableEventTask;
+use Abrouter\Client\Services\Statistics\SendEventTask;
 
 class StatisticsSenderHandler implements HandlerInterface
 {
@@ -29,21 +28,12 @@ class StatisticsSenderHandler implements HandlerInterface
      */
     public function handle(TaskContract $taskContract): bool
     {
-        if (
-            !($taskContract instanceof SendSummarizableEventTask) &&
-            !($taskContract instanceof SendIncrementEventTask)
-        ) {
+        if (!($taskContract instanceof SendEventTask)) {
             return false;
         }
 
-        if ($taskContract instanceof SendIncrementEventTask) {
-            return $this->sendEventService->sendIncrementEvent(
-                $taskContract->getIncrementEventDTO()
-            )->isSuccessful();
-        } else {
-            return $this->sendEventService->sendSummarizableEvent(
-                $taskContract->getSummarizableEventDTO()
-            )->isSuccessful();
-        }
+        return $this->sendEventService->sendEvent(
+            $taskContract->getEventDTO()
+        )->isSuccessful();
     }
 }

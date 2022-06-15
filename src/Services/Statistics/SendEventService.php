@@ -32,6 +32,23 @@ class SendEventService
     }
 
     /**
+     * @deprecated
+     * @param IncrementEventDTO $eventDTO
+     * @return SentEvent
+     * @throws InvalidJsonApiResponseException
+     * @throws SendEventRequestException
+     */
+    public function sendEvent(IncrementEventDTO $eventDTO): SentEvent
+    {
+        $payload = $this->sendEventPayloadBuilder->buildSendIncrementEventRequest($eventDTO);
+
+        $response = $this->sendEventRequest->sendEvent($payload);
+        $sentEvent = $this->sendEventRequestTransformer->transform($response);
+
+        return $sentEvent;
+    }
+
+    /**
      * @param IncrementEventDTO $eventDTO
      * @return SentEvent
      * @throws InvalidJsonApiResponseException
