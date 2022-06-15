@@ -58,6 +58,21 @@ echo '<button style="color: '. $branchId .'">Hello</button>';
 
 You can create an experiment and get your token and id of experiment on [ABRouter](https://abrouter.com) or just read the [docs](https://abrouter.com/en/docs). 
 
+## Sending the stats
+
+```php
+use Abrouter\Client\Config\Config;
+use DI\ContainerBuilder;
+use Abrouter\Client\Client;
+
+$userId = uniqid();
+$client->statistics()->sendEvent(new EventDTO(
+        null, // temporary user id 
+        $userId, // permanent user id 
+        'visited_test_page'
+));
+
+
 ## Parallel running
 
 Parallel running is a mode which allows you to run the experiments asynchronous. 
