@@ -71,6 +71,7 @@ $client->statistics()->sendEvent(new EventDTO(
         $userId, // permanent user id 
         'visited_test_page'
 ));
+```
 
 
 ## Parallel running
