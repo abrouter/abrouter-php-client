@@ -69,7 +69,7 @@ class EventHandlersMap
             ],
             SendEventTask::class => [
                 $this->statisticsSenderHandler,
-            ]
+            ],
         ];
     }
 }
