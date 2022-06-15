@@ -8,8 +8,7 @@ use Abrouter\Client\Contracts\TaskContract;
 use Abrouter\Client\Events\Handlers\AddUserToBranchHandler;
 use Abrouter\Client\Events\Handlers\StatisticsSenderHandler;
 use Abrouter\Client\Services\ExperimentsParallelRun\AddUserToBranchTask;
-use Abrouter\Client\Services\Statistics\SendSummarizableEventTask;
-use Abrouter\Client\Services\Statistics\SendIncrementEventTask;
+use Abrouter\Client\Services\Statistics\SendEventTask;
 
 class EventHandlersMap
 {
@@ -68,12 +67,9 @@ class EventHandlersMap
             AddUserToBranchTask::class => [
                 $this->addUserToBranchHandler,
             ],
-            SendSummarizableEventTask::class => [
+            SendEventTask::class => [
                 $this->statisticsSenderHandler,
-            ],
-            SendIncrementEventTask::class => [
-                $this->statisticsSenderHandler,
-            ],
+            ]
         ];
     }
 }

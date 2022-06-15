@@ -38,7 +38,7 @@ class SummarizePayloadBuilderTest extends TestCase
             '255.255.255.255',
             $date
         ));
-        $payload = $this->sendEventPayloadBuilder->buildSendSummarizeEventRequest($summarizeEventDTO);
+        $payload = $this->sendEventPayloadBuilder->build($summarizeEventDTO);
         $this->assertInstanceOf(JsonPayload::class, $payload);
         $this->assertEquals($payload->getPayload(), [
             'data' => [

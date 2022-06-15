@@ -38,7 +38,7 @@ class IncrementPayloadBuilderTest extends TestCase
             '255.255.255.255',
             $date
         ));
-        $payload = $this->sendEventPayloadBuilder->buildSendIncrementEventRequest($incrementEventDTO);
+        $payload = $this->sendEventPayloadBuilder->build($incrementEventDTO);
         $this->assertInstanceOf(JsonPayload::class, $payload);
         $this->assertEquals($payload->getPayload(), [
             'data' => [
@@ -47,6 +47,7 @@ class IncrementPayloadBuilderTest extends TestCase
                     'event' => $incrementEventDTO->getBaseEventDTO()->getEvent(),
                     'user_id' => $incrementEventDTO->getBaseEventDTO()->getUserId(),
                     'temporary_user_id' => $incrementEventDTO->getBaseEventDTO()->getTemporaryUserId(),
+                    'value' => null,
                     'tag' => $incrementEventDTO->getBaseEventDTO()->getTag(),
                     'referrer' => $incrementEventDTO->getBaseEventDTO()->getReferrer(),
                     'meta' => $incrementEventDTO->getBaseEventDTO()->getMeta(),

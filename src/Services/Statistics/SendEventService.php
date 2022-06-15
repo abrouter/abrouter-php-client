@@ -40,7 +40,7 @@ class SendEventService
      */
     public function sendEvent(IncrementEventDTO $eventDTO): SentEvent
     {
-        $payload = $this->sendEventPayloadBuilder->buildSendIncrementEventRequest($eventDTO);
+        $payload = $this->sendEventPayloadBuilder->build($eventDTO);
 
         $response = $this->sendEventRequest->sendEvent($payload);
         $sentEvent = $this->sendEventRequestTransformer->transform($response);
@@ -56,7 +56,7 @@ class SendEventService
      */
     public function sendIncrementEvent(IncrementEventDTO $eventDTO): SentEvent
     {
-        $payload = $this->sendEventPayloadBuilder->buildSendIncrementEventRequest($eventDTO);
+        $payload = $this->sendEventPayloadBuilder->build($eventDTO);
 
         $response = $this->sendEventRequest->sendEvent($payload);
         $sentEvent = $this->sendEventRequestTransformer->transform($response);
@@ -72,7 +72,7 @@ class SendEventService
      */
     public function sendSummarizableEvent(SummarizeEventDTO $eventDTO): SentEvent
     {
-        $payload = $this->sendEventPayloadBuilder->buildSendSummarizeEventRequest($eventDTO);
+        $payload = $this->sendEventPayloadBuilder->build($eventDTO);
 
         $response = $this->sendEventRequest->sendEvent($payload);
         $sentEvent = $this->sendEventRequestTransformer->transform($response);

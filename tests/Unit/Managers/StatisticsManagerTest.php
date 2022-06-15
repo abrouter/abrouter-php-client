@@ -58,6 +58,7 @@ class StatisticsManagerTest extends TestCase
                             'id' => uniqid(),
                             'type' => 'events',
                             'attributes' => [
+                                'temporary_user_id' => 'temporary_user_12345',
                                 'user_id' => 'user_12345',
                                 'event' => 'new_event',
                                 'tag' => 'new_tag',
@@ -130,9 +131,9 @@ class StatisticsManagerTest extends TestCase
                             'id' => uniqid(),
                             'type' => 'events',
                             'attributes' => [
+                                'temporary_user_id' => 'temporary_user_12345',
                                 'user_id' => 'user_12345',
                                 'event' => 'new_event',
-                                'value' => '100',
                                 'tag' => 'new_tag',
                                 'referrer' => 'abrouter',
                                 'ip' => '255.255.255.255',
