@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Abrouter\Client\Manager;
 
-use Abrouter\Client\DTO\EventDTO;
 use Abrouter\Client\Events\EventDispatcher;
+use Abrouter\Client\DTO\EventDTO;
 use Abrouter\Client\Services\ExperimentsParallelRun\ParallelRunSwitch;
 use Abrouter\Client\Services\Statistics\SendEventTask;
 
