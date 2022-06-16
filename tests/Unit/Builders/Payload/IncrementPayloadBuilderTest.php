@@ -7,7 +7,7 @@ namespace Abrouter\Client\Tests\Unit\Builders\Payload;
 use Abrouter\Client\Builders\Payload\SendEventPayloadBuilder;
 use Abrouter\Client\DTO\BaseEventDTO;
 use Abrouter\Client\Entities\JsonPayload;
-use Abrouter\Client\DTO\IncrementEventDTO;
+use Abrouter\Client\DTO\IncrementalEventDTO;
 use Abrouter\Client\Tests\Unit\TestCase;
 
 class IncrementPayloadBuilderTest extends TestCase
@@ -28,7 +28,7 @@ class IncrementPayloadBuilderTest extends TestCase
     public function testPayloadIsCorrect()
     {
         $date = (new \DateTime())->format('Y-m-d');
-        $incrementEventDTO = new IncrementEventDTO(new BaseEventDTO(
+        $incrementalEventDTO = new IncrementalEventDTO(new BaseEventDTO(
             'temporary_user_' . uniqid(),
             'user_' . uniqid(),
             'new_event',
@@ -38,21 +38,21 @@ class IncrementPayloadBuilderTest extends TestCase
             '255.255.255.255',
             $date
         ));
-        $payload = $this->sendEventPayloadBuilder->build($incrementEventDTO);
+        $payload = $this->sendEventPayloadBuilder->build($incrementalEventDTO);
         $this->assertInstanceOf(JsonPayload::class, $payload);
         $this->assertEquals($payload->getPayload(), [
             'data' => [
                 'type' => 'events',
                 'attributes' => [
-                    'event' => $incrementEventDTO->getBaseEventDTO()->getEvent(),
-                    'user_id' => $incrementEventDTO->getBaseEventDTO()->getUserId(),
-                    'temporary_user_id' => $incrementEventDTO->getBaseEventDTO()->getTemporaryUserId(),
+                    'event' => $incrementalEventDTO->getBaseEventDTO()->getEvent(),
+                    'user_id' => $incrementalEventDTO->getBaseEventDTO()->getUserId(),
+                    'temporary_user_id' => $incrementalEventDTO->getBaseEventDTO()->getTemporaryUserId(),
                     'value' => null,
-                    'tag' => $incrementEventDTO->getBaseEventDTO()->getTag(),
-                    'referrer' => $incrementEventDTO->getBaseEventDTO()->getReferrer(),
-                    'meta' => $incrementEventDTO->getBaseEventDTO()->getMeta(),
-                    'ip' => $incrementEventDTO->getBaseEventDTO()->getIp(),
-                    'created_at' => $incrementEventDTO->getBaseEventDTO()->getCreatedAt()
+                    'tag' => $incrementalEventDTO->getBaseEventDTO()->getTag(),
+                    'referrer' => $incrementalEventDTO->getBaseEventDTO()->getReferrer(),
+                    'meta' => $incrementalEventDTO->getBaseEventDTO()->getMeta(),
+                    'ip' => $incrementalEventDTO->getBaseEventDTO()->getIp(),
+                    'created_at' => $incrementalEventDTO->getBaseEventDTO()->getCreatedAt()
                 ]
             ]
         ]);

@@ -6,7 +6,7 @@ namespace Abrouter\Client\Tests\Integration;
 
 use Abrouter\Client\Client;
 use Abrouter\Client\DTO\BaseEventDTO;
-use Abrouter\Client\DTO\IncrementEventDTO;
+use Abrouter\Client\DTO\IncrementalEventDTO;
 use Abrouter\Client\DTO\SummarizeEventDTO;
 use Abrouter\Client\RemoteEntity\Repositories\UserEventsRepository;
 use Abrouter\Client\Worker;
@@ -23,7 +23,7 @@ class StatSendSyncTest extends IntegrationTestCase
 
         $client = $this->getContainer()->make(Client::class);
         $userSignature = 'test-run-f:' . uniqid();
-        $client->statistics()->sendEvent(new IncrementEventDTO(new BaseEventDTO(
+        $client->statistics()->sendEvent(new IncrementalEventDTO(new BaseEventDTO(
             '',
             $userSignature,
             'event1',

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Abrouter\Client\Events\Handlers;
 
 use Abrouter\Client\Contracts\TaskContract;
-use Abrouter\Client\DTO\IncrementEventDTO;
 use Abrouter\Client\Events\HandlerInterface;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
 use Abrouter\Client\Exceptions\SendEventRequestException;
@@ -33,15 +32,8 @@ class StatisticsSenderHandler implements HandlerInterface
             return false;
         }
 
-        if ($taskContract->getEventDTO() instanceof IncrementEventDTO) {
-            return $this->sendEventService->sendIncrementEvent(
-                $taskContract->getEventDTO()
-            )->isSuccessful();
-        } else {
-            return $this->sendEventService->sendSummarizableEvent(
-                $taskContract->getEventDTO()
-            )->isSuccessful();
-        }
-
+        return $this->sendEventService->sendEvent(
+            $taskContract->getEventDTO()
+        )->isSuccessful();
     }
 }

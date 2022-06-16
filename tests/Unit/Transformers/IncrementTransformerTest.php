@@ -10,7 +10,7 @@ use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\Tests\Unit\TestCase;
 use Abrouter\Client\Transformers\SendEventRequestTransformer;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
-use AbRouter\Client\DTO\IncrementEventDTO;
+use AbRouter\Client\DTO\IncrementalEventDTO;
 
 class IncrementTransformerTest extends TestCase
 {
@@ -32,7 +32,7 @@ class IncrementTransformerTest extends TestCase
     public function testTransform()
     {
         $date = (new \DateTime())->format('Y-m-d');
-        $incrementEventDTO = new IncrementEventDTO(new BaseEventDTO(
+        $incrementalEventDTO = new IncrementalEventDTO(new BaseEventDTO(
             'temporary_user_12345',
             'user_12345',
             'new_event',
@@ -50,13 +50,13 @@ class IncrementTransformerTest extends TestCase
                         'id' => uniqid(),
                         'type' => 'events',
                         'attributes' => [
-                            'user_id' => $incrementEventDTO->getBaseEventDTO()->getUserId(),
-                            'event' => $incrementEventDTO->getBaseEventDTO()->getEvent(),
-                            'tag' => $incrementEventDTO->getBaseEventDTO()->getTag(),
-                            'referrer' => $incrementEventDTO->getBaseEventDTO()->getReferrer(),
-                            'ip' => $incrementEventDTO->getBaseEventDTO()->getIp(),
-                            'meta' => $incrementEventDTO->getBaseEventDTO()->getMeta(),
-                            'created_at' => $incrementEventDTO->getBaseEventDTO()->getCreatedAt()
+                            'user_id' => $incrementalEventDTO->getBaseEventDTO()->getUserId(),
+                            'event' => $incrementalEventDTO->getBaseEventDTO()->getEvent(),
+                            'tag' => $incrementalEventDTO->getBaseEventDTO()->getTag(),
+                            'referrer' => $incrementalEventDTO->getBaseEventDTO()->getReferrer(),
+                            'ip' => $incrementalEventDTO->getBaseEventDTO()->getIp(),
+                            'meta' => $incrementalEventDTO->getBaseEventDTO()->getMeta(),
+                            'created_at' => $incrementalEventDTO->getBaseEventDTO()->getCreatedAt()
                         ],
                     ]
                 ]

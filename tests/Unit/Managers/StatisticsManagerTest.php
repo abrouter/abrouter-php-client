@@ -3,7 +3,8 @@
 namespace Abrouter\Client\Tests\Unit\Managers;
 
 use Abrouter\Client\DTO\BaseEventDTO;
-use Abrouter\Client\DTO\IncrementEventDTO;
+use Abrouter\Client\DTO\EventDTO;
+use Abrouter\Client\DTO\IncrementalEventDTO;
 use Abrouter\Client\DTO\SummarizeEventDTO;
 use Abrouter\Client\Entities\Client\Response;
 use Abrouter\Client\Entities\Client\ResponseInterface;
@@ -29,7 +30,7 @@ class StatisticsManagerTest extends TestCase
         $this->bindConfig();
 
         $date = (new \DateTime())->format('Y-m-d');
-        $eventDTO = new IncrementEventDTO(new BaseEventDTO(
+        $eventDTO = new IncrementalEventDTO(new BaseEventDTO(
             'temporary_user_12345',
             'user_12345',
             'new_event',
@@ -76,9 +77,9 @@ class StatisticsManagerTest extends TestCase
         $args = $this->createArgumentsFor(SendEventService::class);
         $args[0] = $sendEventRequest;
         $sendEventService = new class (...$args) extends SendEventService {
-            public function sendIncrementEvent(IncrementEventDTO $eventDTO): SentEvent
+            public function sendEvent(EventDTO $eventDTO): SentEvent
             {
-                $result = parent::sendIncrementEvent($eventDTO);
+                $result = parent::sendEvent($eventDTO);
                 StatisticsManagerTest::$sentEvent = $result;
                 return $result;
             }
@@ -102,7 +103,7 @@ class StatisticsManagerTest extends TestCase
         $this->bindConfig();
 
         $date = (new \DateTime())->format('Y-m-d');
-        $summarizeEventDTO = new SummarizeEventDTO('100', new BaseEventDTO(
+        $eventDTO = new SummarizeEventDTO('100', new BaseEventDTO(
             'temporary_user_12345',
             'user_12345',
             'new_event',
@@ -149,9 +150,9 @@ class StatisticsManagerTest extends TestCase
         $args = $this->createArgumentsFor(SendEventService::class);
         $args[0] = $sendEventRequest;
         $sendEventService = new class (...$args) extends SendEventService {
-            public function sendSummarizableEvent(SummarizeEventDTO $summarizeEventDTO): SentEvent
+            public function sendEvent(EventDTO $eventDTO): SentEvent
             {
-                $result = parent::sendSummarizableEvent($summarizeEventDTO);
+                $result = parent::sendEvent($eventDTO);
                 StatisticsManagerTest::$sentEvent = $result;
                 return $result;
             }
@@ -159,7 +160,7 @@ class StatisticsManagerTest extends TestCase
 
         $this->getContainer()->set(SendEventService::class, $sendEventService);
         $statisticsManager = $this->getContainer()->make(StatisticsManager::class);
-        $statisticsManager->sendEvent($summarizeEventDTO);
+        $statisticsManager->sendEvent($eventDTO);
 
         $this->assertTrue(self::$sentEvent->isSuccessful());
     }

@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Abrouter\Client\Services\Statistics;
 
 use Abrouter\Client\Builders\Payload\SendEventPayloadBuilder;
-use Abrouter\Client\DTO\IncrementEventDTO;
-use Abrouter\Client\DTO\SummarizeEventDTO;
+use Abrouter\Client\DTO\EventDTO;
 use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
 use Abrouter\Client\Exceptions\SendEventRequestException;
@@ -32,45 +31,12 @@ class SendEventService
     }
 
     /**
-     * @deprecated
-     * @param IncrementEventDTO $eventDTO
+     * @param EventDTO $eventDTO
      * @return SentEvent
      * @throws InvalidJsonApiResponseException
      * @throws SendEventRequestException
      */
-    public function sendEvent(IncrementEventDTO $eventDTO): SentEvent
-    {
-        $payload = $this->sendEventPayloadBuilder->build($eventDTO);
-
-        $response = $this->sendEventRequest->sendEvent($payload);
-        $sentEvent = $this->sendEventRequestTransformer->transform($response);
-
-        return $sentEvent;
-    }
-
-    /**
-     * @param IncrementEventDTO $eventDTO
-     * @return SentEvent
-     * @throws InvalidJsonApiResponseException
-     * @throws SendEventRequestException
-     */
-    public function sendIncrementEvent(IncrementEventDTO $eventDTO): SentEvent
-    {
-        $payload = $this->sendEventPayloadBuilder->build($eventDTO);
-
-        $response = $this->sendEventRequest->sendEvent($payload);
-        $sentEvent = $this->sendEventRequestTransformer->transform($response);
-
-        return $sentEvent;
-    }
-
-    /**
-     * @param SummarizeEventDTO $eventDTO
-     * @return SentEvent
-     * @throws InvalidJsonApiResponseException
-     * @throws SendEventRequestException
-     */
-    public function sendSummarizableEvent(SummarizeEventDTO $eventDTO): SentEvent
+    public function sendEvent(EventDTO $eventDTO): SentEvent
     {
         $payload = $this->sendEventPayloadBuilder->build($eventDTO);
 
