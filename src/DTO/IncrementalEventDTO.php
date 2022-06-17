@@ -2,7 +2,7 @@
 
 namespace Abrouter\Client\DTO;
 
-class IncrementalEventDTO implements EventDTO
+class IncrementalEventDTO implements EventDTOInterface
 {
     /**
      * @var BaseEventDTO

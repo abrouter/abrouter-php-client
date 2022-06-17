@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Abrouter\Client\Tests\Integration;
 
 use Abrouter\Client\Client;
-use Abrouter\Client\DTO\EventDTO;
+use Abrouter\Client\DTO\EventDTOInterface;
 use Abrouter\Client\RemoteEntity\Repositories\UserEventsRepository;
 use Abrouter\Client\Worker;
 

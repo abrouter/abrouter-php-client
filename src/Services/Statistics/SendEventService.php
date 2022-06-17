@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Abrouter\Client\Services\Statistics;
 
 use Abrouter\Client\Builders\Payload\SendEventPayloadBuilder;
-use Abrouter\Client\DTO\EventDTO;
+use Abrouter\Client\DTO\EventDTOInterface;
 use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
 use Abrouter\Client\Exceptions\SendEventRequestException;
@@ -31,12 +31,12 @@ class SendEventService
     }
 
     /**
-     * @param EventDTO $eventDTO
+     * @param EventDTOInterface $eventDTO
      * @return SentEvent
      * @throws InvalidJsonApiResponseException
      * @throws SendEventRequestException
      */
-    public function sendEvent(EventDTO $eventDTO): SentEvent
+    public function sendEvent(EventDTOInterface $eventDTO): SentEvent
     {
         $payload = $this->sendEventPayloadBuilder->build($eventDTO);
 

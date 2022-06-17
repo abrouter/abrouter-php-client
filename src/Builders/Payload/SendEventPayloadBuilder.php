@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Abrouter\Client\Builders\Payload;
 
-use Abrouter\Client\DTO\EventDTO;
+use Abrouter\Client\DTO\EventDTOInterface;
 use Abrouter\Client\Entities\JsonPayload;
 
 class SendEventPayloadBuilder
 {
     /**
-     * @param EventDTO $eventDTO
+     * @param EventDTOInterface $eventDTO
      * @return JsonPayload
      */
-    public function build(EventDTO $eventDTO): JsonPayload
+    public function build(EventDTOInterface $eventDTO): JsonPayload
     {
         return new JsonPayload(
             [

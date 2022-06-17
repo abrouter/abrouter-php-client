@@ -2,7 +2,7 @@
 
 namespace Abrouter\Client\DTO;
 
-class SummarizeEventDTO implements EventDTO
+class SummarizeEventDTO implements EventDTOInterface
 {
     /**
      * @var BaseEventDTO
