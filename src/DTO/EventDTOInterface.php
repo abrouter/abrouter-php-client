@@ -6,5 +6,5 @@ namespace Abrouter\Client\DTO;
 
 interface EventDTOInterface
 {
-    public function getBaseEventDTO (): BaseEventDTO;
+    public function getBaseEventDTO(): BaseEventDTO;
 }
