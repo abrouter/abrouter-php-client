@@ -10,9 +10,9 @@ use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\Tests\Unit\TestCase;
 use Abrouter\Client\Transformers\SendEventRequestTransformer;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
-use AbRouter\Client\DTO\EventDTO;
+use AbRouter\Client\DTO\SummarizeEventDTO;
 
-class SendEventTransformerTest extends TestCase
+class SummarizeTransformerTest extends TestCase
 {
     /**
      * @var SendEventRequestTransformer $sendEventRequestTransformer
@@ -32,7 +32,7 @@ class SendEventTransformerTest extends TestCase
     public function testTransform()
     {
         $date = (new \DateTime())->format('Y-m-d');
-        $eventDTO = new EventDTO(
+        $summarizeEventDTO = new SummarizeEventDTO((string)mt_rand(1, 100), new BaseEventDTO(
             'temporary_user_12345',
             'user_12345',
             'new_event',
@@ -41,30 +41,31 @@ class SendEventTransformerTest extends TestCase
             [],
             '255.255.255.255',
             $date
-        );
+        ));
 
-        $sentEvent = $this->sendEventRequestTransformer->transform(
+        $summarize = $this->sendEventRequestTransformer->transform(
             new Response(
                 [
                     'data' => [
                         'id' => uniqid(),
                         'type' => 'events',
                         'attributes' => [
-                            'user_id' => $eventDTO->getBaseEventDTO()->getUserId(),
-                            'event' => $eventDTO->getBaseEventDTO()->getEvent(),
-                            'tag' => $eventDTO->getBaseEventDTO()->getTag(),
-                            'referrer' => $eventDTO->getBaseEventDTO()->getReferrer(),
-                            'ip' => $eventDTO->getBaseEventDTO()->getIp(),
-                            'meta' => $eventDTO->getBaseEventDTO()->getMeta(),
-                            'created_at' => $eventDTO->getBaseEventDTO()->getCreatedAt()
+                            'user_id' => $summarizeEventDTO->getBaseEventDTO()->getUserId(),
+                            'event' => $summarizeEventDTO->getBaseEventDTO()->getEvent(),
+                            'value' => $summarizeEventDTO->getValue(),
+                            'tag' => $summarizeEventDTO->getBaseEventDTO()->getTag(),
+                            'referrer' => $summarizeEventDTO->getBaseEventDTO()->getReferrer(),
+                            'ip' => $summarizeEventDTO->getBaseEventDTO()->getIp(),
+                            'meta' => $summarizeEventDTO->getBaseEventDTO()->getMeta(),
+                            'created_at' => $summarizeEventDTO->getBaseEventDTO()->getCreatedAt()
                         ],
                     ]
                 ]
             )
         );
 
-        $this->assertInstanceOf(SentEvent::class, $sentEvent);
-        $this->assertEquals($sentEvent->isSuccessful(), true);
+        $this->assertInstanceOf(SentEvent::class, $summarize);
+        $this->assertEquals($summarize->isSuccessful(), true);
     }
 
     /**

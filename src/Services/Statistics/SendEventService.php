@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Abrouter\Client\Services\Statistics;
 
-use Abrouter\Client\Builders\Payload\EventSendPayloadBuilder;
-use Abrouter\Client\DTO\EventDTO;
+use Abrouter\Client\Builders\Payload\SendEventPayloadBuilder;
+use Abrouter\Client\DTO\EventDTOInterface;
 use Abrouter\Client\Entities\SentEvent;
 use Abrouter\Client\Exceptions\InvalidJsonApiResponseException;
 use Abrouter\Client\Exceptions\SendEventRequestException;
@@ -16,29 +16,29 @@ class SendEventService
 {
     private SendEventRequest $sendEventRequest;
 
-    private EventSendPayloadBuilder $eventSendPayloadBuilder;
+    private SendEventPayloadBuilder $sendEventPayloadBuilder;
 
     private SendEventRequestTransformer $sendEventRequestTransformer;
 
     public function __construct(
         SendEventRequest $sendEventRequest,
-        EventSendPayloadBuilder $eventSendPayloadBuilder,
+        SendEventPayloadBuilder $sendEventPayloadBuilder,
         SendEventRequestTransformer $sendEventRequestTransformer
     ) {
         $this->sendEventRequest = $sendEventRequest;
-        $this->eventSendPayloadBuilder = $eventSendPayloadBuilder;
+        $this->sendEventPayloadBuilder = $sendEventPayloadBuilder;
         $this->sendEventRequestTransformer = $sendEventRequestTransformer;
     }
 
     /**
-     * @param EventDTO $eventDTO
+     * @param EventDTOInterface $eventDTO
      * @return SentEvent
      * @throws InvalidJsonApiResponseException
      * @throws SendEventRequestException
      */
-    public function sendEvent(EventDTO $eventDTO): SentEvent
+    public function sendEvent(EventDTOInterface $eventDTO): SentEvent
     {
-        $payload = $this->eventSendPayloadBuilder->build($eventDTO);
+        $payload = $this->sendEventPayloadBuilder->build($eventDTO);
 
         $response = $this->sendEventRequest->sendEvent($payload);
         $sentEvent = $this->sendEventRequestTransformer->transform($response);

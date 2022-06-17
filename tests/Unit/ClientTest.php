@@ -6,7 +6,6 @@ use Abrouter\Client\Client;
 use Abrouter\Client\Manager\ExperimentManager;
 use Abrouter\Client\Manager\FeatureFlagManager;
 use Abrouter\Client\Manager\StatisticsManager;
-use Abrouter\Client\Tests\Unit\TestCase;
 
 class ClientTest extends TestCase
 {

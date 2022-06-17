@@ -11,20 +11,20 @@ class ExperimentRunPayloadBuilder
     public function build(string $userSignature, string $experimentId): JsonPayload
     {
         return new JsonPayload([
-                'data' => [
-                    'type'          => 'experiment-run',
-                    'attributes'    => [
-                        'userSignature' => $userSignature,
-                    ],
-                    'relationships' => [
-                        'experiment' => [
-                            'data' => [
-                                'id'   => $experimentId,
-                                'type' => 'experiments',
-                            ],
-                        ],
-                    ]
+            'data' => [
+                'type'          => 'experiment-run',
+                'attributes'    => [
+                    'userSignature' => $userSignature,
                 ],
+                'relationships' => [
+                    'experiment' => [
+                        'data' => [
+                            'id'   => $experimentId,
+                            'type' => 'experiments',
+                        ],
+                    ],
+                ]
+            ],
         ]);
     }
 }

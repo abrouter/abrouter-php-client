@@ -20,6 +20,7 @@ class UserEventsRequestTransformer
                 $item['attributes']['event'],
                 $item['attributes']['user_id'],
                 $item['attributes']['temporary_user_id'] ?? '',
+                $item['attributes']['value'] ?? '',
                 $item['attributes']['tag'] ?? '',
                 $item['attributes']['referrer'] ?? '',
                 $item['attributes']['ip'] ?? '',

@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace Abrouter\Client\Services\Statistics;
 
 use Abrouter\Client\Contracts\TaskContract;
-use Abrouter\Client\DTO\EventDTO;
+use Abrouter\Client\DTO\EventDTOInterface;
 
 class SendEventTask implements TaskContract
 {
-    private EventDTO $eventDTO;
+    private EventDTOInterface $eventDTO;
 
-    public function __construct(EventDTO $eventDTO)
+    public function __construct(EventDTOInterface $eventDTO)
     {
         $this->eventDTO = $eventDTO;
     }
 
     /**
-     * @return EventDTO
+     * @return EventDTOInterface
      */
-    public function getEventDTO(): EventDTO
+    public function getEventDTO(): EventDTOInterface
     {
         return $this->eventDTO;
     }
