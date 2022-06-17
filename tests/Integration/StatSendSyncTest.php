@@ -85,7 +85,7 @@ class StatSendSyncTest extends IntegrationTestCase
         $client->statistics()->sendEvent(new SummarizeEventDTO('10', new BaseEventDTO(
             '',
             $userSignature,
-            'event1',
+            'event1_sum',
             '',
             '',
             [],
@@ -97,7 +97,7 @@ class StatSendSyncTest extends IntegrationTestCase
 
         $this->assertEquals(1, sizeof($events->getStatisticEvents()));
         foreach ($events->getStatisticEvents() as $event) {
-            $this->assertEquals($event->getEvent(), 'event1');
+            $this->assertEquals($event->getEvent(), 'event1_sum');
             $this->assertEquals($event->getValue(), '10');
         }
     }
