@@ -83,6 +83,9 @@ $client->statistics()->sendEvent(new EventDTO(
 ));
 ```
 
+Please note, you can use the IncrementalEventDTO (Abrouter\Client\DTO\IncrementalEventDTO) if you would like to send the increment counter statistics, and SummarizeEventDTO(same namespace) to track some sum. 
+
+
 
 ## Parallel running
 
