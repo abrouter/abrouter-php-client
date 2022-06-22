@@ -92,7 +92,7 @@ $client->statistics()->sendEvent(
 // sending purchase event with purchase amount
 $client->statistics()->sendEvent(
     $eventBuilder
-        ->incremental()
+        ->summarize()
         ->event('purchase')
         ->setValue(30)
         ->setUserId($userSignature)
