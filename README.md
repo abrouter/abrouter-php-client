@@ -80,7 +80,7 @@ $client = $di->make(Abrouter\Client\Client::class); // using PHP-DI
 
 $eventBuilder = $this->getContainer()->make(StatEventBuilder::class);
 
-//sending button_click event
+//sending button_click event as button_click+1
 $client->statistics()->sendEvent(
     $eventBuilder
         ->incremental()
@@ -89,7 +89,7 @@ $client->statistics()->sendEvent(
         ->build()
 );
 
-// sending purchase event
+// sending purchase event with purchase amount
 $client->statistics()->sendEvent(
     $eventBuilder
         ->incremental()
