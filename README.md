@@ -94,14 +94,13 @@ $client->statistics()->sendEvent(
     $eventBuilder
         ->incremental()
         ->event('purchase')
-        ->setValue("30")
+        ->setValue(30)
         ->setUserId($userSignature)
         ->build()
 );
 ```
 
-Please note, you can use the IncrementalEventDTO (Abrouter\Client\DTO\IncrementalEventDTO) if you would like to send the increment counter statistics, and SummarizeEventDTO(same namespace) to track some sum. 
-
+For additional details of sending events please see StatEventBuilder class.
 
 ## Parallel running
 
