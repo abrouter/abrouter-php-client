@@ -64,6 +64,7 @@ You can create an experiment and get your token and id of experiment on [ABRoute
 use Abrouter\Client\Config\Config;
 use DI\ContainerBuilder;
 use Abrouter\Client\Client;
+use Abrouter\Client\Builders\StatEventBuilder;
 
 require '/app/vendor/autoload.php';
 
@@ -76,15 +77,30 @@ $di = $containerBuilder->build();
  * @var Client $client
  */
 $client = $di->make(Abrouter\Client\Client::class); // using PHP-DI
-$client->statistics()->sendEvent(new EventDTO(
-        null, // temporary user id 
-        $userId, // permanent user id 
-        'visited_test_page'
-));
+
+$eventBuilder = $this->getContainer()->make(StatEventBuilder::class);
+
+//sending button_click event
+$client->statistics()->sendEvent(
+    $eventBuilder
+        ->incremental()
+        ->event('button_click')
+        ->setUserId($userSignature)
+        ->build()
+);
+
+// sending purchase event
+$client->statistics()->sendEvent(
+    $eventBuilder
+        ->incremental()
+        ->event('purchase')
+        ->setValue("30")
+        ->setUserId($userSignature)
+        ->build()
+);
 ```
 
 Please note, you can use the IncrementalEventDTO (Abrouter\Client\DTO\IncrementalEventDTO) if you would like to send the increment counter statistics, and SummarizeEventDTO(same namespace) to track some sum. 
-
 
 
 ## Parallel running
