@@ -46,7 +46,7 @@ $di->set(Config::class, new Config($token, 'https://abrouter.com'));
  * @var Client $client
  */
 $client = $di->make(Abrouter\Client\Client::class);
-$userSignature = uniqid();
+$userSignature = $_SERSSION['userId'] ?? uniqid();
 $experimentId = 'button_color';//experiment id is also there
 
 
@@ -68,7 +68,7 @@ use Abrouter\Client\Builders\StatEventBuilder;
 
 require '/app/vendor/autoload.php';
 
-$userId = uniqid();
+$userSignature = $_SERSSION['userId'] ?? uniqid();
 
 $containerBuilder = new ContainerBuilder();
 $di = $containerBuilder->build();
