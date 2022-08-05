@@ -16,7 +16,7 @@ class StatSendParallelTest extends IntegrationTestCase
 {
     public function testStatSend()
     {
-        $this->configureParallelRun('add73bda37106bbddf2e6b3f61c6ed197c2250e99df9474ad01b9afb2035af33cf66c292fdf6a6e8');
+        $this->configureParallelRun('default');
         $this->clearRedis();
 
         $client = $this->getContainer()->make(Client::class);
@@ -48,7 +48,7 @@ class StatSendParallelTest extends IntegrationTestCase
 
     public function testIncrementalStatSend()
     {
-        $this->configureParallelRun('add73bda37106bbddf2e6b3f61c6ed197c2250e99df9474ad01b9afb2035af33cf66c292fdf6a6e8');
+        $this->configureParallelRun('default');
         $this->clearRedis();
 
         $client = $this->getContainer()->make(Client::class);
@@ -82,7 +82,7 @@ class StatSendParallelTest extends IntegrationTestCase
     {
         $this->bindConfig(
             'https://abrouter.com',
-            'add73bda37106bbddf2e6b3f61c6ed197c2250e99df9474ad01b9afb2035af33cf66c292fdf6a6e8',
+            'default',
         );
         $this->clearRedis();
 

@@ -10,9 +10,14 @@ class ParallelRunSwitch
 {
     private ParallelRunConfigAccessor $parallelRunConfigAccessor;
 
-    public function __construct(ParallelRunConfigAccessor $parallelRunConfigAccessor)
-    {
+    private ParallelRunInitializer $parallelRunInitializer;
+
+    public function __construct(
+        ParallelRunConfigAccessor $parallelRunConfigAccessor,
+        ParallelRunInitializer $parallelRunInitializer
+    ) {
         $this->parallelRunConfigAccessor = $parallelRunConfigAccessor;
+        $this->parallelRunInitializer = $parallelRunInitializer;
     }
 
     public function isEnabled(): bool
@@ -28,6 +33,8 @@ class ParallelRunSwitch
         if ($this->parallelRunConfigAccessor->getTaskManager() === null) {
             return false;
         }
+
+        $this->parallelRunInitializer->initializeIfNot();
 
         return true;
     }
