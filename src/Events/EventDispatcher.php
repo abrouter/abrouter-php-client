@@ -6,7 +6,6 @@ namespace Abrouter\Client\Events;
 
 use Abrouter\Client\Config\Accessors\ParallelRunConfigAccessor;
 use Abrouter\Client\Contracts\TaskContract;
-use Abrouter\Client\Contracts\TaskManagerContract;
 
 class EventDispatcher
 {

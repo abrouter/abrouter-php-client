@@ -10,6 +10,7 @@ use Abrouter\Client\Config\ParallelRunConfig;
 use Abrouter\Client\Config\RedisConfig;
 use Abrouter\Client\Contracts\KvStorageContract;
 use Abrouter\Client\DB\RedisConnection;
+use Abrouter\Client\DB\RunTimeCache;
 use Abrouter\Client\Services\KvStorage\KvStorage;
 use Abrouter\Client\Services\TaskManager\TaskManager;
 use DI\Container;
@@ -50,6 +51,10 @@ class IntegrationTestCase extends BaseTestCase
     protected function bindConfig(string $host = self::TEST_HOST, string $token = null): void
     {
         $this->host = $host;
+
+        if ($token === 'default') {
+            $token = 'add73bda37106bbddf2e6b3f61c6ed197c2250e99df9474ad01b9afb2035af33cf66c292fdf6a6e8';
+        }
         $this->token = $token ?? uniqid();
 
         $config = new Config($this->token, $this->host);
@@ -63,6 +68,10 @@ class IntegrationTestCase extends BaseTestCase
 
     protected function configureParallelRun(string $token = null): void
     {
+        if ($token === 'default') {
+            $token = 'add73bda37106bbddf2e6b3f61c6ed197c2250e99df9474ad01b9afb2035af33cf66c292fdf6a6e8';
+        }
+
         $container = $this->getContainer();
 
         $redisConfig = new RedisConfig(
@@ -130,5 +139,10 @@ class IntegrationTestCase extends BaseTestCase
     protected function clearRedis(): void
     {
         $this->getContainer()->make(RedisConnection::class)->getConnection()->flushall();
+    }
+
+    protected function clearRunTimeCache(): void
+    {
+        RunTimeCache::flushAll();
     }
 }

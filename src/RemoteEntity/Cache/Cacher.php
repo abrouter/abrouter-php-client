@@ -21,8 +21,12 @@ class Cacher
         return $this->kvStorageConfigAccessor->hasKvStorage();
     }
 
-    public function fetch(string $id, string $type, int $expireIn, callable $fetchFunction): ?object
-    {
+    public function fetch(
+        string $id,
+        string $type,
+        int $expireIn,
+        callable $fetchFunction
+    ): ?object {
         $objectId = $this->getObjectId($id, $type);
         $object = $this->kvStorageConfigAccessor->getKvStorage()->get($objectId);
         if ($object !== null) {
@@ -32,6 +36,12 @@ class Cacher
         $object = $fetchFunction();
         $this->kvStorageConfigAccessor->getKvStorage()->put($objectId, serialize($object), $expireIn);
         return $object;
+    }
+
+    public function get(string $id, string $type): object
+    {
+        $objectId = $this->getObjectId($id, $type);
+        return unserialize($this->kvStorageConfigAccessor->getKvStorage()->get($objectId));
     }
 
     private function getObjectId(string $id, string $type): string

@@ -19,7 +19,8 @@
         "guzzlehttp/guzzle": "^6.5 || ^7.0",
         "ext-json": "*",
         "art4/json-api-client": "^1.0",
-        "predis/predis": "^1.0 || ^2.0"
+        "predis/predis": "^1.0 || ^2.0",
+        "abrouter/related-users": "^0.0.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9",

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Abrouter\Client\Tests\Unit\Transformers;
+namespace Abrouter\Client\Tests\Unit\Builders;
 
 use Abrouter\Client\Builders\ConfigBuilder;
 use Abrouter\Client\Config\Config;

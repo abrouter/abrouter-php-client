@@ -6,6 +6,7 @@ namespace Abrouter\Client\Events;
 
 use Abrouter\Client\Contracts\TaskContract;
 use Abrouter\Client\Events\Handlers\AddUserToBranchHandler;
+use Abrouter\Client\Events\Handlers\RelatedUsersStatisticsInterceptor;
 use Abrouter\Client\Events\Handlers\StatisticsSenderHandler;
 use Abrouter\Client\Services\ExperimentsParallelRun\AddUserToBranchTask;
 use Abrouter\Client\Services\Statistics\SendEventTask;
@@ -16,14 +17,18 @@ class EventHandlersMap
 
     private StatisticsSenderHandler $statisticsSenderHandler;
 
+    private RelatedUsersStatisticsInterceptor $relatedUsersStatisticsInterceptor;
+
     private array $map;
 
     public function __construct(
         AddUserToBranchHandler $addUserToBranchHandler,
-        StatisticsSenderHandler $statisticsSenderHandler
+        StatisticsSenderHandler $statisticsSenderHandler,
+        RelatedUsersStatisticsInterceptor $relatedUsersStatisticsInterceptor
     ) {
         $this->addUserToBranchHandler = $addUserToBranchHandler;
         $this->statisticsSenderHandler = $statisticsSenderHandler;
+        $this->relatedUsersStatisticsInterceptor = $relatedUsersStatisticsInterceptor;
         $this->map = $this->getInitialMap();
     }
 
@@ -69,6 +74,7 @@ class EventHandlersMap
             ],
             SendEventTask::class => [
                 $this->statisticsSenderHandler,
+                $this->relatedUsersStatisticsInterceptor,
             ],
         ];
     }

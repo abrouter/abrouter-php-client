@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Abrouter\Client\Services\ExperimentsParallelRun;
 
 use Abrouter\Client\Config\Accessors\ParallelRunConfigAccessor;
-use Abrouter\Client\Contracts\TaskManagerContract;
 use Abrouter\Client\RemoteEntity\Cache\Cacher;
 use Abrouter\Client\RemoteEntity\Entities\ExperimentRanResult;
 use Abrouter\Client\RemoteEntity\Repositories\Cached\ExperimentBranchesCacheRepository;
@@ -32,20 +31,29 @@ class ParallelRunner
      */
     private Cacher $cacher;
 
+    private RelatedUserBranchDetector $relatedUsersBranchDetector;
+
     public function __construct(
         ExperimentBranchesCacheRepository $experimentBranchesCacheRepository,
         ExperimentRunner $experimentRunner,
         ParallelRunConfigAccessor $parallelRunConfig,
-        Cacher $cacher
+        Cacher $cacher,
+        RelatedUserBranchDetector $relatedUserBranchDetector
     ) {
         $this->experimentBranchesCacheRepository = $experimentBranchesCacheRepository;
         $this->experimentRunner = $experimentRunner;
         $this->parallelRunConfigAccessor = $parallelRunConfig;
         $this->cacher = $cacher;
+        $this->relatedUsersBranchDetector = $relatedUserBranchDetector;
     }
 
     public function run(string $userSignature, string $experimentAlias): ExperimentRanResult
     {
+        $experimentRunResult = $this->relatedUsersBranchDetector->getBranch($userSignature, $experimentAlias);
+        if ($experimentRunResult !== null) {
+            return $experimentRunResult;
+        }
+
         $runFunction = function () use ($experimentAlias, $userSignature) {
             $branches = $this
                 ->experimentBranchesCacheRepository
