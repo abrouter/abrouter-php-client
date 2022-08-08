@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace Abrouter\Client\DB\Repositories;
 
+use Abrouter\Client\Config\Accessors\KvStorageConfigAccessor;
 use Abrouter\Client\DB\Dictionary\ParallelRunningDictionary;
-use Abrouter\Client\DB\RedisConnection;
 
 class ParallelRunningStateRepository
 {
-    private RedisConnection $redisConnection;
+    private KvStorageConfigAccessor $kvStorage;
 
-    public function __construct(RedisConnection $redisConnection)
+    public function __construct(KvStorageConfigAccessor $kvStorageConfigAccessor)
     {
-        $this->redisConnection = $redisConnection;
+        $this->kvStorage = $kvStorageConfigAccessor;
     }
 
     public function isInitialized(): bool
     {
-        $value = $this->redisConnection->getConnection()->get(ParallelRunningDictionary::IS_INITIAZLIED_KEY);
+        $value = $this->kvStorage->getKvStorage()->get(ParallelRunningDictionary::IS_INITIAZLIED_KEY);
         return $value === ParallelRunningDictionary::IS_INITIAZLIED_TRUE_VALUE;
     }
 
     public function isReady(): bool
     {
-        $value = $this->redisConnection->getConnection()->get(ParallelRunningDictionary::IS_RUNNING_KEY);
+        $value = $this->kvStorage->getKvStorage()->get(ParallelRunningDictionary::IS_RUNNING_KEY);
         return $value === ParallelRunningDictionary::IS_RUNNING_VALUE_TRUE;
     }
 }
