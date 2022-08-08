@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Abrouter\Client\Services\ExperimentsParallelRun;
 
 use Abrouter\Client\DB\Managers\ParallelRunningStateManager;
-use Abrouter\Client\DB\RedisConnection;
 use Abrouter\Client\DB\RelatedUsersStore;
 use Abrouter\Client\DB\Repositories\ParallelRunningStateCachedRepository;
 
@@ -15,24 +14,16 @@ class ParallelRunInitializer
 
     private ParallelRunningStateManager $parallelRunningStateManager;
 
-    private RedisConnection $redisConnection;
-
     public function __construct(
         ParallelRunningStateCachedRepository $parallelRunningStateCachedRepository,
-        ParallelRunningStateManager $parallelRunningStateManager,
-        RedisConnection $redisConnection
+        ParallelRunningStateManager $parallelRunningStateManager
     ) {
         $this->parallelRunningStateCachedRepository = $parallelRunningStateCachedRepository;
         $this->parallelRunningStateManager = $parallelRunningStateManager;
-        $this->redisConnection = $redisConnection;
     }
 
     public function initializeIfNot(): bool
     {
-        if (!$this->redisConnection->isReady()) {
-            return false;
-        }
-
         //if parallel running ready to serve
         if ($this->parallelRunningStateCachedRepository->isReady()) {
             return true;
