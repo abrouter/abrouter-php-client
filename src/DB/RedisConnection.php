@@ -19,6 +19,11 @@ class RedisConnection
         $this->redisConfig = $redisConfigAccessor->getRedisConfig();
     }
 
+    public function isReady()
+    {
+        return $this->redisConfig !== null;
+    }
+
     public function getConnection()
     {
         if (isset(self::$connection)) {
