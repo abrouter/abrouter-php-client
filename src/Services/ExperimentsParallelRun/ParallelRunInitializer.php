@@ -7,6 +7,7 @@ namespace Abrouter\Client\Services\ExperimentsParallelRun;
 use Abrouter\Client\DB\Managers\ParallelRunningStateManager;
 use Abrouter\Client\DB\RelatedUsersStore;
 use Abrouter\Client\DB\Repositories\ParallelRunningStateCachedRepository;
+use Abrouter\Client\DB\Repositories\RelatedUsersCacheRepository;
 
 class ParallelRunInitializer
 {
@@ -14,16 +15,25 @@ class ParallelRunInitializer
 
     private ParallelRunningStateManager $parallelRunningStateManager;
 
+    private RelatedUsersCacheRepository $relatedUsersCacheRepository;
+
     public function __construct(
         ParallelRunningStateCachedRepository $parallelRunningStateCachedRepository,
-        ParallelRunningStateManager $parallelRunningStateManager
+        ParallelRunningStateManager $parallelRunningStateManager,
+        RelatedUsersCacheRepository $relatedUsersCacheRepository
     ) {
         $this->parallelRunningStateCachedRepository = $parallelRunningStateCachedRepository;
         $this->parallelRunningStateManager = $parallelRunningStateManager;
+        $this->relatedUsersCacheRepository = $relatedUsersCacheRepository;
     }
 
     public function initializeIfNot(): bool
     {
+        if (!RelatedUsersStore::isLoaded()) {
+            //initialization related users
+            RelatedUsersStore::load($this->relatedUsersCacheRepository->getAll());
+        }
+
         //if parallel running ready to serve
         if ($this->parallelRunningStateCachedRepository->isReady()) {
             return true;
@@ -33,9 +43,6 @@ class ParallelRunInitializer
         if ($this->parallelRunningStateCachedRepository->isInitialized()) {
             return false;
         }
-
-        //initialization
-        RelatedUsersStore::load([]);
 
         $this->parallelRunningStateManager->setInitialized();
         $this->parallelRunningStateManager->setReadyToServe();

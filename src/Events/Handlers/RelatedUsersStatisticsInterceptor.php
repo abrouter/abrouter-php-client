@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Abrouter\Client\Events\Handlers;
 
 use Abrouter\Client\Contracts\TaskContract;
+use Abrouter\Client\DB\Managers\RelatedUsersCacheManager;
 use Abrouter\Client\DB\RelatedUsersStore;
 use Abrouter\Client\Events\HandlerInterface;
 use Abrouter\Client\Services\ExperimentsParallelRun\ParallelRunSwitch;
@@ -16,12 +17,16 @@ class RelatedUsersStatisticsInterceptor implements HandlerInterface
 
     private RelatedUsersStore $relatedUsersStore;
 
+    private RelatedUsersCacheManager $relatedUsersCacheManager;
+
     public function __construct(
         ParallelRunSwitch $parallelRunSwitch,
-        RelatedUsersStore $relatedUsersStore
+        RelatedUsersStore $relatedUsersStore,
+        RelatedUsersCacheManager $relatedUsersCacheManager
     ) {
         $this->parallelRunSwitch = $parallelRunSwitch;
         $this->relatedUsersStore = $relatedUsersStore;
+        $this->relatedUsersCacheManager = $relatedUsersCacheManager;
     }
 
     public function handle(TaskContract $taskContract): bool
@@ -38,6 +43,10 @@ class RelatedUsersStatisticsInterceptor implements HandlerInterface
         $temporaryUserId = $taskContract->getEventDTO()->getBaseEventDTO()->getTemporaryUserId();
 
         $this->relatedUsersStore->get()->append($userId, $temporaryUserId);
+        $this->relatedUsersCacheManager->store(
+            $this->relatedUsersStore->get()->getAll()
+        );
+
 
         return true;
     }
