@@ -27,4 +27,9 @@ class RelatedUsersStore
     {
         self::$store = new RelatedUsersCollection($relatedUsersList);
     }
+
+    public static function isLoaded(): bool
+    {
+        return self::$store !== null;
+    }
 }
