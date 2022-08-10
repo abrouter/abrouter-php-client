@@ -10,6 +10,8 @@ use Abrouter\Client\Services\KvStorage\KvStorage;
 
 class RelatedUsersCacheManager
 {
+    private const EXPIRES = 3600 * 24 * 180;
+
     private KvStorageConfigAccessor $kvStorage;
 
     public function __construct(
@@ -23,6 +25,10 @@ class RelatedUsersCacheManager
         $this
             ->kvStorage
             ->getKvStorage()
-            ->put(ParallelRunningDictionary::RELATED_USERS_KEY, json_encode($relatedUsers));
+            ->put(
+                ParallelRunningDictionary::RELATED_USERS_KEY,
+                json_encode($relatedUsers),
+                self::EXPIRES
+            );
     }
 }
