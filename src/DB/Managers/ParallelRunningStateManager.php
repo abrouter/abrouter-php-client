@@ -10,6 +10,8 @@ use Abrouter\Client\DB\Repositories\ParallelRunningStateCachedRepository;
 
 class ParallelRunningStateManager
 {
+    private const EXPIRES = 3600 * 24 * 180;
+
     private ParallelRunningStateCachedRepository $parallelRunningStateCachedRepository;
     private KvStorageConfigAccessor $kvStorageConfigAccessor;
 
@@ -25,7 +27,8 @@ class ParallelRunningStateManager
     {
         $this->kvStorageConfigAccessor->getKvStorage()->put(
             ParallelRunningDictionary::IS_RUNNING_KEY,
-            ParallelRunningDictionary::IS_RUNNING_VALUE_TRUE
+            ParallelRunningDictionary::IS_RUNNING_VALUE_TRUE,
+            self::EXPIRES
         );
         $this->parallelRunningStateCachedRepository->clearCacheServing();
     }
@@ -34,7 +37,8 @@ class ParallelRunningStateManager
     {
         $this->kvStorageConfigAccessor->getKvStorage()->put(
             ParallelRunningDictionary::IS_RUNNING_KEY,
-            ParallelRunningDictionary::IS_RUNNING_VALUE_STOPPED
+            ParallelRunningDictionary::IS_RUNNING_VALUE_STOPPED,
+            self::EXPIRES
         );
         $this->parallelRunningStateCachedRepository->clearCacheServing();
     }
@@ -43,7 +47,8 @@ class ParallelRunningStateManager
     {
         $this->kvStorageConfigAccessor->getKvStorage()->put(
             ParallelRunningDictionary::IS_INITIAZLIED_KEY,
-            ParallelRunningDictionary::IS_INITIAZLIED_TRUE_VALUE
+            ParallelRunningDictionary::IS_INITIAZLIED_TRUE_VALUE,
+            self::EXPIRES
         );
         $this->parallelRunningStateCachedRepository->clearCacheInitialized();
     }
