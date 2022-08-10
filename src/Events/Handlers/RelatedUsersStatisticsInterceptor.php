@@ -47,9 +47,13 @@ class RelatedUsersStatisticsInterceptor implements HandlerInterface
         $userId = $taskContract->getEventDTO()->getBaseEventDTO()->getUserId();
         $temporaryUserId = $taskContract->getEventDTO()->getBaseEventDTO()->getTemporaryUserId();
 
+        if (empty($userId) || empty($temporaryUserId)) {
+            return true;
+        }
+
         $this->relatedUsersStore::load($this->relatedUsersCacheRepository->getAll());
 
-        $this->relatedUsersStore->get()->append($userId, $temporaryUserId);
+        $this->relatedUsersStore->get()->append((string)$userId, (string)$temporaryUserId);
 
         $this->relatedUsersCacheManager->store(
             $this->relatedUsersStore->get()->getAll()
