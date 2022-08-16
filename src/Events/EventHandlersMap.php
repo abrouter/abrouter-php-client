@@ -17,18 +17,14 @@ class EventHandlersMap
 
     private StatisticsSenderHandler $statisticsSenderHandler;
 
-    private RelatedUsersStatisticsInterceptor $relatedUsersStatisticsInterceptor;
-
     private array $map;
 
     public function __construct(
         AddUserToBranchHandler $addUserToBranchHandler,
-        StatisticsSenderHandler $statisticsSenderHandler,
-        RelatedUsersStatisticsInterceptor $relatedUsersStatisticsInterceptor
+        StatisticsSenderHandler $statisticsSenderHandler
     ) {
         $this->addUserToBranchHandler = $addUserToBranchHandler;
         $this->statisticsSenderHandler = $statisticsSenderHandler;
-        $this->relatedUsersStatisticsInterceptor = $relatedUsersStatisticsInterceptor;
         $this->map = $this->getInitialMap();
     }
 
@@ -74,7 +70,6 @@ class EventHandlersMap
             ],
             SendEventTask::class => [
                 $this->statisticsSenderHandler,
-                $this->relatedUsersStatisticsInterceptor,
             ],
         ];
     }
