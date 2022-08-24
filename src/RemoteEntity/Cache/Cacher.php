@@ -38,10 +38,15 @@ class Cacher
         return $object;
     }
 
-    public function get(string $id, string $type): object
+    public function get(string $id, string $type): ?object
     {
         $objectId = $this->getObjectId($id, $type);
-        return unserialize($this->kvStorageConfigAccessor->getKvStorage()->get($objectId));
+        $object = $this->kvStorageConfigAccessor->getKvStorage()->get($objectId);
+        if (empty($object)) {
+            return null;
+        }
+
+        return unserialize($object);
     }
 
     private function getObjectId(string $id, string $type): string
