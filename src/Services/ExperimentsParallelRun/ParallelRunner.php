@@ -17,11 +17,6 @@ class ParallelRunner
     private $experimentBranchesCacheRepository;
 
     /**
-     * @var ExperimentRunner
-     */
-    private $experimentRunner;
-
-    /**
      * @var ParallelRunConfigAccessor
      */
     private ParallelRunConfigAccessor $parallelRunConfigAccessor;
@@ -35,13 +30,11 @@ class ParallelRunner
 
     public function __construct(
         ExperimentBranchesCacheRepository $experimentBranchesCacheRepository,
-        ExperimentRunner $experimentRunner,
         ParallelRunConfigAccessor $parallelRunConfig,
         Cacher $cacher,
         RelatedUserBranchDetector $relatedUserBranchDetector
     ) {
         $this->experimentBranchesCacheRepository = $experimentBranchesCacheRepository;
-        $this->experimentRunner = $experimentRunner;
         $this->parallelRunConfigAccessor = $parallelRunConfig;
         $this->cacher = $cacher;
         $this->relatedUsersBranchDetector = $relatedUserBranchDetector;
@@ -54,15 +47,16 @@ class ParallelRunner
             return $experimentRunResult;
         }
 
-        $runFunction = function () use ($experimentAlias, $userSignature) {
+        $experimentRunner = new ExperimentRunner();
+        $runFunction = function () use ($experimentAlias, $userSignature, $experimentRunner) {
             $branches = $this
                 ->experimentBranchesCacheRepository
                 ->getByExperimentAlias($experimentAlias);
 
             foreach ($branches->getExperimentBranches() as $branch) {
-                $this->experimentRunner->addSide($branch->getUid(), (float)$branch->getPercentage());
+                $experimentRunner->addSide($branch->getUid(), (float)$branch->getPercentage());
             }
-            $branch = $this->experimentRunner->roll();
+            $branch = $experimentRunner->roll();
 
             $task = new AddUserToBranchTask(
                 $experimentAlias,
